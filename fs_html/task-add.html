@@ -1,0 +1,313 @@
+<!--_meta 作为公共模版分离出去-->
+<!DOCTYPE HTML>
+<html><head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+<link rel="Bookmark" href="/favicon.ico">
+<link rel="Shortcut Icon" href="/favicon.ico">
+<!--[if lt IE 9]>
+<script type="text/javascript" src="lib/html5shiv.js"></script>
+<script type="text/javascript" src="lib/respond.min.js"></script>
+<![endif]-->
+<link rel="stylesheet" type="text/css" href="static/h-ui/css/H-ui.min.css">
+<link rel="stylesheet" type="text/css" href="static/h-ui.admin/css/H-ui.admin.css">
+<link rel="stylesheet" type="text/css" href="lib/Hui-iconfont/1.0.8/iconfont.css">
+<link rel="stylesheet" type="text/css" href="static/h-ui.admin/skin/default/skin.css" id="skin">
+<link rel="stylesheet" type="text/css" href="static/h-ui.admin/css/style.css">
+<!--[if IE 6]>
+<script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script>DD_belatedPNG.fix('*');</script>
+<![endif]-->
+<!--/meta 作为公共模版分离出去-->
+
+<title></title>
+<link href="lib/My97DatePicker/4.8/skin/WdatePicker.css" rel="stylesheet" type="text/css"></head>
+<body>
+<div class="page-container">
+	<form action="" method="post" class="form form-horizontal" id="form-category-add" novalidate="novalidate">
+		<div id="tab-category" class="HuiTab">
+			<div class="tabBar cl">
+				<span class="current">基本信息</span>
+				<span class="">自定义字段</span>
+				<!-- <span class="">SEO</span> -->
+			</div>
+			<div class="tabCon" style="display: block;">
+				<input type="hidden" id="id" name="id" value="">
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>标题：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<input type="text" class="input-text" value="" placeholder="" id="title" name="title">
+					</div>
+				</div>
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-3">描述：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<input type="text" class="textarea radius" value="" placeholder="" id="describe" name="describe">
+					</div>
+				</div>
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-3">优先级：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<span class="select-box text_width30">
+						  <select class="select " size="1" name="priority" id="priority">
+						  </select>
+						</span>
+					</div>	
+				</div>
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>状态：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<span class="select-box text_width30">
+						  <select class="select " size="1" name="status" id="status">
+						  </select>
+						</span>
+					</div>
+				</div>
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>标签：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<input type="text" class="input-text" value="" placeholder="" id="tags" name="tags">
+					</div>
+				</div>
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>指派用户：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<input type="text" class="input-text" value="" placeholder="" id="users" name="users">
+					</div>
+				</div>
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>开始时间：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<input type="text" onfocus="WdatePicker({ maxDate:'#F{$dp.$D(\'endTime\')}',dateFmt: 'yyyy-MM-dd HH:mm:ss' })" id="startTime" name="startTime" class="input-text Wdate" >
+					</div>
+				</div>
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>结束时间：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<input type="text" onfocus="WdatePicker({ minDate:'#F{$dp.$D(\'startTime\')}',dateFmt: 'yyyy-MM-dd HH:mm:ss' })" id="endTime" name="endTime" class="input-text Wdate" >
+					</div>
+				</div>
+			</div>
+			<div class="tabCon" style="display: none;">
+				<div class="row cl" id="taskTempDiv">
+					<label class="form-label col-xs-4 col-sm-3">任务模板：</label>
+					<div class="formControls col-xs-8 col-sm-9" id="">
+						<span class="select-box text_width30">
+						  <select class="select " size="1" name="tempId" id="tempId">
+						  </select>
+						</span>
+					</div>
+				</div>
+			</div>
+			<!-- <div class="tabCon" style="display: none;">
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-3">首页文件名：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<input type="text" class="input-text" value="index.html" style="width:200px;">
+					</div>
+					<div class="col-3">
+					</div>
+				</div>
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-3">关键词：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<input type="text" class="input-text" value="">
+					</div>
+					<div class="col-3">
+					</div>
+				</div>
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-3">描述：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<textarea name="" cols="" rows="" class="textarea" placeholder="说点什么...最少输入10个字符" datatype="*10-100" dragonfly="true" nullmsg="备注不能为空！" onkeyup="$.Huitextarealength(this,100)"></textarea>
+						<p class="textarea-numberbar"><em class="textarea-length">0</em>/100</p>
+					</div>
+					<div class="col-3">
+					</div>
+				</div>
+			</div> -->
+		</div>
+		<div class="row cl">
+			<div class="col-9 col-offset-3">
+				<input class="btn btn-primary radius" id="submit" type="button" onclick="save()" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+			</div>
+		</div>
+	</form>
+</div>
+
+<!--_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="static/h-ui/js/H-ui.min.js"></script>
+<script type="text/javascript" src="static/h-ui.admin/js/H-ui.admin.js"></script> <!--/_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="static/h-ui.admin/js/common.js"></script>
+<script type="text/javascript" src="static/h-ui.admin/js/utils.js"></script>
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="lib/jquery.validation/1.14.0/jquery.validate.js"></script> 
+<script type="text/javascript" src="lib/jquery.validation/1.14.0/validate-methods.js"></script> 
+<script type="text/javascript" src="lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<script type="text/javascript">
+$(function(){
+	loadData();
+	$('.skin-minimal input').iCheck({
+		checkboxClass: 'icheckbox-blue',
+		radioClass: 'iradio-blue',
+		increaseArea: '20%'
+	});
+	
+	$("#tab-category").Huitab({
+		index:0
+	});
+	$("#form-category-add").validate({
+		rules:{
+			
+		},
+		onkeyup:false,
+		focusCleanup:true,
+		success:"valid",
+		submitHandler:function(form){
+			//$(form).ajaxSubmit();
+			var index = parent.layer.getFrameIndex(window.name);
+			//parent.$('.btn-refresh').click();
+			parent.layer.close(index);
+		}
+	});
+});
+
+
+//保存数据
+function save(){
+	var title = $("#title").val();
+	var describe = $("#describe").val();
+	var priority = $("#priority").val();
+	var status = $("#status").val();
+	var tags = $("#tags").val();
+	var users = $("#users").val();
+	var startTime = $("#startTime").val();
+	var endTime = $("#endTime").val();
+	var tempId = $("#tempId").val();
+	
+	var fieldset = {};
+	$('div[name="fieldsets"]').each(function(i,e){ 
+		var div = $(e);
+		var key = div.find("label[name='key']").html();
+		var val = div.find("input[name='val']").val();
+		debugger;
+		fieldset[key]=val;
+	}); 
+	
+	var attr1 = $("#submit").attr("attr1");
+	if(attr1=="add"){
+		var url = "/task/create";
+		var data={title:title,describe:describe,priority:priority,status:status,tags:tags,users:users,startTime:startTime,endTime:endTime,tempId:tempId,fieldset:JSON.stringify(fieldset)};
+	}else{
+		var url = "/task/update";
+		var id = $("#id").val();
+		var data={id:id,title:title,describe:describe,priority:priority,status:status,tags:tags,users:users,startTime:startTime,endTime:endTime,tempId:tempId,fieldset:JSON.stringify(fieldset)};
+	}
+	common.postData(url,data,function(data){
+		parent.window.location.reload();
+		common.alertX(data.msg);
+		parent.layer.close(parent.layer.getFrameIndex(window.name));
+	});
+}
+
+//加载页面数据
+var priorityDict,statusDict;
+	utils.loadDictOption2(function(data){
+		priorityDict = data;
+	},'task_priority');
+	utils.loadDictOption2(function(data){
+		statusDict = data;
+	},'task_status');
+function loadData(){
+	var params = common.getParams();
+	$("#id").val(params.id?params.id:"");
+	$("#priority").html(priorityDict);
+	$("#status").html(statusDict);
+	$("#submit").attr("attr1",params.func);
+
+	loadTaskTemp();		//加载任务模板
+}
+//加载任务模板
+var tempJson = {};
+function loadTaskTemp(){
+	var url = "/taskTemp/list?pageNum=-1";
+	common.getData(url,function(data){
+		var list = data.result.records;
+		var optHtml = '<option value="" >请选择</option>';
+		for(var i=0;i<list.length;i++){
+			var obj = list[i];
+			optHtml+='<option value="'+obj.id+'">'+obj.name+'</option>';
+			tempJson[obj.id]=obj.listFieldset;
+		}
+		$("#tempId").html(optHtml);
+		loadTaskInfo();
+	});
+}
+$(document).on("change","#tempId",function(){  
+	var val = $(this).val();
+	var jsonArr = tempJson[val];
+	var html="";
+	$(".fieldsetDiv").remove();
+	for(var i=0;i<jsonArr.length;i++){
+		var obj = $.parseJSON(jsonArr[i]);
+		html+='<div class="row cl fieldsetDiv" name="fieldsets">\
+			<label class="form-label col-xs-4 col-sm-3" name="key">'+obj.name+'</label>\
+			<div class="formControls col-xs-8 col-sm-9">\
+				<input type="text" class="input-text" value="" placeholder="" id="" name="val">\
+			</div>\
+		</div>';
+	}
+	$("#taskTempDiv").after(html);
+});
+
+
+//加载任务详情
+function loadTaskInfo(){
+	var id = $("#id").val();
+	if(!id){
+		return;
+	}
+	
+	var url = "/task/getInfoById?id="+id;
+	common.getData(url,function(data){
+	//ate String fieldset;		// 自定义字段
+	
+		var obj = data.result;
+		$("#title").val(obj.title);
+		$("#describe").val(obj.describe);
+		$("#tags").val(obj.tags);
+		$("#users").val(obj.users);
+		$("#startTime").val(obj.startTime);
+		$("#endTime").val(obj.endTime);
+		//下拉选择
+		$("#priority").val(obj.priority);
+		$("#status").val(obj.status);
+		$("#tempId").val(obj.tempId);
+		
+		//var fieldsetJson = $.parseJSON(obj.fieldset);
+		var fieldsetJson = obj.extraData;
+		var html = "";
+		for(var p in fieldsetJson){
+			//alert("key:"+p+" ->val:"+fieldsetJson[p]);
+			html+='<div class="row cl fieldsetDiv" name="fieldsets">\
+				<label class="form-label col-xs-4 col-sm-3" name="key">'+p+'</label>\
+				<div class="formControls col-xs-8 col-sm-9">\
+					<input type="text" class="input-text" value="'+fieldsetJson[p]+'" placeholder="" id="" name="val">\
+				</div>\
+			</div>';
+		}
+		$("#taskTempDiv").after(html);
+	});
+}
+
+</script>
+<!--/请在上方写此页面业务相关的脚本-->
+
+</body></html>

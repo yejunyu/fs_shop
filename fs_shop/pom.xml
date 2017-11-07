@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.fullstack.shop</groupId>
+    <artifactId>shop</artifactId>
+    <version>1.0.0</version>
+
+    <!-- Inherit defaults from Spring Boot -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.0.0.BUILD-SNAPSHOT</version>
+    </parent>
+
+	<!-- 版本控制 -->
+	<properties>
+		
+		<!-- main version setting -->
+		<mybatis.version>3.2.8</mybatis.version>
+		<mybatis-spring.version>1.2.2</mybatis-spring.version>
+		<druid.version>1.0.11</druid.version>
+		
+		<!-- tools version setting -->
+		<slf4j.version>1.7.21</slf4j.version>
+		<commons-lang3.version>3.3.2</commons-lang3.version>
+		<fastjson.version>1.1.40</fastjson.version>
+		<ehcache.version>2.6.9</ehcache.version>
+		<ehcache-web.version>2.0.4</ehcache-web.version>
+		<guava.version>19.0</guava.version>
+		<!-- jdbc driver setting -->
+		<mysql.driver.version>5.1.30</mysql.driver.version>
+	    
+	</properties>
+    <!-- Add typical dependencies for a web application -->
+    <dependencies>
+    	<dependency>
+	    	<groupId>org.springframework</groupId>
+	     	<artifactId>spring-context-support</artifactId>
+		</dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>  
+        	<groupId>org.springframework.boot</groupId>  
+	        <artifactId>spring-boot-starter-test</artifactId>  
+	    </dependency> 
+	    <dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-cache</artifactId>
+		</dependency>
+	    <dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-jdbc</artifactId>
+		</dependency>
+	    <dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+        <!-- jsp 解析引擎 -->
+	    <dependency>
+		   <groupId>org.apache.tomcat.embed</groupId>
+		   <artifactId>tomcat-embed-jasper</artifactId>
+		</dependency>
+	    <!-- mysql 驱动 -->  
+	    <dependency>  
+	        <groupId>mysql</groupId>  
+	        <artifactId>mysql-connector-java</artifactId>  
+	    </dependency>  
+	  	<!-- mybatis -->
+	  	<!-- <dependency>  
+	        <groupId>org.mybatis.spring.boot</groupId>  
+	        <artifactId>mybatis-spring-boot-starter</artifactId>  
+	        <version>1.1.1</version>  
+	    </dependency>  -->
+	    <dependency>
+			<groupId>com.baomidou</groupId>
+			<artifactId>mybatisplus-spring-boot-starter</artifactId>
+			<version>1.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+		</dependency>
+		<!-- CACHE begin -->
+		<dependency>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache-core</artifactId>
+			<version>${ehcache.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.ehcache</groupId>  
+			<artifactId>ehcache-web</artifactId>  
+			<version>${ehcache-web.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>${guava.version}</version>
+		</dependency>
+		<!-- CACHE end -->
+		<!-- fastjson json -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>${fastjson.version}</version>
+		</dependency>
+    </dependencies>
+
+    <!-- Package as an executable jar -->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+    <!-- Add Spring repositories -->
+    <!-- (you don't need this if you are using a .RELEASE version) -->
+    <repositories>
+        <repository>
+            <id>spring-snapshots</id>
+            <url>http://repo.spring.io/snapshot</url>
+            <snapshots><enabled>true</enabled></snapshots>
+        </repository>
+        <repository>
+            <id>spring-milestones</id>
+            <url>http://repo.spring.io/milestone</url>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>spring-snapshots</id>
+            <url>http://repo.spring.io/snapshot</url>
+        </pluginRepository>
+        <pluginRepository>
+            <id>spring-milestones</id>
+            <url>http://repo.spring.io/milestone</url>
+        </pluginRepository>
+    </pluginRepositories>
+</project>

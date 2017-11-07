@@ -1,0 +1,47 @@
+@charset "utf-8";
+/* 你自己的样式 */
+.text_width10{
+	width:10%;
+}
+.text_width20{
+	width:20%;
+}
+.text_width30{
+	width:30%;
+}
+.text_width50{
+	width:50%;
+}
+.text_width80{
+	width:80%;
+}
+
+.width10{
+	width:10%;
+}
+.width20{
+	width:20%;
+}
+.width30{
+	width:30%;
+}
+.width50{
+	width:50%;
+}
+.width80{
+	width:80%;
+}
+.width90{
+	width:90%;
+}
+
+.m_l_100{
+	margin-left:100px;
+}
+
+.m_l_50{
+	margin-left:50px;
+}
+.bg_white{
+	background-color:white;
+}

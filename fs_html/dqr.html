@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+
+<title>二维码下载地址自动识别跳转</title>
+</head>
+<body>
+<script type="text/javascript">
+	﻿﻿var u = navigator.userAgent;
+	var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+	var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+	if(isAndroid){
+		//document.write("你是一个Android");
+		alert("准备跳转安卓下载...");
+		window.location.href="http://a.app.qq.com/o/simple.jsp?pkgname=com.zhihu.android&g_f=991703";
+	}else if(isiOS){
+		//document.write("你是一个iOS");
+		alert("准备跳转iOS下载...");
+		window.location.href="http://t.cn/Rq3gcDV";
+	}else{
+		alert("您请求的方式暂时不支持下载...");
+		document.write("您请求的方式暂时不支持下载...");
+	}
+	
+</script>
+
+</body>
+</html>
