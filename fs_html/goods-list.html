@@ -16,6 +16,7 @@
 <link rel="stylesheet" type="text/css" href="static/h-ui.admin/skin/default/skin.css" id="skin" />
 <link rel="stylesheet" type="text/css" href="static/h-ui.admin/css/style.css" />
 <link rel="stylesheet" type="text/css" href="lib/My97DatePicker/4.8/skin/WdatePicker.css"></head>
+<link rel="stylesheet" href="lib/zTree/v3/css/zTreeStyle/zTreeStyle.css" type="text/css">
 <!--[if IE 6]>
 <script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js" ></script>
 <script>DD_belatedPNG.fix('*');</script>
@@ -23,15 +24,103 @@
 <title></title>
 </head>
 <body>
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 商品管理 <span class="c-gray en">&gt;</span> 商品列表 <a class="btn btn-success radius r btn-refresh" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="pos-a" style="width:200px;left:0;top:0; bottom:0; height:100%; border-right:1px solid #e5e5e5; background-color:#f5f5f5; overflow:auto;">
+	<ul id="treeDemo" class="ztree"></ul>
+</div>
+<div style="margin-left:200px;">
+	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe64b;</i> 商品管理 <span id="officeNameSpan"> </span> <span class="c-gray en">&gt;</span> 商品列表 </nav>
+	<div class="page-container">
+		<!-- <div class="text-c"> 日期范围：
+			<input type="text" onfocus="WdatePicker({ maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}' })" id="datemin" class="input-text Wdate" style="width:120px;">
+			-
+			<input type="text" onfocus="WdatePicker({ minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d' })" id="datemax" class="input-text Wdate" style="width:120px;">
+			<input type="text" class="input-text" style="width:250px" placeholder="输入会员名称、电话、邮箱" id="" name="">
+			<button type="submit" class="btn btn-success radius" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜用户</button>
+		</div> -->
+		<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l">
+			<a href="javascript:;" onclick="batchdel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> 
+			<a href="javascript:;" onclick="add('添加用户','','','510')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加商品</a></span> 
+			<span class="r">共有数据：<strong id="count"></strong> 条</span> </div>
+		<div class="mt-20">
+		<input type="hidden" id="tId" name="tId" value="">
+		<input type="hidden" id="tempName" name="officeName" value="">
+		<table class="table table-border table-bordered table-hover table-bg table-sort">
+			<thead>
+				<tr class="text-c">
+					<th width="25"><input type="checkbox" name="" value=""></th>
+					<th width="100">名称</th>
+					<th width="400">描述</th>
+					<th width="100">价格</th>
+					<th width="100">积分</th>
+					<th width="">操作</th>
+				</tr>
+			</thead>
+			<tbody id="data">
+				
+			</tbody>
+		</table>
+		</div>
+	</div>
+</div>
+<div id="infoDiv" class="bringins-content" style="display:none;">
+	<form action="" method="post" class="form form-horizontal" id="form-category-add" novalidate="novalidate">
+		<div id="tab-category" class="HuiTab">
+			<div class="tabBar cl">
+				<span class="current">基本信息</span>
+			</div>
+			<div class="tabCon" style="display: block;">
+				<input class="goods" type="hidden" id="id" name="id" value="">
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>名称：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<input type="text" class="input-text goods" value="" placeholder="" id="name" name="name">
+					</div>
+				</div>
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>描述：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<input type="text" class="textarea goods" value="" placeholder="" id="description" name="description">
+					</div>
+				</div>
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-3">类型：</label>
+					<div class="formControls col-xs-8 col-sm-9" id="">
+						<span class="select-box text_width30">
+						  <select class="select goods" size="1" name="tempId" id="tempId">
+						  </select>
+						</span>
+					</div>
+				</div>
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>价格：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<input type="text" class="input-text goods" value="" placeholder="" id="price" name="price">
+					</div>
+				</div>
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>积分：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<input type="text" class="input-text goods" value="" placeholder="" id="score" name="score">
+					</div>
+				</div>
+				<div class="row cl">
+					<span class="">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+					<span class="">类型补充属性</span>
+					<div class="line" style="border-top: solid 2px #fff;"></div>
+				</div>
+			</div>
+		</div>
+		<div class="row cl">
+			<div class="col-9 col-offset-3">
+				<input class="btn btn-primary radius" id="submit" type="button" onclick="save()" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+			</div>
+		</div>
+	</form>
+</div>
+
+
+<!-- <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 商品管理 <span class="c-gray en">&gt;</span> 商品列表 <a class="btn btn-success radius r btn-refresh" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
-	<!-- <div class="text-c"> 日期范围：
-		<input type="text" onfocus="WdatePicker({ maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}' })" id="datemin" class="input-text Wdate" style="width:120px;">
-		-
-		<input type="text" onfocus="WdatePicker({ minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d' })" id="datemax" class="input-text Wdate" style="width:120px;">
-		<input type="text" class="input-text" style="width:250px" placeholder="输入会员名称、电话、邮箱" id="" name="">
-		<button type="submit" class="btn btn-success radius" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜用户</button>
-	</div> -->
 	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l">
 		<a href="javascript:;" onclick="batchdel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> 
 		<a href="javascript:;" onclick="add('添加商品','task-add.html','','700')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加商品</a></span> 
@@ -42,12 +131,9 @@
 			<tr class="text-c">
 				<th width="25"><input type="checkbox" name="" value=""></th>
 				<th width="100">名称</th>
-				<th width="200">标识码（如型号、条形码）</th>
-				<th width="100">品牌</th>
-				<th width="100">价格</th>
-				<th width="50">最小值</th>
-				<th width="50">最大值</th>
 				<th width="400">描述</th>
+				<th width="100">价格</th>
+				<th width="100">积分</th>
 				<th width="">操作</th>
 			</tr>
 		</thead>
@@ -63,7 +149,6 @@
 			<div class="tabBar cl">
 				<span class="current">基本信息</span>
 				<span class="">自定义字段</span>
-				<!-- <span class="">SEO</span> -->
 			</div>
 			<div class="tabCon" style="display: block;">
 				<input class="goods" type="hidden" id="id" name="id" value="">
@@ -74,9 +159,9 @@
 					</div>
 				</div>
 				<div class="row cl">
-					<label class="form-label col-xs-4 col-sm-3">标识码（如型号、条形码）：</label>
+					<label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>描述：</label>
 					<div class="formControls col-xs-8 col-sm-9">
-						<input type="text" class="input-text radius goods" value="" placeholder="" id="code" name="code">
+						<input type="text" class="textarea goods" value="" placeholder="" id="description" name="description">
 					</div>
 				</div>
 				<div class="row cl">
@@ -86,39 +171,21 @@
 					</div>
 				</div>
 				<div class="row cl">
-					<label class="form-label col-xs-4 col-sm-3">品牌：</label>
-					<div class="formControls col-xs-8 col-sm-9">
-						<input type="text" class="input-text goods" value="" placeholder="" id="brand" name="brand">
-					</div>
-				</div>
-				<div class="row cl">
 					<label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>价格：</label>
 					<div class="formControls col-xs-8 col-sm-9">
 						<input type="text" class="input-text goods" value="" placeholder="" id="price" name="price">
 					</div>
 				</div>
 				<div class="row cl">
-					<label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>描述：</label>
+					<label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>积分：</label>
 					<div class="formControls col-xs-8 col-sm-9">
-						<input type="text" class="textarea goods" value="" placeholder="" id="description" name="description">
-					</div>
-				</div>
-				<div class="row cl">
-					<label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>最小值：</label>
-					<div class="formControls col-xs-8 col-sm-9">
-						<input type="text" class="input-text goods" value="" placeholder="" id="min" name="min">
-					</div>
-				</div>
-				<div class="row cl">
-					<label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>最大值：</label>
-					<div class="formControls col-xs-8 col-sm-9">
-						<input type="text" class="input-text goods" value="" placeholder="" id="max" name="max">
+						<input type="text" class="input-text goods" value="" placeholder="" id="score" name="score">
 					</div>
 				</div>
 			</div>
 			<div class="tabCon" style="display: none;">
 				<div class="row cl" id="tempDiv">
-					<label class="form-label col-xs-4 col-sm-3">商品模板：</label>
+					<label class="form-label col-xs-4 col-sm-3">商品属性：</label>
 					<div class="formControls col-xs-8 col-sm-9" id="">
 						<span class="select-box text_width30">
 						  <select class="select goods" size="1" name="tempId" id="tempId">
@@ -127,33 +194,6 @@
 					</div>
 				</div>
 			</div>
-			<!-- <div class="tabCon" style="display: none;">
-				<div class="row cl">
-					<label class="form-label col-xs-4 col-sm-3">首页文件名：</label>
-					<div class="formControls col-xs-8 col-sm-9">
-						<input type="text" class="input-text" value="index.html" style="width:200px;">
-					</div>
-					<div class="col-3">
-					</div>
-				</div>
-				<div class="row cl">
-					<label class="form-label col-xs-4 col-sm-3">关键词：</label>
-					<div class="formControls col-xs-8 col-sm-9">
-						<input type="text" class="input-text" value="">
-					</div>
-					<div class="col-3">
-					</div>
-				</div>
-				<div class="row cl">
-					<label class="form-label col-xs-4 col-sm-3">描述：</label>
-					<div class="formControls col-xs-8 col-sm-9">
-						<textarea name="" cols="" rows="" class="textarea" placeholder="说点什么...最少输入10个字符" datatype="*10-100" dragonfly="true" nullmsg="备注不能为空！" onkeyup="$.Huitextarealength(this,100)"></textarea>
-						<p class="textarea-numberbar"><em class="textarea-length">0</em>/100</p>
-					</div>
-					<div class="col-3">
-					</div>
-				</div>
-			</div> -->
 		</div>
 		<div class="row cl">
 			<div class="col-9 col-offset-3">
@@ -161,7 +201,7 @@
 			</div>
 		</div>
 	</form>
-</div>
+</div> -->
 
 <!--_footer 作为公共模版分离出去-->
 <script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script> 
@@ -172,6 +212,7 @@
 <script type="text/javascript" src="static/h-ui.admin/js/utils.js"></script>
 
 <!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="lib/zTree/v3/js/jquery.ztree.all-3.5.min.js"></script>
 <script type="text/javascript" src="lib/My97DatePicker/4.8/WdatePicker.js"></script> 
 <script type="text/javascript" src="lib/datatables/1.10.0/jquery.dataTables.min.js"></script> 
 <script type="text/javascript" src="lib/laypage/1.2/laypage.js"></script>
@@ -189,20 +230,61 @@ $(function(){
 		index:0
 	});
 });
-function sortDataTable(){
-	$('.table-sort').dataTable({
-		"aaSorting": [[ 2, "desc" ]],//默认第几个排序
-		"bStateSave": true,//状态保存
-		"aoColumnDefs": [
-		  //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
-		  {"orderable":false,"aTargets":[0,6,7]}// 制定列不参与排序
-		]
+//加载数据
+function loadData(){
+	var url = "/goodsTemp/list?pageNum=-1";
+	common.getData(url,function(data){
+		//var params = common.getParams();
+		var list = data.result.records;
+		var html="";
+		var zNodes = [];
+		for(var i=0;i<list.length;i++){
+			var obj = list[i];
+			var n = {id:obj.id,pId:"",name:obj.name};
+			zNodes.push(n);
+		}
+		initTree(zNodes);
 	});
 }
-//加载页面数据
-function loadData(){
-	var url = "/goods/list?pageNum=-1";
+
+var setting = {
+	view: {
+		dblClickExpand: false,
+		showLine: false,
+		selectedMulti: false
+	},
+	data: {
+		simpleData: {
+			enable:true,
+			idKey: "id",
+			pIdKey: "pId",
+			rootPId: ""
+		}
+	},
+	callback: {
+		beforeClick: function(treeId, treeNode) {
+			var zTree = $.fn.zTree.getZTreeObj("tree");
+			loadGoodsData(treeNode.id);
+			$("#tId").val(treeNode.id);
+			$("#tempName").val(treeNode.name);
+			//$("#officeNameSpan").html('<span class="c-gray en">&gt;</span> '+treeNode.name);
+		}
+	}
+};
+
+//初始加载左侧菜单
+function initTree(zNodes){
+	var t = $("#treeDemo");
+	t = $.fn.zTree.init(t, setting, zNodes);
+}
+//根据类型id获取对应的商品列表
+function loadGoodsData(tempId){
+	if(!tempId){
+		return;
+	}
+	var url = "/goods/list?tempId="+tempId;
 	common.getData(url,function(data){
+		cleanDataTable();
 		var list = data.result.records;
 		var html="";
 		for(var i=0;i<list.length;i++){
@@ -210,21 +292,38 @@ function loadData(){
 			html+='<tr class="text-c">\
 				<td><input type="checkbox" value="'+obj.id+'" name="id"></td>\
 				<td>'+obj.name+'</td>\
-				<td>'+obj.code+'</td>\
-				<td>'+obj.brand+'</td>\
-				<td>'+obj.price+'</td>\
-				<td>'+obj.min+'</td>\
-				<td>'+obj.max+'</td>\
 				<td>'+obj.description+'</td>\
+				<td>'+obj.price+'</td>\
+				<td>'+obj.score+'</td>\
 				<td class="td-manage">\
-				<a title="编辑" href="javascript:;" onclick="edit(\'编辑\',\'task-add.html\',\'\',\'700\',\''+obj.id+'\',\''+obj.name+'\',\''+obj.code+'\',\''+obj.brand+'\')" class="ml-5" style="text-decoration:none">\
+				<a title="编辑" href="javascript:;" onclick="edit(\'编辑\',\''+obj.id+'\')" class="ml-5" style="text-decoration:none">\
 				<i class="Hui-iconfont">&#xe6df;</i></a> <a title="删除" href="javascript:;" onclick="del(\''+obj.id+'\')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>\
 			</tr>';
 		}
 		$("#data").html(html);
-		$("#count").html(data.result.total);
-		sortDataTable();
+		$("#count").html(list.length);
+		if(list.length>0){
+			sortDataTable();
+		}
 	});
+}
+function sortDataTable(){
+	$('.table-sort').dataTable({
+		"aaSorting": [[ 3, "desc" ]],//默认第几个排序
+		"bStateSave": true,//状态保存
+		"aoColumnDefs": [
+		  //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
+		  {"orderable":false,"aTargets":[0,5]}// 制定列不参与排序
+		]
+	});
+}
+//清除旧数据
+function cleanDataTable(){
+	if ($('.table-sort').hasClass('dataTable')) {
+		var dttable = $('.table-sort').dataTable();
+		dttable.fnClearTable(); //清空一下table
+		dttable.fnDestroy(); //还原初始化了的datatable
+	}
 }
 
 /*添加*/
@@ -240,7 +339,97 @@ function add(title,url,w,h){
 	$("#id").val("");
 	loadDataInfo();
 }
-function edit(title,url,w,h,id,name,code,contactWay){
+function loadDataInfo(){
+	//清除旧数据
+	$(".goods").val("");
+	$(".fieldsetDiv").remove();
+	
+	var params = common.getParams();
+	$("#id").val(params.id?params.id:"");
+	$("#submit").attr("attr1",params.func);
+
+	loadGoodsType();		//加载商品类型
+}
+//加载商品类型
+var typeJson = {};
+function loadGoodsType(){
+	var url = "/goodsTemp/list?pageNum=-1";
+	common.getData(url,function(data){
+		var list = data.result.records;
+		var optHtml = '<option value="" >请选择</option>';
+		var tId = $("#tId").val();
+		for(var i=0;i<list.length;i++){
+			var obj = list[i];
+			if(obj.id==tId){
+				optHtml+='<option value="'+obj.id+'" selected="selected">'+obj.name+'</option>';
+			}else{
+				optHtml+='<option value="'+obj.id+'">'+obj.name+'</option>';
+			}
+			typeJson[obj.id]=obj.listFieldset;
+		}
+		$("#tempId").html(optHtml);
+		changeTempId(tId);
+		//如果放在编辑里面，js会直接同时加载两个方法，导致这个方法里面有错
+		loadGoodsInfo();
+	});
+}
+$(document).on("change","#tempId",function(){  
+	var val = $(this).val();
+	changeTempId(val);
+});
+function changeTempId(val){
+	var jsonArr = typeJson[val];
+	if(!jsonArr){
+		return;
+	}
+	var html="";
+	$(".fieldsetDiv").remove();
+	for(var i=0;i<jsonArr.length;i++){
+		var obj = $.parseJSON(jsonArr[i]);
+		html+='<div class="row cl fieldsetDiv" name="fieldsets">\
+			<label class="form-label col-xs-4 col-sm-3" name="key">'+obj.name+'</label>\
+			<div class="formControls col-xs-8 col-sm-9">\
+				<input type="text" class="input-text" value="" placeholder="" id="" name="val">\
+			</div>\
+		</div>';
+	}
+	$("#tab-category").after(html);
+}
+
+//保存数据
+function save(){
+	var name = $("#name").val();
+	var description = $("#description").val();
+	var score = $("#score").val();
+	var price = $("#price").val();
+	var tempId = $("#tempId").val();
+	
+	var fieldset = {};
+	$('div[name="fieldsets"]').each(function(i,e){ 
+		var div = $(e);
+		var key = div.find("label[name='key']").html();
+		var val = div.find("input[name='val']").val();
+		debugger;
+		fieldset[key]=val;
+	}); 
+	
+	var attr1 = $("#submit").attr("attr1");
+	if(attr1=="add"){
+		var url = "/goods/create";
+		var data={name:name,score:score,price:price,description:description,tempId:tempId,fieldset:JSON.stringify(fieldset)};
+	}else{
+		var url = "/goods/update";
+		var id = $("#id").val();
+		var data={id:id,name:name,score:score,price:price,description:description,tempId:tempId,fieldset:JSON.stringify(fieldset)};
+	}
+	common.postData(url,data,function(data){
+		window.location.reload();
+		common.alertX(data.msg);
+		parent.layer.close(parent.layer.getFrameIndex(window.name));
+	});
+}
+//编辑
+function edit(title,id){
 	common.addParams({id:id,func:"edit"});
 	//layer_show(title,url,w,h);
 	$('#infoDiv').bringins({
@@ -250,6 +439,40 @@ function edit(title,url,w,h,id,name,code,contactWay){
 		"closeButton":"white"
 	});
 	loadDataInfo();
+}
+//加载商品详情
+function loadGoodsInfo(){
+	var id = $("#id").val();
+	if(!id){
+		return;
+	}
+	
+	var url = "/goods/getInfoById?id="+id;
+	common.getData(url,function(data){
+	
+		var obj = data.result;
+		$("#name").val(obj.name);
+		$("#description").val(obj.description);
+		$("#price").val(obj.price);
+		$("#score").val(obj.score);
+		
+		$("#tempId").val(obj.tempId);
+		
+		//var fieldsetJson = $.parseJSON(obj.fieldset);
+		var fieldsetJson = obj.extraData;
+		var html = "";
+		$(".fieldsetDiv").remove();
+		for(var p in fieldsetJson){
+			//alert("key:"+p+" ->val:"+fieldsetJson[p]);
+			html+='<div class="row cl fieldsetDiv" name="fieldsets">\
+				<label class="form-label col-xs-4 col-sm-3" name="key">'+p+'</label>\
+				<div class="formControls col-xs-8 col-sm-9">\
+					<input type="text" class="input-text" value="'+fieldsetJson[p]+'" placeholder="" id="" name="val">\
+				</div>\
+			</div>';
+		}
+		$("#tab-category").after(html);
+	});
 }
 
 /*删除*/
@@ -286,138 +509,6 @@ function batchdel(){
 		common.alertX("请选择要删除的数据.");
 	}
 }
-
-
-<!--  商品新增   -->
-//保存数据
-function save(){
-	var name = $("#name").val();
-	var code = $("#code").val();
-	var brand = $("#brand").val();
-	var price = $("#price").val();
-	var description = $("#description").val();
-	var min = $("#min").val();
-	var max = $("#max").val();
-	var type = $("#type").val();
-	var tempId = $("#tempId").val();
-	
-	var fieldset = {};
-	$('div[name="fieldsets"]').each(function(i,e){ 
-		var div = $(e);
-		var key = div.find("label[name='key']").html();
-		var val = div.find("input[name='val']").val();
-		debugger;
-		fieldset[key]=val;
-	}); 
-	
-	var attr1 = $("#submit").attr("attr1");
-	if(attr1=="add"){
-		var url = "/goods/create";
-		var data={name:name,code:code,brand:brand,price:price,description:description,min:min,max:max,type:type,tempId:tempId,fieldset:JSON.stringify(fieldset)};
-	}else{
-		var url = "/goods/update";
-		var id = $("#id").val();
-		var data={id:id,name:name,code:code,brand:brand,price:price,description:description,min:min,max:max,type:type,tempId:tempId,fieldset:JSON.stringify(fieldset)};
-	}
-	common.postData(url,data,function(data){
-		window.location.reload();
-		common.alertX(data.msg);
-		parent.layer.close(parent.layer.getFrameIndex(window.name));
-	});
-}
-
-//加载页面数据
-//var priorityDict,statusDict;
-//	utils.loadDictOption2(function(data){
-//		priorityDict = data;
-//	},'task_priority');
-//	utils.loadDictOption2(function(data){
-//		statusDict = data;
-//	},'task_status');
-function loadDataInfo(){
-	//清除旧数据
-	$(".goods").val("");
-	$(".fieldsetDiv").remove();
-	
-	var params = common.getParams();
-	$("#id").val(params.id?params.id:"");
-	$("#submit").attr("attr1",params.func);
-
-	loadGoodsType();		//加载商品类型
-}
-//加载商品类型
-var typeJson = {};
-function loadGoodsType(){
-	var url = "/goodsTemp/list?pageNum=-1";
-	common.getData(url,function(data){
-		var list = data.result.records;
-		var optHtml = '<option value="" >请选择</option>';
-		for(var i=0;i<list.length;i++){
-			var obj = list[i];
-			optHtml+='<option value="'+obj.id+'">'+obj.name+'</option>';
-			typeJson[obj.id]=obj.listFieldset;
-		}
-		$("#tempId").html(optHtml);
-		loadGoodsInfo();
-	});
-}
-$(document).on("change","#tempId",function(){  
-	var val = $(this).val();
-	var jsonArr = typeJson[val];
-	var html="";
-	$(".fieldsetDiv").remove();
-	for(var i=0;i<jsonArr.length;i++){
-		var obj = $.parseJSON(jsonArr[i]);
-		html+='<div class="row cl fieldsetDiv" name="fieldsets">\
-			<label class="form-label col-xs-4 col-sm-3" name="key">'+obj.name+'</label>\
-			<div class="formControls col-xs-8 col-sm-9">\
-				<input type="text" class="input-text" value="" placeholder="" id="" name="val">\
-			</div>\
-		</div>';
-	}
-	$("#tempDiv").after(html);
-});
-
-
-//加载商品详情
-function loadGoodsInfo(){
-	var id = $("#id").val();
-	if(!id){
-		return;
-	}
-	
-	var url = "/goods/getInfoById?id="+id;
-	common.getData(url,function(data){
-	
-		var obj = data.result;
-		$("#name").val(obj.name);
-		$("#code").val(obj.code);
-		$("#brand").val(obj.brand);
-		$("#price").val(obj.price);
-		$("#description").val(obj.description);
-		$("#min").val(obj.min);
-		$("#max").val(obj.max);
-		$("#type").val(obj.type);
-		$("#tempId").val(obj.tempId);
-		
-		//var fieldsetJson = $.parseJSON(obj.fieldset);
-		var fieldsetJson = obj.extraData;
-		var html = "";
-		$(".fieldsetDiv").remove();
-		for(var p in fieldsetJson){
-			//alert("key:"+p+" ->val:"+fieldsetJson[p]);
-			html+='<div class="row cl fieldsetDiv" name="fieldsets">\
-				<label class="form-label col-xs-4 col-sm-3" name="key">'+p+'</label>\
-				<div class="formControls col-xs-8 col-sm-9">\
-					<input type="text" class="input-text" value="'+fieldsetJson[p]+'" placeholder="" id="" name="val">\
-				</div>\
-			</div>';
-		}
-		$("#tempDiv").after(html);
-	});
-}
-
-
 
 </script> 
 </body>

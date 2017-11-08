@@ -41,11 +41,11 @@ public class RequestUtils {
 	
 	public static <T> Page<T> getPage(HttpServletRequest request) throws BusinessException {
 		Page<T> page = new Page<T>();
-//		if(RequestUtils.getInteger(request, "pageNum")!=null &&
-//				RequestUtils.getInteger(request, "pageSize")!=null ){
+		if(RequestUtils.getInteger(request, "pageNum")!=null &&
+				RequestUtils.getInteger(request, "pageSize")!=null ){
 			page.setCurrent(RequestUtils.getInt(request, "pageNum"));
 			page.setSize(RequestUtils.getInt(request, "pageSize"));
-//		}
+		}
 		return page;
 	}
 	/**

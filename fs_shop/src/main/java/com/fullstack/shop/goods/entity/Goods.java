@@ -16,12 +16,12 @@ public class Goods extends DataEntity<Goods> {
 	
 	private static final long serialVersionUID = 1L;
 	private String name;		// 名称
+	private String description;		// 描述
 	private Integer type;		// 类型
 	@TableField("temp_id")
 	protected Integer tempId;	// 模板id
-	private Integer score;		// 最小值
+	private Integer score;		// 积分
 	private String price;		// 价格
-	private String description;		// 描述
 	private Integer min;		// 最小值
 	private Integer max;		// 最大值
 	private String fieldset;		// 自定义字段
