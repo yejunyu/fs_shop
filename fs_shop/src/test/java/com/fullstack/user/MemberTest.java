@@ -20,7 +20,7 @@ public class MemberTest extends AppTest{
     public void insert() throws BusinessException{  
     	
     	Member entity = new Member();  
-    	entity.setName("junit");
+    	entity.setName("junit01");
     	entity.setContactWay("110");
     	entity.preInsert();
         service.insert(entity);  

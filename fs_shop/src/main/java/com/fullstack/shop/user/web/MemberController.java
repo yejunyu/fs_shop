@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.fullstack.common.exceptions.BusinessException;
 import com.fullstack.common.web.RequestUtils;
@@ -26,8 +27,8 @@ public class MemberController extends ServiceController {
 	@RequestMapping("list")
     public JSONObject list(HttpServletRequest request,Member member) throws BusinessException {
 		Page<Member> page = RequestUtils.getPage(request);
-//		EntityWrapper<User> e = this.entityInit(user);
-//		page = userService.findPage(page, e);
+		EntityWrapper<Member> e = this.entityInit(member);
+		page = memberService.findPage(page, e);
         return this.retResult(page);
     }
 	
