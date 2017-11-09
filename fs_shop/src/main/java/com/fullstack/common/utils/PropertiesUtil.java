@@ -15,6 +15,8 @@ public class PropertiesUtil {
 	private static String redis_port = null;
 	private static String redis_password = null;
 	
+	private static String goods_img_base_path = null;
+	
 	static {
 		InputStream inputStream = PropertiesUtil.class
 				.getResourceAsStream("/business.properties");
@@ -24,6 +26,9 @@ public class PropertiesUtil {
 			redis_host = properties.getProperty("redis.host");
 			redis_port = properties.getProperty("redis.port");
 			redis_password = properties.getProperty("redis.password");
+			
+			goods_img_base_path = properties.getProperty("goods.img.base.path");
+			
 		} catch (Exception e) {
 			
 		}
@@ -43,6 +48,10 @@ public class PropertiesUtil {
 
 	public static String getRedisKeyPrefix() {
 		return redis_keyPrefix;
+	}
+
+	public static String getGoodsImgBasePath() {
+		return goods_img_base_path;
 	}
 
 	

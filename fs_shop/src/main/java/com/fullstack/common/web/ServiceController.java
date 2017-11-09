@@ -5,7 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.fullstack.shop.dict.entity.Dict;
 import com.fullstack.shop.dict.service.DictService;
 import com.fullstack.shop.goods.entity.Goods;
+import com.fullstack.shop.goods.entity.GoodsImg;
 import com.fullstack.shop.goods.entity.GoodsTemp;
+import com.fullstack.shop.goods.service.GoodsImgService;
 import com.fullstack.shop.goods.service.GoodsService;
 import com.fullstack.shop.goods.service.GoodsTempService;
 import com.fullstack.shop.user.entity.Member;
@@ -28,5 +30,7 @@ public abstract class ServiceController extends BaseController {
 	protected GoodsTempService<GoodsTemp> goodsTempService;
 	@Autowired  
 	protected GoodsService<Goods> goodsService;
+	@Autowired  
+	protected GoodsImgService<GoodsImg> goodsImgService;
 	
 }

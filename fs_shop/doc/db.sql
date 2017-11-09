@@ -58,6 +58,18 @@ CREATE TABLE `shop_goods` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商品表';
 
+DROP TABLE IF EXISTS `shop_goods_img`;
+CREATE TABLE `shop_goods_img` (
+  `id` int(11) NOT NULL auto_increment COMMENT 'id',
+  `goods_id` int(11) DEFAULT NULL COMMENT '商品id',
+  `name` varchar(100) DEFAULT NULL COMMENT '名称',
+	`path` varchar(100) DEFAULT NULL COMMENT '路径',
+  `bytes` MEDIUMBLOB DEFAULT NULL COMMENT '文件二进制存储',
+	`first_show` char(1) NOT NULL DEFAULT '0' COMMENT '优先展示',
+  `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT '删除标记',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商品图片表';
+
 DROP TABLE IF EXISTS `shop_order`;
 CREATE TABLE `shop_order` (
   `id` int(11) NOT NULL auto_increment COMMENT 'id',
