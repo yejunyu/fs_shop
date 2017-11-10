@@ -22,6 +22,9 @@ public class GoodsImg extends DataEntity<GoodsImg> {
 	@TableField("first_show")
 	private String firstShow; 	// 优先展示（0：正常；1：优先）
 	
+	@TableField(exist=false)
+	private String remarks;	// 备注
+	
 	@Override
 	public String toString(){
 		StringBuffer str = new StringBuffer();

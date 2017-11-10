@@ -45,6 +45,9 @@ public class RequestUtils {
 				RequestUtils.getInteger(request, "pageSize")!=null ){
 			page.setCurrent(RequestUtils.getInt(request, "pageNum"));
 			page.setSize(RequestUtils.getInt(request, "pageSize"));
+		}else if(RequestUtils.getInteger(request, "pageNum")==-1){
+			page.setCurrent(RequestUtils.getInt(request, "pageNum"));
+			page.setSize(0);
 		}
 		return page;
 	}

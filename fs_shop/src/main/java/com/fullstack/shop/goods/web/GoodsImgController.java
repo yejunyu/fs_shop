@@ -16,6 +16,7 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.fullstack.common.exceptions.BusinessException;
 import com.fullstack.common.utils.DateUtils;
+import com.fullstack.common.utils.ImgUtils;
 import com.fullstack.common.utils.Log;
 import com.fullstack.common.utils.PropertiesUtil;
 import com.fullstack.common.utils.UploadUtils;
@@ -96,6 +97,8 @@ public class GoodsImgController extends ServiceController {
 		goodsImg.setName(fileName);
 		goodsImg.setPath(filePath);
 		goodsImgService.create(goodsImg);
+		goodsImg.getExtraData().put(ImgUtils.IMG_KEY, 
+				ImgUtils.commonPathUtils(PropertiesUtil.getGoodsImgLoadPath(),goodsImg.getPath(),goodsImg.getName()));
         return this.retResult(goodsImg);
     }
 	/**
@@ -151,5 +154,18 @@ public class GoodsImgController extends ServiceController {
     public JSONObject getInfoById(HttpServletRequest request,GoodsImg goodsImg) throws BusinessException {
 		goodsImg = goodsImgService.getInfoById(goodsImg.getId());
         return this.retResult(goodsImg);
+    }
+	
+	/**
+	 * 
+	 * @param request
+	 * @param goodsImg
+	 * @return
+	 * @throws BusinessException
+	 */
+	@RequestMapping("bindGoodsId")
+    public JSONObject bindGoodsId(HttpServletRequest request,GoodsImg goodsImg) throws BusinessException {
+		goodsImgService.bindGoodsId(goodsImg.getId(),goodsImg.getGoodsId());
+        return this.retResult("图片绑定成功");
     }
 }

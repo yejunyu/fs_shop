@@ -48,10 +48,11 @@
 			<thead>
 				<tr class="text-c">
 					<th width="25"><input type="checkbox" name="" value=""></th>
-					<th width="100">名称</th>
-					<th width="400">描述</th>
-					<th width="100">价格</th>
-					<th width="100">积分</th>
+					<th width="15%">名称</th>
+					<th width="30%">描述</th>
+					<th width="10%">价格</th>
+					<th width="10%">积分</th>
+					<th width="15%">缩略图</th>
 					<th width="">操作</th>
 				</tr>
 			</thead>
@@ -83,7 +84,7 @@
 					</div>
 				</div>
 				<div class="row cl">
-					<label class="form-label col-xs-4 col-sm-3">类型：</label>
+					<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>类型：</label>
 					<div class="formControls col-xs-8 col-sm-9" id="">
 						<span class="select-box text_width30">
 						  <select class="select goods" size="1" name="tempId" id="tempId">
@@ -106,8 +107,14 @@
 				<div class="row cl">
 					<label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>图片：</label>
 					<div class="formControls col-xs-8 col-sm-9">
-						<input type="file" class="input-text goods" value="" placeholder="" id="file" name="file">
-						<input class="btn btn-primary radius" id="submitImg" type="button" onclick="save()" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+						<input type="hidden" class="input-text goods" value="" id="fileId" name="fileId">
+						<span class="btn-upload">
+							<a href="javascript:void();" class="btn btn-primary radius">选择文件
+								<span class="red" style="font-size:11px;">(默认不修改)</span></a>
+							<input type="file" id="file" name="file" multiple name="file_0" class="input-file">
+						</span>
+						<br>
+						<img id="fileShow" style="display:none;padding-top:5px;" class="thumb_img100 goods " alt="" src="">
 					</div>
 				</div>
 				<div class="row cl">
@@ -290,7 +297,7 @@ function loadGoodsData(tempId){
 	if(!tempId){
 		return;
 	}
-	var url = "/goods/list?tempId="+tempId;
+	var url = "/goods/list?pageNum=-1&tempId="+tempId;
 	common.getData(url,function(data){
 		cleanDataTable();
 		var list = data.result.records;
@@ -303,13 +310,14 @@ function loadGoodsData(tempId){
 				<td>'+obj.description+'</td>\
 				<td>'+obj.price+'</td>\
 				<td>'+obj.score+'</td>\
+				<td><img class="thumb_img60" alt="'+obj.name+'" src="'+obj.extraData.imgPath+'"></td>\
 				<td class="td-manage">\
 				<a title="编辑" href="javascript:;" onclick="edit(\'编辑\',\''+obj.id+'\')" class="ml-5" style="text-decoration:none">\
 				<i class="Hui-iconfont">&#xe6df;</i></a> <a title="删除" href="javascript:;" onclick="del(\''+obj.id+'\')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>\
 			</tr>';
 		}
 		$("#data").html(html);
-		$("#count").html(list.length);
+		$("#count").html(data.result.total);
 		if(list.length>0){
 			sortDataTable();
 		}
@@ -351,6 +359,7 @@ function loadDataInfo(){
 	//清除旧数据
 	$(".goods").val("");
 	$(".fieldsetDiv").remove();
+	$("#file").attr("src","");
 	
 	var params = common.getParams();
 	$("#id").val(params.id?params.id:"");
@@ -364,7 +373,7 @@ function loadGoodsType(){
 	var url = "/goodsTemp/list?pageNum=-1";
 	common.getData(url,function(data){
 		var list = data.result.records;
-		var optHtml = '<option value="" >请选择</option>';
+		var optHtml = '';
 		var tId = $("#tId").val();
 		for(var i=0;i<list.length;i++){
 			var obj = list[i];
@@ -411,6 +420,7 @@ function save(){
 	var score = $("#score").val();
 	var price = $("#price").val();
 	var tempId = $("#tempId").val();
+	var imgId = $("#fileId").val();
 	
 	var fieldset = {};
 	$('div[name="fieldsets"]').each(function(i,e){ 
@@ -424,11 +434,11 @@ function save(){
 	var attr1 = $("#submit").attr("attr1");
 	if(attr1=="add"){
 		var url = "/goods/create";
-		var data={name:name,score:score,price:price,description:description,tempId:tempId,fieldset:JSON.stringify(fieldset)};
+		var data={name:name,score:score,price:price,description:description,tempId:tempId,imgId:imgId,fieldset:JSON.stringify(fieldset)};
 	}else{
 		var url = "/goods/update";
 		var id = $("#id").val();
-		var data={id:id,name:name,score:score,price:price,description:description,tempId:tempId,fieldset:JSON.stringify(fieldset)};
+		var data={id:id,name:name,score:score,price:price,description:description,tempId:tempId,imgId:imgId,fieldset:JSON.stringify(fieldset)};
 	}
 	common.postData(url,data,function(data){
 		window.location.reload();
@@ -505,7 +515,6 @@ function batchdel(){
 	if(ids.length>0){
 		layer.confirm('确认要批量删除吗？',function(index){
 			var data={ids:ids};
-			debugger;
 			var url = "/goods/batchDel";
 			common.postData(url,data,function(data){
 				window.location.reload();
@@ -517,7 +526,18 @@ function batchdel(){
 		common.alertX("请选择要删除的数据.");
 	}
 }
-
+//绑定图片到对应的商品(逻辑变动，所以暂留)
+function bindGoodsId(id,goodsId){
+	if(!id || !goodsId){
+		return;
+	}
+	var url = "/goodsImg/bindGoodsId";
+	var data={id:id,goodsId:goodsId};
+	common.postData(url,data,function(data){
+		common.msg(data.msg);
+	});
+	
+}
 
 //上传图片
 //实例化一个plupload上传对象
@@ -530,12 +550,14 @@ var uploader = new plupload.Uploader({
 uploader.bind('FilesAdded',function(uploader,files){
 	uploader.start(); 
 });
+
 uploader.bind('FileUploaded',function(uploader,files,responseObject){
 	var res = $.parseJSON(responseObject.response);
 	var id = res.result.id;
-	var name = res.result.name;
-	debugger;
-	
+	$("#fileShow").show();
+	$("#fileShow").attr('src',res.result.extraData.imgPath); 
+	$("#fileId").val(res.result.id);
+	//bindGoodsId(id,goodsId);
 });
 //在实例对象上调用init()方法进行初始化
 uploader.init();

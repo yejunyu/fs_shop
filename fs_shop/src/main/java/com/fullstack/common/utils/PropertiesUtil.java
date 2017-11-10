@@ -15,7 +15,11 @@ public class PropertiesUtil {
 	private static String redis_port = null;
 	private static String redis_password = null;
 	
+	/** 存储地址  **/
 	private static String goods_img_base_path = null;
+	
+	/** 加载地址  **/
+	private static String goods_img_load_path = null;
 	
 	static {
 		InputStream inputStream = PropertiesUtil.class
@@ -28,6 +32,8 @@ public class PropertiesUtil {
 			redis_password = properties.getProperty("redis.password");
 			
 			goods_img_base_path = properties.getProperty("goods.img.base.path");
+			
+			goods_img_load_path = properties.getProperty("goods.img.load.path");
 			
 		} catch (Exception e) {
 			
@@ -52,6 +58,10 @@ public class PropertiesUtil {
 
 	public static String getGoodsImgBasePath() {
 		return goods_img_base_path;
+	}
+
+	public static String getGoodsImgLoadPath() {
+		return goods_img_load_path;
 	}
 
 	

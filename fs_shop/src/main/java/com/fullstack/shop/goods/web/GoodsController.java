@@ -40,6 +40,10 @@ public class GoodsController extends ServiceController {
 	@RequestMapping("create")
     public JSONObject createGoods(HttpServletRequest request,Goods goods) throws BusinessException {
 		goodsService.create(goods);
+		
+		if(RequestUtils.getInteger(request, "imgId")!=null){
+			goodsImgService.bindGoodsId(RequestUtils.getInteger(request, "imgId"),goods.getId());
+		}
         return this.retResult(success_create);
     }
 	/**
@@ -52,6 +56,10 @@ public class GoodsController extends ServiceController {
 	@RequestMapping("update")
     public JSONObject updateGoods(HttpServletRequest request,Goods goods) throws BusinessException {
 		goodsService.editById(goods);
+		
+		if(RequestUtils.getInteger(request, "imgId")!=null){
+			goodsImgService.bindGoodsId(RequestUtils.getInteger(request, "imgId"),goods.getId());
+		}
         return this.retResult(success_update);
     }
 	/**

@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
@@ -175,4 +176,10 @@ public abstract class BaseServiceImpl<D extends BaseMapper<T>, T extends DataEnt
 		return new JSONArray();
 	}
 	
+	@SuppressWarnings("hiding")
+	protected <T> EntityWrapper<T> entityInit(T t){
+		EntityWrapper<T> e=new EntityWrapper<T>();
+    	e.setEntity(t);
+    	return e;
+	}
 }
