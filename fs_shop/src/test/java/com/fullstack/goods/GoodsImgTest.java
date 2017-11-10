@@ -24,4 +24,9 @@ public class GoodsImgTest extends AppTest {
 		System.out.println("id->"+goodsImg.getId());
     }
 	
+	@Test  
+    public void delNullGoodsImg() throws BusinessException{
+		service.delNullGoodsImg();
+    }
+	
 }

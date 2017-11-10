@@ -27,5 +27,5 @@ public interface GoodsImgService<T> extends BaseService<GoodsImg> {
 	 * 删除没有绑定商品的图片
 	 * @return
 	 */
-	public GoodsImg delNullGoodsImg();
+	public void delNullGoodsImg() throws BusinessException;
 }
