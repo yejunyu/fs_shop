@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title></title>    
+    <link rel="stylesheet" href="./css/style.css">
+	<body style="">
+	<!-- 购物车部分 start -chay -->
+    <div class="shopping-cart clearfix" data-status="1" data-poiname="" data-poiid="144928553110415497">
+	    <form method="post" action="" id="shoppingCartForm">
+
+          <div class="first-to-app clearfix j-first-to-app" style="top: -302px;">
+            <span class="fl">电脑下单不享优惠了哦，优惠活动手机专享~</span>
+
+          </div>
+
+  	    <div class="order-list" style="top: -257px;">
+  	      <div class="title">
+            <span class="fl buy-title">购物车</span>
+  	        <span class="fr dishes"><a id="cleanBuyCar" href="javascript:;" class="clear-cart"><i></i>清空菜品</a></span>
+  	      </div>
+  	      <ul id="buycar" style="height: auto; overflow: visible;">
+			<li class="clearfix  food-112738546_119600112" data-fid="112738546" data-fkey="112738546_119600112">  
+			<div class="fl na clearfix" title="面包诱惑">    
+				<div class="">面包诱惑</div>      
+				</div>   
+				<div class="fl modify clearfix">    
+				<a href="javascript:;" class="fl minus">-</a>   
+				<input type="text" class="fl txt-count" value="1 " maxlength="2">    
+				<a href="javascript:;" class="fl plus">+</a>  </div>  <div class="fr pri ">   
+				<span>¥28</span>  </div>  </li>
+				</ul>
+  	      <div class="other-charge">
+  	        <div class="clearfix packing-cost">
+  	          <span class="fl">包装盒</span>
+  	          <span class="fr boxtotalprice">¥1</span>
+  	        </div>
+  	        <div class="clearfix delivery-cost">
+  	          <span class="fl">配送费(不计入起送价)</span>
+  	          <span class="fr shippingfee">¥6</span>
+  	        </div>
+  	      </div>
+  	      <div class="privilege hidden" style="">
+  	      </div>
+  	      <div class="total">共<span class="totalnumber">1</span>份，总计<span class="bill">¥35</span></div>
+  	    </div>
+
+  	    <div class="footer clearfix">
+          <div class="logo icon fl"></div>
+          <div class="brief-order fl" style="display: none;">
+            <span class="count">1</span>
+            <span class="price"><i>¥</i>35</span>
+          </div>
+          <div class="fr">
+           <a class="ready-pay borderradius-2" href="javascript:;" style="display: none;">差<span data-left="20" class="margintominprice">0</span>元起送</a>
+            <input class="go-pay borderradius-2" type="submit" value="立即下单" style="display: inline-block;">
+            <input type="hidden" value="{&quot;poi&quot;:&quot;144928553110415497&quot;,&quot;foods&quot;:[{&quot;sku&quot;:119600112,&quot;attrs&quot;:[],&quot;num&quot;:1}]}" class="order-data" name="shop_cart">
+          </div>
+        </div>
+      </form>
+    </div>
+	<!-- 购物车部分 end -chay -->
+	  <div class="wrapper">
+  	  
+      <div class="page-wrap">
+        <div class="inner-wrap">
+	<!-- 菜单导航条 start -chay -->
+	<!-- <script type="text/template" id="foodtype-template">
+	<div class="foodtype-nav clearfix" style="display: none;">
+	  <i class="icon i-tagtop"></i>
+	  <ul>
+		<li  class="active"  >
+		  <a href="javascript:;" class="type " data-anchor="0" title="招牌菜">
+			<span class="name">
+		招牌菜
+		
+			</span>
+		  </a>
+		</li>
+		<li  >
+		  <a href="javascript:;" class="type " data-anchor="1" title="热菜">
+			<span class="name">
+		热菜
+		
+			</span>
+		  </a>
+		</li>
+		<li  >
+		  <a href="javascript:;" class="type " data-anchor="2" title="主食/点心">
+			<span class="name">
+		主食/点心
+		
+			</span>
+		  </a>
+		</li>
+		<li  >
+		  <a href="javascript:;" class="type " data-anchor="3" title="刨冰冰沙类">
+			<span class="name">
+		刨冰冰沙类
+		
+			</span>
+		  </a>
+		</li>
+		<li  >
+		  <a href="javascript:;" class="type " data-anchor="4" title="汤羹煲类">
+			<span class="name">
+		汤羹煲类
+		
+			</span>
+		  </a>
+		</li>
+		<li  >
+		  <a href="javascript:;" class="type " data-anchor="5" title="甜品类">
+			<span class="name">
+		甜品类
+		
+			</span>
+		  </a>
+		</li>
+		<li  >
+		  <a href="javascript:;" class="type " data-anchor="6" title="热菜.">
+			<span class="name">
+		热菜.
+		
+			</span>
+		  </a>
+		</li>
+		<li  >
+		  <a href="javascript:;" class="type " data-anchor="7" title="冷菜">
+			<span class="name">
+		冷菜
+		
+			</span>
+		  </a>
+		</li>
+		<li  >
+		  <a href="javascript:;" class="type " data-anchor="8" title="主食">
+			<span class="name">
+		主食
+		
+			</span>
+		  </a>
+		</li>
+		<li  >
+		  <a href="javascript:;" class="type " data-anchor="9" title="酒水类">
+			<span class="name">
+		酒水类
+		
+			</span>
+		  </a>
+		</li>
+		<li  >
+		  <a href="javascript:;" class="type " data-anchor="10" title="饮品果汁类">
+			<span class="name">
+		饮品果汁类
+		
+			</span>
+		  </a>
+		</li>
+	  </ul>
+	</div>
+	</script> -->
+	<!-- 菜单导航条 end -chay -->
+<div class="food-list fl">
+
+  <div class="cate-tab-area">
+  <div class="tab-link">
+    <div class="tab-link-inner clearfix">
+      <a href="" class="tab-item  active">菜单</a>
+      <a href="" class="tab-item ">评价</a>
+    </div>
+  </div>
+	<!-- 菜单类目 start -chay -->
+    <div class="ori-foodtype-nav clearfix">
+      <ul class="clearfix">
+        <li class="">
+          <a href="javascript:;" class="type menuType" data-anchor="0" title="招牌菜">
+            <span class="name">
+    招牌菜
+    
+            </span>
+          </a>
+        </li>
+        <li class="active">
+          <a href="javascript:;" class="type menuType" data-anchor="1" title="热菜">
+            <span class="name">
+    热菜
+    
+            </span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="javascript:;" class="type menuType" data-anchor="7" title="冷菜">
+            <span class="name">
+    冷菜
+    
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="javascript:;" class="type menuType" data-anchor="8" title="主食">
+            <span class="name">
+    主食
+    
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="javascript:;" class="type menuType" data-anchor="9" title="酒水类">
+            <span class="name">
+    酒水类
+    
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="javascript:;" class="type menuType" data-anchor="10" title="饮品果汁类">
+            <span class="name">
+    饮品果汁类
+    
+            </span>
+          </a>
+        </li>
+      </ul>
+    </div>
+	<!-- 菜单类目 end -chay -->
+  </div>
+
+  <div class="food-nav">
+    <div class="title-blank hidden" style="display: none;">
+      <span class="tag-na">    招牌菜
+    
+</span>
+    </div>
+
+      <div class="category">
+        <h3 class="title title-0" title="招牌菜">
+
+          <span class="tag-na">    招牌菜
+    
+</span>
+        </h3>
+              <div class="pic-food-cont clearfix">
+	<!-- 绿茶烤鸭 -->
+  <div class="j-pic-food pic-food" id="258652783">
+    <div class="avatar">
+      <img src="./images/0e8c3ad18e61a1e27c784b9f197b6cfa427944.jpg" data-src="" class="food-shape scroll-loading">
+    </div>
+
+    <div class="np clearfix">
+      <span class="name fl" title="绿茶烤鸡（只）">
+        绿茶烤鸡（只）
+      </span>
+    </div>
+
+    <div class="sale-info clearfix">
+      <div class="sold-count ct-lightgrey">
+<span>月售 46份</span>
+             </div>
+        <div class="zan-count">
+          赞 3
+        </div>
+
+    </div>
+
+    <div class="labels clearfix">
+          <a href="javascript:;" class="add fr icon i-addcart j-addcart"></a>
+        <span id="food258652783-cart-num" class="pic-food-cart-num fr" style="display:none;">0</span>
+
+      <div class="price fl">
+          <div class="only">¥55</div>
+      </div>
+    </div>
+  </div>
+  <!-- 绿茶鸡肉合拼 -->
+  <div class="j-pic-food pic-food" id="112738540">
+    
+    <div class="avatar">
+      <img src="./images/88dd359c66d4f87d0f575dd02ceda9b4546816.jpg" data-src="" class="food-shape scroll-loading">
+    </div>
+
+    <div class="np clearfix">
+      <span class="name fl" title="绿茶鸡肉合拼">
+        绿茶鸡肉合拼
+      </span>
+    </div>
+
+    <div class="sale-info clearfix">
+      <div class="sold-count ct-lightgrey">
+<span>月售 53份</span>
+             </div>
+        <div class="zan-count">
+          赞 1
+        </div>
+
+    </div>
+
+    <div class="labels clearfix">
+          <a href="javascript:;" class="add fr icon i-addcart j-addcart"></a>
+        <span id="food112738540-cart-num" class="pic-food-cart-num fr" style="display:none;">0</span>
+
+      <div class="price fl">
+          <div class="only">¥55</div>
+      </div>
+    </div>
+  </div>
+  <!-- 面包诱惑 -->
+  <div class="j-pic-food pic-food pic-food-col2" id="112738546">
+   
+    <div class="avatar">
+      <img src="./images/32e173f2391a16831c651687fad4f06759392.jpg" data-src="" class="food-shape scroll-loading">
+    </div>
+
+    <div class="np clearfix">
+      <span class="name fl" title="面包诱惑">
+        面包诱惑
+      </span>
+    </div>
+
+    <div class="sale-info clearfix">
+      <div class="sold-count ct-lightgrey">
+<span>月售 68份</span>
+             </div>
+        <div class="zan-count">
+          赞 1
+        </div>
+
+    </div>
+
+    <div class="labels clearfix">
+          <a href="javascript:;" class="add fr icon i-addcart j-addcart"></a>
+        <span id="food112738546-cart-num" class="pic-food-cart-num fr" style="">1</span>
+
+      <div class="price fl">
+          <div class="only">¥28</div>
+      </div>
+    </div>
+  </div>
+  <!-- 招牌校园大排 -->
+  <div class="j-pic-food pic-food" id="368599427">
+    
+    <div class="avatar">
+      <img src="./images/f29b6b822b7dfca1cfb50e5167b7e4f017951.jpg" data-src="" class="food-shape scroll-loading">
+    </div>
+
+    <div class="np clearfix">
+      <span class="name fl" title="招牌校园大排(小份2块)">
+        招牌校园大排(小份2块)
+      </span>
+    </div>
+
+    <div class="sale-info clearfix">
+      <div class="sold-count ct-lightgrey">
+<span>月售 79份</span>
+             </div>
+
+    </div>
+
+    <div class="labels clearfix">
+          <a href="javascript:;" class="add fr icon i-addcart j-addcart"></a>
+        <span id="food368599427-cart-num" class="pic-food-cart-num fr" style="display:none;">0</span>
+
+      <div class="price fl">
+          <div class="only">¥20</div>
+      </div>
+    </div>
+  </div>
+          </div>
+
+      </div>
+      <div class="category">
+        <h3 class="title title-1" title="热菜">
+
+          <span class="tag-na">    热菜
+    
+</span>
+        </h3>
+              <div class="pic-food-cont clearfix">
+	<!-- 虾黄粉丝煲 -->		  
+  <div class="j-pic-food pic-food" id="369411618">
+    
+    <div class="avatar">
+      <img src="./images/f3df5157a0d74a4257d51758a1972315173576.jpg" data-src="" class="food-shape scroll-loading">
+    </div>
+
+    <div class="np clearfix">
+      <span class="name fl" title="虾黄粉丝煲">
+        虾黄粉丝煲
+      </span>
+    </div>
+
+    <div class="sale-info clearfix">
+      <div class="sold-count ct-lightgrey">
+<span>月售 113份</span>
+             </div>
+        <div class="zan-count">
+          赞 4
+        </div>
+
+    </div>
+
+    <div class="labels clearfix">
+          <a href="javascript:;" class="add fr icon i-addcart j-addcart"></a>
+        <span id="food369411618-cart-num" class="pic-food-cart-num fr" style="display:none;">0</span>
+
+      <div class="price fl">
+          <div class="only">¥22</div>
+      </div>
+    </div>
+  </div>
+          </div>
+
+      </div>
+      
+      <div class="category">
+        <h3 class="title title-7" title="冷菜">
+
+          <span class="tag-na">    冷菜
+    
+</span>
+        </h3>
+              <div class="pic-food-cont clearfix">
+	<!-- 辣炝鸡 -->
+  <div class="j-pic-food pic-food  " id="269291929">
+    
+    <div class="avatar">
+      <img src="./images/5fac888343cc339232397db46d4a0689166412.jpg" data-src="" class="food-shape scroll-loading">
+    </div>
+
+    <div class="np clearfix">
+      <span class="name fl" title="辣炝鸡">
+        辣炝鸡
+      </span>
+    </div>
+
+    <div class="sale-info clearfix">
+      <div class="sold-count ct-lightgrey">
+<span>月售 24份</span>
+             </div>
+        <div class="zan-count">
+          赞 2
+        </div>
+
+    </div>
+
+    <div class="labels clearfix">
+          <a href="javascript:;" class="add fr icon i-addcart j-addcart"></a>
+        <span id="food269291929-cart-num" class="pic-food-cart-num fr" style="display:none;">0</span>
+
+      <div class="price fl">
+          <div class="only">¥32</div>
+      </div>
+    </div>
+  </div>
+       </div>
+
+      </div>
+      <div class="category">
+        <h3 class="title title-8" title="主食">
+
+          <span class="tag-na">    主食
+    
+</span>
+        </h3>
+              <div class="pic-food-cont clearfix">
+	<!-- 红糖糍粑 -->
+  <div class="j-pic-food pic-food  " id="369877628">
+    
+    <div class="avatar">
+      <img src="./images/410be334872c3f7aab88bbcf9f8d8a4f543760.jpg" data-src="" class="food-shape scroll-loading">
+    </div>
+
+    <div class="np clearfix">
+      <span class="name fl" title="红糖糍粑">
+        红糖糍粑
+      </span>
+    </div>
+
+    <div class="sale-info clearfix">
+      <div class="sold-count ct-lightgrey">
+<span>月售 60份</span>
+             </div>
+        <div class="zan-count">
+          赞 1
+        </div>
+
+    </div>
+
+    <div class="labels clearfix">
+          <a href="javascript:;" class="add fr icon i-addcart j-addcart"></a>
+        <span id="food369877628-cart-num" class="pic-food-cart-num fr" style="display:none;">0</span>
+
+      <div class="price fl">
+          <div class="only">¥12</div>
+      </div>
+    </div>
+  </div>
+        </div>
+
+      </div>
+      <div class="category">
+        <h3 class="title title-9" title="酒水类">
+
+          <span class="tag-na">    酒水类
+    
+</span>
+        </h3>
+              <div class="pic-food-cont clearfix">
+	<!-- 芬达（听） -->
+  <div class="j-pic-food pic-food  " id="345143790">
+    
+    <div class="avatar">
+      <img src="./images/c629b00cc516aed60858a2bbc109a1b5165179.jpg" data-src="" class="food-shape scroll-loading">
+    </div>
+
+    <div class="np clearfix">
+      <span class="name fl" title="芬达（听）">
+        芬达（听）
+      </span>
+    </div>
+
+    <div class="sale-info clearfix">
+      <div class="sold-count ct-lightgrey">
+<span>月售 32份</span>
+             </div>
+        <div class="zan-count">
+          赞 1
+        </div>
+
+    </div>
+
+    <div class="labels clearfix">
+          <a href="javascript:;" class="add fr icon i-addcart j-addcart"></a>
+        <span id="food345143790-cart-num" class="pic-food-cart-num fr" style="display:none;">0</span>
+
+      <div class="price fl">
+          <div class="only">¥5</div>
+      </div>
+    </div>
+  </div>
+	</div>
+
+    </div>
+      <div class="category">
+        <h3 class="title title-10" title="饮品果汁类">
+
+          <span class="tag-na">    饮品果汁类
+    
+</span>
+        </h3>
+              <div class="pic-food-cont clearfix">
+	<!-- 青柠苏打（杯） -->
+  <div class="j-pic-food pic-food  " id="361913495">
+    
+    <div class="avatar">
+      <img src="./images/7678d049a98c3487874d128f11481b5665157.jpg" data-src="" class="food-shape scroll-loading">
+    </div>
+
+    <div class="np clearfix">
+      <span class="name fl" title="青柠苏打（杯）">
+        青柠苏打（杯）
+      </span>
+    </div>
+
+    <div class="sale-info clearfix">
+      <div class="sold-count ct-lightgrey">
+<span>月售 6份</span>
+             </div>
+
+    </div>
+
+    <div class="labels clearfix">
+          <a href="javascript:;" class="add fr icon i-addcart j-addcart"></a>
+        <span id="food361913495-cart-num" class="pic-food-cart-num fr" style="display:none;">0</span>
+
+      <div class="price fl">
+          <div class="only">¥12</div>
+      </div>
+    </div>
+  </div>
+    </div>
+
+      </div>
+  </div>
+</div>
+
+
+<div class="widgets fr">
+</div><div class="clear"></div>
+
+      </div>
+    </div>
+  </div>
+  
+<script type="text/javascript" src="./js/jquery.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	//页面内跳转实现
+	$(".menuType").click(function(){
+		var val = $(this).attr("data-anchor");
+		scrollOffset($(".title-"+val).offset()); 
+	});
+	function scrollOffset(scroll_offset) {
+		$("body,html").animate({
+		  scrollTop: scroll_offset.top - 70
+		}, 0);
+	}
+	//加入购物车(高度适应问题)
+	$(document).on("click",".add",function(){  
+		var html='<li class="clearfix  food-112738546_119600112" data-fid="112738546" data-fkey="112738546_119600112">\
+			<div class="fl na clearfix" title="面包诱惑">\
+				<div class="">面包诱惑</div>\
+				</div>\
+				<div class="fl modify clearfix">\
+				<a href="javascript:;" class="fl minus">-</a>\
+				<input type="text" class="fl txt-count" value="1 " maxlength="2">\
+				<a href="javascript:;" class="fl plus">+</a>  </div>  <div class="fr pri ">\
+				<span>¥28</span>  </div>  </li>';
+		$("#buycar").append(html);
+		$(".shopping-cart").height($(".shopping-cart").height()+50);
+	});
+	
+	//清空购物车(高度适应问题)
+	$("#cleanBuyCar").click(function(){
+		$("#buycar").empty();
+	});
+});
+</script>
+</body></html>
