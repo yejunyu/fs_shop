@@ -33,7 +33,7 @@
   	    <div class="buycarfooter footer clearfix">
           <div class="logo icon fl"></div>
           <div class="fr">
-            <input class="go-pay borderradius-2" type="submit" value="立即下单" style="display: inline-block;">
+            <input class="go-pay borderradius-2" id="goods_order" type="submit" value="立即下单" style="display: inline-block;">
             <input type="hidden" value="{&quot;poi&quot;:&quot;144928553110415497&quot;,&quot;foods&quot;:[{&quot;sku&quot;:119600112,&quot;attrs&quot;:[],&quot;num&quot;:1}]}" class="order-data" name="shop_cart">
           </div>
         </div>
@@ -178,7 +178,6 @@ $(function(){
 			var price = $(this).find(".goodsPrice").html();
 			totalCount+=parseInt(count);
 			totalPrice = parseFloat(totalPrice+parseFloat(parseInt(count)*parseFloat(price)));
-			debugger;
 		});
 		$("#totalCount").html(totalCount);
 		$("#totalPrice").html(totalPrice);
@@ -190,7 +189,7 @@ $(function(){
 		$("#buycar").css("overflow-y","hidden");
 		$("#buycar").empty();
 	});
-	
+	//加载数据
 	loadData();
 	function loadData(){
 		var url = "/goodsTemp/list?pageNum=-1";
@@ -244,6 +243,20 @@ $(function(){
 			$("#goodsType").html(optHtml);
 		});
 	}
+	//下单
+	$("#goods_order").click(function(){
+		var lis = $("#buycar").find(".buycar_goods");
+		var totalCount=0,totalPrice=0;
+		$.each(lis, function(){
+			var count = $(this).find(".txt-count").val();
+			var price = $(this).find(".goodsPrice").html();
+			totalCount+=parseInt(count);
+			totalPrice = parseFloat(totalPrice+parseFloat(parseInt(count)*parseFloat(price)));
+		});
+		$("#totalCount").html(totalCount);
+		$("#totalPrice").html(totalPrice);
+	});
+	
 });
 </script>
 </body></html>
