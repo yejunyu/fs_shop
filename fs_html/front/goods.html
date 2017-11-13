@@ -349,7 +349,6 @@
 
     <div class="labels clearfix">
           <a href="javascript:;" class="add fr icon i-addcart j-addcart"></a>
-        <span id="food269291929-cart-num" class="pic-food-cart-num fr" style="display:none;">0</span>
 
       <div class="price fl">
           <div class="only">¥32</div>
@@ -496,9 +495,16 @@
     </div>
   </div>
   
-<script type="text/javascript" src="./js/jquery.min.js"></script>
+<!--_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="../lib/jquery/1.9.1/jquery.min.js"></script> 
+<script type="text/javascript" src="../lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="../static/h-ui/js/H-ui.min.js"></script> 
+<script type="text/javascript" src="../static/h-ui.admin/js/H-ui.admin.js"></script> <!--/_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="../static/h-ui.admin/js/common.js"></script>
+<script type="text/javascript" src="../static/h-ui.admin/js/utils.js"></script>
 <script type="text/javascript">
 $(function(){
+	
 	//页面内跳转实现
 	$(".menuType").click(function(){
 		var val = $(this).attr("data-anchor");
@@ -544,13 +550,53 @@ $(function(){
 		$("#buycar").empty();
 	});
 	
+	loadData();
 	function loadData(){
-		var html='<li class="">\
-          <a href="javascript:;" class="type menuType" data-anchor="0" title="招牌菜">\
-            <span class="name">招牌菜</span>\
-          </a>\
-        </li>';
+		var url = "/goodsTemp/list?pageNum=-1";
+		common.getData(url,function(data){
+			var list = data.result.records;
+			var optHtml = '';
+			for(var i=0;i<list.length;i++){
+				var obj = list[i];
+				optHtml+='<li class="">\
+							<a href="javascript:;" class="type menuType" data-anchor="'+obj.id+'" title="'+obj.name+'">\
+								<span class="name">'+obj.name+'</span>\
+							</a>\
+						</li>';
+			}
+			$("#goodsType").html(optHtml);
+			
+		});
 		
+		
+		var h = '<div class="category">\
+					<h3 class="title title-7" title="冷菜"><span class="tag-na">冷菜</span></h3>\
+					<div class="pic-food-cont clearfix">\
+						<div class="j-pic-food pic-food " id="269291929">\
+							<div class="avatar">\
+								<img src="./images/5fac888343cc339232397db46d4a0689166412.jpg" data-src="" class="food-shape scroll-loading">\
+							</div>\
+							<div class="np clearfix">\
+								<span class="name fl" title="辣炝鸡">辣炝鸡</span>\
+							</div>\
+							<div class="sale-info clearfix">\
+								<div class="sold-count ct-lightgrey">\
+									<span>月售 24份</span>\
+								</div>\
+								<div class="zan-count">\
+								  赞 2\
+								</div>\
+							</div>\
+							<div class="labels clearfix">\
+								<a href="javascript:;" class="add fr icon i-addcart j-addcart"></a>\
+								<div class="price fl">\
+									<div class="only">¥32</div>\
+								</div>\
+							</div>\
+						</div>\
+					</div>\
+				</div>';
+				
 	}
 });
 </script>
