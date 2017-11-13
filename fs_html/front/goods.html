@@ -9,10 +9,10 @@
     <div class="shopping-cart clearfix" data-status="1" data-poiname="" data-poiid="144928553110415497">
 	    <form method="post" action="" id="shoppingCartForm">
 
-          <div class="first-to-app clearfix j-first-to-app" style="top: -302px;">
+          <!-- <div class="first-to-app clearfix j-first-to-app" style="top: -302px;">
             <span class="fl">电脑下单不享优惠了哦，优惠活动手机专享~</span>
 
-          </div>
+          </div> -->
 
   	    <div class="order-list" style="top: -257px;">
   	      <div class="title">
@@ -45,7 +45,7 @@
   	      <div class="total">共<span class="totalnumber">1</span>份，总计<span class="bill">¥35</span></div>
   	    </div>
 
-  	    <div class="footer clearfix">
+  	    <div class="buycarfooter footer clearfix">
           <div class="logo icon fl"></div>
           <div class="brief-order fl" style="display: none;">
             <span class="count">1</span>
@@ -64,103 +64,6 @@
   	  
       <div class="page-wrap">
         <div class="inner-wrap">
-	<!-- 菜单导航条 start -chay -->
-	<!-- <script type="text/template" id="foodtype-template">
-	<div class="foodtype-nav clearfix" style="display: none;">
-	  <i class="icon i-tagtop"></i>
-	  <ul>
-		<li  class="active"  >
-		  <a href="javascript:;" class="type " data-anchor="0" title="招牌菜">
-			<span class="name">
-		招牌菜
-		
-			</span>
-		  </a>
-		</li>
-		<li  >
-		  <a href="javascript:;" class="type " data-anchor="1" title="热菜">
-			<span class="name">
-		热菜
-		
-			</span>
-		  </a>
-		</li>
-		<li  >
-		  <a href="javascript:;" class="type " data-anchor="2" title="主食/点心">
-			<span class="name">
-		主食/点心
-		
-			</span>
-		  </a>
-		</li>
-		<li  >
-		  <a href="javascript:;" class="type " data-anchor="3" title="刨冰冰沙类">
-			<span class="name">
-		刨冰冰沙类
-		
-			</span>
-		  </a>
-		</li>
-		<li  >
-		  <a href="javascript:;" class="type " data-anchor="4" title="汤羹煲类">
-			<span class="name">
-		汤羹煲类
-		
-			</span>
-		  </a>
-		</li>
-		<li  >
-		  <a href="javascript:;" class="type " data-anchor="5" title="甜品类">
-			<span class="name">
-		甜品类
-		
-			</span>
-		  </a>
-		</li>
-		<li  >
-		  <a href="javascript:;" class="type " data-anchor="6" title="热菜.">
-			<span class="name">
-		热菜.
-		
-			</span>
-		  </a>
-		</li>
-		<li  >
-		  <a href="javascript:;" class="type " data-anchor="7" title="冷菜">
-			<span class="name">
-		冷菜
-		
-			</span>
-		  </a>
-		</li>
-		<li  >
-		  <a href="javascript:;" class="type " data-anchor="8" title="主食">
-			<span class="name">
-		主食
-		
-			</span>
-		  </a>
-		</li>
-		<li  >
-		  <a href="javascript:;" class="type " data-anchor="9" title="酒水类">
-			<span class="name">
-		酒水类
-		
-			</span>
-		  </a>
-		</li>
-		<li  >
-		  <a href="javascript:;" class="type " data-anchor="10" title="饮品果汁类">
-			<span class="name">
-		饮品果汁类
-		
-			</span>
-		  </a>
-		</li>
-	  </ul>
-	</div>
-	</script> -->
-	<!-- 菜单导航条 end -chay -->
 <div class="food-list fl">
 
   <div class="cate-tab-area">
@@ -172,7 +75,7 @@
   </div>
 	<!-- 菜单类目 start -chay -->
     <div class="ori-foodtype-nav clearfix">
-      <ul class="clearfix">
+      <ul id="goodsType" class="clearfix">
         <li class="">
           <a href="javascript:;" class="type menuType" data-anchor="0" title="招牌菜">
             <span class="name">
@@ -606,7 +509,7 @@ $(function(){
 		  scrollTop: scroll_offset.top - 70
 		}, 0);
 	}
-	//加入购物车(高度适应问题)
+	//加入购物车
 	$(document).on("click",".add",function(){  
 		var html='<li class="clearfix  food-112738546_119600112" data-fid="112738546" data-fkey="112738546_119600112">\
 			<div class="fl na clearfix" title="面包诱惑">\
@@ -618,13 +521,37 @@ $(function(){
 				<a href="javascript:;" class="fl plus">+</a>  </div>  <div class="fr pri ">\
 				<span>¥28</span>  </div>  </li>';
 		$("#buycar").append(html);
-		$(".shopping-cart").height($(".shopping-cart").height()+50);
+		
+		var h = $("#buycar").height();
+		if(parseInt(h)>250){
+			$("#buycar").height(260);
+			$("#buycar").css("overflow-y","scroll");
+			$("#buycar").css("border","10px");
+			//border-radius: 10px;  
+			$("#buycar").css("overflow-x","hidden");
+		}else{
+			$(".shopping-cart").height($(".shopping-cart").height()+50);
+			var mtVal = $(".buycarfooter").css("margin-top").replace("px","");
+			$(".buycarfooter").css("margin-top",parseInt(mtVal)+parseInt(50));
+		}
+		//overflow:scroll;
+		//$(".buycarfooter").offset().top=$(".buycarfooter").offset().top+50;
+		
+		
 	});
-	
-	//清空购物车(高度适应问题)
+	//清空购物车
 	$("#cleanBuyCar").click(function(){
 		$("#buycar").empty();
 	});
+	
+	function loadData(){
+		var html='<li class="">\
+          <a href="javascript:;" class="type menuType" data-anchor="0" title="招牌菜">\
+            <span class="name">招牌菜</span>\
+          </a>\
+        </li>';
+		
+	}
 });
 </script>
 </body></html>
