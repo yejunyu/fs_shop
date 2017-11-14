@@ -45,7 +45,7 @@ public class DateUtils {
 		return getDate(parsePatterns[2]);
 	}
 	/**
-	 * 获取当前时间的年月日
+	 * 获取当前时间的年月日、时分秒
 	 * @return
 	 */
 	public static String getDateYMDHMS() {

@@ -15,7 +15,7 @@ public interface OrderService<T> extends BaseService<Order> {
 	 * @param order
 	 * @return
 	 */
-	public boolean createOrder(Order order) throws BusinessException;
+	public boolean createOrder(String wxId,Integer memberAddresId,Order order) throws BusinessException;
 	/**
 	 * 获取最新的订单号
 	 * @return

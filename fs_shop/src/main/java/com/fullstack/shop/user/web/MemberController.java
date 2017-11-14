@@ -9,6 +9,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.fullstack.common.exceptions.BusinessException;
+import com.fullstack.common.utils.DateUtils;
 import com.fullstack.common.web.RequestUtils;
 import com.fullstack.common.web.ServiceController;
 import com.fullstack.shop.user.entity.Member;
@@ -18,6 +19,22 @@ import com.fullstack.shop.user.entity.Member;
 public class MemberController extends ServiceController {
 	
 	
+	/**
+	 * 获取用户一个简单的唯一标识号
+	 * @param request
+	 * @param member
+	 * @return
+	 * @throws BusinessException
+	 */
+	@RequestMapping("getMemberUUID")
+    public JSONObject getMemberUUID(HttpServletRequest request) throws BusinessException {
+		String uuid = RequestUtils.getRemoteAddr(request)+"_"+DateUtils.getDateYMDHMS();
+		Member member = new Member();
+		member.setWxId(uuid);
+		member.setName("游客"+(memberService.getCount(new Member())+1));
+		memberService.createMember(member);
+        return this.retResult(member);
+    }
 	/**
 	 * 用户列表
 	 * @param request

@@ -72,10 +72,6 @@ public abstract class DataEntity<T> implements Serializable {
 	}
 
 	public Integer getCreateBy() {
-		//TODO 暂时模拟数据，后续需要去除
-		if(createBy==null){
-			this.createBy=-1;
-		}
 		return createBy;
 	}
 
@@ -92,10 +88,6 @@ public abstract class DataEntity<T> implements Serializable {
 	}
 
 	public Integer getUpdateBy() {
-		//TODO 暂时模拟数据，后续需要去除
-		if(updateBy==null){
-			this.updateBy=-1;
-		}
 		return updateBy;
 	}
 
@@ -144,12 +136,21 @@ public abstract class DataEntity<T> implements Serializable {
 	}
 
 	public void preInsert(){
+		if(this.createBy==null){
+			this.createBy=-1;
+		}
+		if(this.updateBy==null){
+			this.updateBy=-1;
+		}
 		this.createDate = new Date();
 		this.updateDate = this.createDate;
 	}
 
 	public void preUpdate(){
 		this.updateDate = new Date();
+		if(this.updateBy==null){
+			this.updateBy=-1;
+		}
 	}
 	
 	/**

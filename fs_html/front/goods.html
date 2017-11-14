@@ -5,6 +5,19 @@
     <title></title>    
     <link rel="stylesheet" href="./css/style.css">
 	<body style="">
+	<div class="page-header clearfix">
+        <div class="middle-nav">
+          <div class="middlenav-wrap clearfix">
+            <h1 class="logo fl">
+              <a href="" title="FStack"><img src="./images/logo.png" alt="FStack"></a>
+            </h1>
+			<div class="desire fl">
+              <a href="javascript;" class="ca-lightgrey"><span id="memberName">欢迎您,</span></a>
+              <a href="" class="ca-lightgrey" rel="nofollow"><span>我的订单</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
 	<!-- 购物车部分 start -chay -->
     <div class="shopping-cart clearfix" data-status="1" data-poiname="" data-poiid="144928553110415497">
 	    <form method="post" action="" id="shoppingCartForm">
@@ -33,7 +46,7 @@
   	    <div class="buycarfooter footer clearfix">
           <div class="logo icon fl"></div>
           <div class="fr">
-            <input class="go-pay borderradius-2" id="goods_order" type="submit" value="立即下单" style="display: inline-block;">
+            <input class="go-pay borderradius-2" id="goods_order" type="button" value="立即下单" style="display: inline-block;">
             <input type="hidden" value="{&quot;poi&quot;:&quot;144928553110415497&quot;,&quot;foods&quot;:[{&quot;sku&quot;:119600112,&quot;attrs&quot;:[],&quot;num&quot;:1}]}" class="order-data" name="shop_cart">
           </div>
         </div>
@@ -118,9 +131,9 @@ $(function(){
 			li.find(".txt-count").val(parseInt(count)+1);
 		}else{
 			buycarStyle();
-			var html='<li class="clearfix buycar_goods" data-fid="" id="buycar_goods'+id+'" data-fkey="">\
+			var html='<li class="clearfix buycar_goods" data-fid="" id="buycar_goods'+id+'" attrId="'+id+'" data-fkey="">\
 						<div class="fl na clearfix" title="'+name+'">\
-							<div class="">'+name+'</div>\
+							<div class="goodsName">'+name+'</div>\
 						</div>\
 						<div class="fl modify clearfix">\
 							<a href="javascript:;" class="fl minus">-</a>\
@@ -192,6 +205,8 @@ $(function(){
 	//加载数据
 	loadData();
 	function loadData(){
+		$("#memberName").html($("#memberName").html()+common.currentMember.name);
+	
 		var url = "/goodsTemp/list?pageNum=-1";
 		common.getData(url,function(data){
 			var list = data.result.records;
@@ -247,14 +262,18 @@ $(function(){
 	$("#goods_order").click(function(){
 		var lis = $("#buycar").find(".buycar_goods");
 		var totalCount=0,totalPrice=0;
+		var list=[],obj={};
 		$.each(lis, function(){
-			var count = $(this).find(".txt-count").val();
-			var price = $(this).find(".goodsPrice").html();
-			totalCount+=parseInt(count);
-			totalPrice = parseFloat(totalPrice+parseFloat(parseInt(count)*parseFloat(price)));
+			obj={};
+			obj["id"]=$(this).attr("attrId");
+			obj["name"]=$(this).find(".goodsName").html();
+			obj["price"]=$(this).find(".goodsPrice").html();
+			obj["count"]=$(this).find(".txt-count").val();
+			
+			list.push(obj);
 		});
-		$("#totalCount").html(totalCount);
-		$("#totalPrice").html(totalPrice);
+		common.addParams({buycars:JSON.stringify(list)});
+		window.location.href=common.htmlPath+"/front/order_detail.html";
 	});
 	
 });

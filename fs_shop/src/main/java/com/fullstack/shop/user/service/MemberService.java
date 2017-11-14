@@ -20,4 +20,17 @@ public interface MemberService<T> extends BaseService<Member> {
 	 * @throws BusinessException
 	 */
 	public boolean createMember(Member member) throws BusinessException;
+	/**
+	 * 统计数量
+	 * @param member
+	 * @return
+	 * @throws BusinessException
+	 */
+	public int getCount(Member member) throws BusinessException;
+	/**
+	 * 根据唯一标识数据获取用户信息
+	 * @return
+	 * @throws BusinessException
+	 */
+	public Member getByWxId(String wxId) throws BusinessException;
 }

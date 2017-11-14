@@ -1,5 +1,7 @@
 package com.fullstack.common.utils;
 
+import java.math.BigDecimal;
+
 /**
  * 
  * @author chay
@@ -15,7 +17,15 @@ public class MathUtils {
 	public static int getRandom(int num) {
 		return (int) (1+Math.random()*num);
 	}
-	
+	/**
+	 * 获取双精度
+	 * @param num
+	 * @return
+	 */
+	public static Double getDouble2(String num) {
+		BigDecimal b = new BigDecimal(Double.parseDouble(num)); 
+		return b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+	}
 	
 	
 	

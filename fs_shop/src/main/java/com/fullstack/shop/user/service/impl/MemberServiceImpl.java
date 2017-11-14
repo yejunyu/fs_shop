@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.fullstack.common.exceptions.BusinessException;
 import com.fullstack.common.service.impl.BaseServiceImpl;
 import com.fullstack.shop.user.dao.MemberDao;
@@ -27,6 +28,22 @@ public class MemberServiceImpl extends BaseServiceImpl<MemberDao, Member> implem
 	public boolean createMember(Member member) throws BusinessException {
 		return super.create(member);
 	}
+
+	@Override
+	public int getCount(Member member) throws BusinessException {
+		EntityWrapper<Member> ew = this.entityInit(member);
+		return super.selectCount(ew);
+	}
+
+	@Override
+	public Member getByWxId(String wxId) throws BusinessException {
+		Member member = new Member();
+		member.setWxId(wxId);
+		EntityWrapper<Member> ew = this.entityInit(member);
+		return super.selectOne(ew);
+	}
+	
+	
 	
 	
 }

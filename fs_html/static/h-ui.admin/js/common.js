@@ -3,19 +3,28 @@
  */
 var common = function(){};
 
-common.basePath = "http://localhost:8888";
+common.basePath = "http://192.168.1.102:8888";
 common.htmlPath = "";
 common.cookieKey = "token";
 common.cookieParams = "params";
-common.currentUser = {};
+common.currentMember = {};
 common.v = new Date().getTime();
 
-common.initCurrentUser = function(data) {
-	common.currentUser.id=data.id;
-	common.currentUser.name=data.name;
-	common.currentUser.code=data.code;
-	common.currentUser.contactWay=data.contactWay;
-	common.currentUser.lastLoginTime=data.lastLoginTime;
+common.initCurrentMember = function() {
+	var key = "currentMember";
+	var currentMemberStr = $.cookie(key); 
+	var currentMember =  $.parseJSON(currentMemberStr?currentMemberStr:"{}");
+	if(!currentMember.wxId){
+		var url = "/member/getMemberUUID";
+		common.getData(url,function(data){
+			common.currentMember["wxId"]=data.result.wxId;
+			common.currentMember["name"]=data.result.name;
+			$.cookie(key, JSON.stringify(common.currentMember));
+		});
+	}else if(!common.currentMember.wxId){
+		common.currentMember["wxId"]=currentMember.wxId;
+		common.currentMember["name"]=currentMember.name;
+	}
 }
 
 common.formatDate = function(timestamp){
@@ -200,6 +209,7 @@ $(function(){
 	var pathName=window.document.location.pathname;  
 	var pos=curWwwPath.indexOf(pathName);  
 	common.htmlPath=curWwwPath.substring(0,pos);  
+	common.initCurrentMember();
 }); 
 
 

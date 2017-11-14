@@ -63,7 +63,7 @@ public class OrderTest extends AppTest{
     	entity.setOrderDelivery(orderDelivery);
     	entity.setListOrderDetail(listOrderDetail);
     	
-        service.createOrder(entity);
+        service.createOrder("s",1,entity);
         System.out.println("插入信息 id-->"+entity.getId());
     }  
     

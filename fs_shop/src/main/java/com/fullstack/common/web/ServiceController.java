@@ -10,7 +10,15 @@ import com.fullstack.shop.goods.entity.GoodsTemp;
 import com.fullstack.shop.goods.service.GoodsImgService;
 import com.fullstack.shop.goods.service.GoodsService;
 import com.fullstack.shop.goods.service.GoodsTempService;
+import com.fullstack.shop.order.entity.Order;
+import com.fullstack.shop.order.entity.OrderDelivery;
+import com.fullstack.shop.order.entity.OrderDetail;
+import com.fullstack.shop.order.service.OrderDeliveryService;
+import com.fullstack.shop.order.service.OrderDetailService;
+import com.fullstack.shop.order.service.OrderService;
 import com.fullstack.shop.user.entity.Member;
+import com.fullstack.shop.user.entity.MemberAddress;
+import com.fullstack.shop.user.service.MemberAddressService;
 import com.fullstack.shop.user.service.MemberService;
 
 /**
@@ -25,6 +33,8 @@ public abstract class ServiceController extends BaseController {
 	
 	@Autowired  
 	protected MemberService<Member> memberService;
+	@Autowired  
+	protected MemberAddressService<MemberAddress> memberAddressService;
 	
 	@Autowired  
 	protected GoodsTempService<GoodsTemp> goodsTempService;
@@ -32,5 +42,12 @@ public abstract class ServiceController extends BaseController {
 	protected GoodsService<Goods> goodsService;
 	@Autowired  
 	protected GoodsImgService<GoodsImg> goodsImgService;
+	
+	@Autowired  
+	protected OrderService<Order> orderService;
+	@Autowired  
+	protected OrderDetailService<OrderDetail> orderDetailService;
+	@Autowired  
+	protected OrderDeliveryService<OrderDelivery> orderDeliveryService;
 	
 }

@@ -9,7 +9,7 @@ CREATE TABLE `shop_dict` (
   `remarks` varchar(255) DEFAULT NULL COMMENT '备注信息',
   `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT '删除标记',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8 COMMENT='字典表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='字典表';
 
 DROP TABLE IF EXISTS `shop_member`;
 CREATE TABLE `shop_member` (
@@ -25,7 +25,7 @@ CREATE TABLE `shop_member` (
   `remarks` varchar(255) DEFAULT NULL COMMENT '备注信息',
   `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT '删除标记',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COMMENT='顾客基础信息表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='顾客基础信息表';
 
 DROP TABLE IF EXISTS `shop_goods_temp`;
 CREATE TABLE `shop_goods_temp` (
@@ -43,8 +43,8 @@ DROP TABLE IF EXISTS `shop_goods`;
 CREATE TABLE `shop_goods` (
   `id` int(11) NOT NULL auto_increment COMMENT 'id',
   `name` varchar(50) NOT NULL COMMENT '名称',
-	`type` int(11) NOT NULL COMMENT '类型',
-	`temp_id` int(11) NOT NULL COMMENT '模板id',
+	`type` int(11) DEFAULT NULL COMMENT '类型',
+	`temp_id` int(11) DEFAULT NULL COMMENT '模板id',
   `price` varchar(20) NULL DEFAULT '0' COMMENT '价格',
 	`score` int(11) DEFAULT -1 COMMENT '积分',
   `description` varchar(255) DEFAULT NULL COMMENT '描述',
@@ -126,4 +126,20 @@ CREATE TABLE `shop_report` (
   `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT '删除标记',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='报表表';
+
+DROP TABLE IF EXISTS `shop_member_address`;
+CREATE TABLE `shop_member_address` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `name` varchar(50) DEFAULT NULL COMMENT '名称',
+  `sex` varchar(2) DEFAULT NULL COMMENT '性别',
+  `phone` varchar(20) DEFAULT NULL COMMENT '手机号码',
+  `address` varchar(50) DEFAULT NULL COMMENT '地址',
+	`detail_address` varchar(50) DEFAULT NULL COMMENT '详细地址',
+  `default_flag` tinyint(2) NOT NULL DEFAULT '0' COMMENT '是否默认使用',
+	`create_by` int(11) NOT NULL COMMENT '创建者',
+  `create_date` datetime NOT NULL COMMENT '创建时间',
+  `remarks` varchar(255) DEFAULT NULL COMMENT '备注信息',
+  `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT '删除标记',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='顾客收餐地址信息表';
 
