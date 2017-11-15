@@ -40,6 +40,12 @@ common.formatDate = function(timestamp){
 	var seconds = time.getSeconds();
 	return year+'-'+add0(month)+'-'+add0(date)+' '+add0(hours)+':'+add0(minutes)+':'+add0(seconds);
 }
+common.stringLengthUtils = function(length,str){
+	if (str.length > length){
+		str = str.substring(0,length)+"......";
+	} 
+	return str;
+}
 common.alertX = function(msg){
 	alert(msg);
 }

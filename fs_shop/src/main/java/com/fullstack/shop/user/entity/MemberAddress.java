@@ -25,6 +25,8 @@ public class MemberAddress extends DataEntity<MemberAddress> {
 	private Integer createBy;			// 创建人
 	@TableField("create_date")
 	private Date createDate;			// 创建时间
+	@TableField("update_date")
+	private Date updateDate;			// 创建时间
 	@TableField("default_flag")
 	private Integer defaultFlag;		// 是否默认
 	

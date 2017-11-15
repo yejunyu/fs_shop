@@ -20,4 +20,11 @@ public interface OrderDetailService<T> extends BaseService<OrderDetail> {
 	 * @throws BusinessException
 	 */
 	public boolean batchInsert(List<OrderDetail> listOrderDetail,int orderId) throws BusinessException;
+	/**
+	 * 根据订单id获取下单详情
+	 * @param orderId
+	 * @return
+	 * @throws BusinessException
+	 */
+	public List<OrderDetail> getListByOrderId(int orderId) throws BusinessException;
 }

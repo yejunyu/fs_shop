@@ -31,5 +31,52 @@ public class MemberAddressController extends ServiceController {
 		page = memberAddressService.findPage(page, e);
 		return this.retResult(page);
     }
-	
+	/**
+	 * 
+	 * @param request
+	 * @param memberAddress
+	 * @return
+	 * @throws BusinessException
+	 */
+	@RequestMapping("create")
+    public JSONObject createOrder(HttpServletRequest request,MemberAddress memberAddress) throws BusinessException {
+		memberAddressService.create(memberAddress);
+        return this.retResult(success_create);
+    }
+	/**
+	 * 修改
+	 * @param request
+	 * @param Order
+	 * @return
+	 * @throws BusinessException
+	 */
+	@RequestMapping("update")
+    public JSONObject updateOrder(HttpServletRequest request,MemberAddress memberAddress) throws BusinessException {
+		memberAddressService.editById(memberAddress);
+        return this.retResult(success_update);
+    }
+	/**
+	 * 删除
+	 * @param request
+	 * @param Order
+	 * @return
+	 * @throws BusinessException
+	 */
+	@RequestMapping("del")
+    public JSONObject delOrder(HttpServletRequest request,MemberAddress memberAddress) throws BusinessException {
+		memberAddressService.delById(memberAddress);
+        return this.retResult(success_del);
+    }
+	/**
+	 * 
+	 * @param request
+	 * @param Order
+	 * @return
+	 * @throws BusinessException
+	 */
+	@RequestMapping("getInfoById")
+    public JSONObject getInfoById(HttpServletRequest request,MemberAddress memberAddress) throws BusinessException {
+		memberAddress = memberAddressService.getInfoById(memberAddress.getId());
+        return this.retResult(memberAddress);
+    }
 }

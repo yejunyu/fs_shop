@@ -9,11 +9,12 @@
         <div class="middle-nav">
           <div class="middlenav-wrap clearfix">
             <h1 class="logo fl">
-              <a href="" title="FStack"><img src="./images/logo.png" alt="FStack"></a>
+              <a href="/front/goods.html" title="FStack"><img src="./images/logo.png" alt="FStack"></a>
             </h1>
 			<div class="desire fl">
-              <a href="javascript;" class="ca-lightgrey"><span id="memberName">欢迎您,</span></a>
-              <a href="" class="ca-lightgrey" rel="nofollow"><span>我的订单</span></a>
+              <span id="memberName" style="font-size:16px;">欢迎您,</span>
+              <a href="/front/order_list.html" class="ca-lightgrey" rel="nofollow"><span>我的订单</span></a>
+              <a href="/front/order_detail.html" class="ca-lightgrey" rel="nofollow"><span>我的购物车</span></a>
             </div>
           </div>
         </div>
@@ -63,7 +64,7 @@
   <div class="tab-link">
     <div class="tab-link-inner clearfix">
       <a href="" class="tab-item  active">菜单</a>
-      <a href="" class="tab-item ">评价</a>
+      <!-- <a href="" class="tab-item ">评价</a> -->
     </div>
   </div>
 	<!-- 菜单类目 start -chay -->
@@ -229,7 +230,7 @@ $(function(){
 						var objs = list[i];
 						html+='<div class="j-pic-food pic-food " id="'+objs.id+'">\
 									<div class="avatar">\
-										<img src="'+objs.extraData.imgPath+'" data-src="" class="food-shape scroll-loading">\
+										<img src="'+objs.extraData.imgPath+'" >\
 									</div>\
 									<div class="np clearfix">\
 										<span class="name fl" title="'+objs.name+'">'+objs.name+'</span>\

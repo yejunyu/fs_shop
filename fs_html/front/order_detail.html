@@ -13,11 +13,12 @@
         <div class="middle-nav">
           <div class="middlenav-wrap clearfix">
             <h1 class="logo fl">
-              <a href="" title="FStack"><img src="./images/logo.png" alt="FStack"></a>
+              <a href="/front/goods.html" title="FStack"><img src="./images/logo.png" alt="FStack"></a>
             </h1>
 			<div class="desire fl">
-              <a href="javascript;" class="ca-lightgrey"><span id="memberName">欢迎您,</span></a>
-              <a href="" class="ca-lightgrey" rel="nofollow"><span>我的订单</span></a>
+              <span id="memberName" style="font-size:16px;">欢迎您,</span>
+              <a href="/front/order_list.html" class="ca-lightgrey" rel="nofollow"><span>我的订单</span></a>
+              <a href="/front/order_detail.html" class="ca-lightgrey" rel="nofollow"><span>我的购物车</span></a>
             </div>
           </div>
         </div>
@@ -60,11 +61,6 @@
               </div>
 
           </div>
-
-          <input type="hidden" name="poiid" value="144737903809269054">
-          <input type="hidden" name="token" value="30ED195F3F9B45BFB04DF37B364E9085">
-          <input type="hidden" name="buildingid" value="">
-
           <div class="field clearfix leave-message-short">
             <label for="message">给商家留言：</label>
             <input class="show-tags sprite" type="text" name="remarks" id="remarks" placeholder="不要辣，多放盐等口味要求" maxlength="100" value="">
@@ -124,16 +120,17 @@
 			<tr>        
 				<td class="middle-center">
 					<div class="dialog-main">
+						<input type="hidden" id="addressId" />
 						<div class="title"><a href="javascript:;" class="close fr"><i class="icon i-cross"></i></a><span>添加新地址</span></div>
 						<div class="content">
 							<div class="j-add-box add-box clearfix" data-aid="undefined">
 								<div class="addr-line clearfix"><label class="addr-line-label"><span class="addr-em">*</span>联系人：</label>   
 									<div class="addr-line-content">
-										<input type="text" name="user" value="" placeholder="请输入姓名" class="user-input input-shadow" maxlength="20"> 
+										<input type="text" name="name" id="name" value="" placeholder="请输入姓名" class="user-input input-shadow" maxlength="20"> 
 										<div><span class="addr-em">*</span>
-											<input type="radio" name="gender" value="先生" id="addr-box-gender1" class="gender-input gender1-input">
+											<input type="radio" name="sex" value="先生" id="addr-box-gender1" class="gender-input gender1-input">
 											<label for="addr-box-gender1">先生</label>
-											<input type="radio" name="gender" value="女士" id="addr-box-gender2" class="gender-input gender2-input">
+											<input type="radio" name="sex" value="女士" id="addr-box-gender2" class="gender-input gender2-input">
 											<label for="addr-box-gender2">女士</label>
 										</div>
 									</div>
@@ -141,7 +138,7 @@
 								<div class="addr-line clearfix">
 									<label class="addr-line-label"><span class="addr-em">*</span>手机号码：</label>
 									<div class="addr-line-content">
-										<input type="text" name="mobile" value="" placeholder="请输入11位手机号码" class="mobile-input input-shadow" maxlength="11"> 
+										<input type="text" name="phone" id="phone" value="" placeholder="请输入11位手机号码" class="mobile-input input-shadow" maxlength="11"> 
 									</div>
 								</div>
 								<div class="addr-line clearfix">
@@ -149,7 +146,7 @@
 									<label class="addr-line-label"><span class="addr-em">*</span>收餐地址：</label>
 									<div class="addr-line-content">
 										<i class="icon i-user-pos" style="margin-left: 0px;"></i>
-										<input type="text" name="address" value="" placeholder="学校/小区/街道" class="address-input input-shadow" maxlength="50">
+										<input type="text" name="address" id="address" value="" placeholder="学校/小区/街道" class="address-input input-shadow" maxlength="50">
 										<ul class="address-suggestion j-address-suggestion" style="display:none;"></ul>
 									</div>
 								</div>
@@ -157,7 +154,7 @@
 									<label class="addr-line-label">
 									<span class="addr-em-hidden">*</span>详细地址：</label>
 									<div class="addr-line-content">
-										<input type="text" name="address-detail" placeholder="您可以填写门牌号码，宿舍楼等" class="address-detail-input input-shadow" maxlength="50">
+										<input type="text" name="detailAddress" id="detailAddress" placeholder="您可以填写门牌号码，宿舍楼等" class="address-detail-input input-shadow" maxlength="50">
 									</div>
 								</div>
 								<div class="j-addr-tip addr-tip"></div>
@@ -234,7 +231,7 @@ $(function(){
 			for(var i=0;i<list.length;i++){
 				var obj = list[i];
 				var check = "";
-				if(obj.defaultFlag==1){
+				if(i==0){
 					check = "address-checked";
 				}
 				html+='<div class="j-address-box address-box '+check+'" data-aid="'+obj.id+'" data-flag="1">\
@@ -245,9 +242,9 @@ $(function(){
                             ：\
                           '+obj.phone+'\
                         </span>\
-                        <span class="box-modify fr">\
-                          <a class="j-modify-address address-operation cc-lightred-new" href="javascript:;">修改</a>\
-                          <a class="j-delete-address address-operation cc-lightred-new" href="javascript:;">删除</a>\
+                        <span class=" fr">\
+                          <a class="j-modify-address address-operation cc-lightred-new" attrId="'+obj.id+'" href="javascript:;">修改</a>\
+                          <a class="j-delete-address address-operation cc-lightred-new" attrId="'+obj.id+'" href="javascript:;">删除</a>\
                         </span>\
                       </p>\
                       <p class="address-line">'+obj.address+'&nbsp;&nbsp;'+obj.detailAddress+'</p>\
@@ -259,6 +256,12 @@ $(function(){
 	}
 	//新地址添加
 	$("#address-new").click(function(){
+		$("#addressId").val("");
+		$("#name").val("");
+		$("#phone").val("");
+		$("#address").val("");
+		$("#detailAddress").val("");
+		
 		$(".dialog-address").css("display","block");
 	});
 	$(".cancel,.close").click(function(){
@@ -283,10 +286,61 @@ $(function(){
 		var url = "/order/create";
 		var data={wxId:common.currentMember.wxId,remarks:remarks,memberAddressId:memberAddressId,listDetail:JSON.stringify(list)};
 		common.postData(url,data,function(data){
+			common.addParams({buycars:"{}"});
 			common.alertX(data.msg);
 			window.location.href=common.htmlPath+"/front/order_list.html";
 		});
 	});
+	//地址选择
+	$(document).on("click",".address-box",function(){  
+		$(".address-checked").removeClass("address-checked");
+		$(this).addClass("address-checked");
+	});
+	//新增地址
+	$(document).on("click",".save",function(){  
+		var name = $("#name").val();
+		var sex = $("input[name='sex']:checked").val();
+		var phone = $("#phone").val();
+		var address = $("#address").val();
+		var detailAddress = $("#detailAddress").val();	
+		var addressId = $("#addressId").val();
+		var url = "/memberAddress/create";
+		debugger;
+		if(addressId){
+			url = "/memberAddress/update";
+		}
+		var data={id:addressId,name:name,sex:sex,phone:phone,address:address,detailAddress:detailAddress};
+		common.postData(url,data,function(data){
+			$(".close").trigger("click");
+			common.msg(data.msg);
+			loadAddres();
+		});
+	});
+	//删除地址信息
+	$(document).on("click",".j-delete-address",function(){  
+		var id = $(this).attr("attrId");
+		var url = "/memberAddress/del";
+		var data={id:id};
+		common.postData(url,data,function(data){
+			common.msg(data.msg);
+			loadAddres();
+		});
+	});
+	//修改地址
+	$(document).on("click",".j-modify-address",function(){  
+		var id = $(this).attr("attrId");
+		var url = "/memberAddress/getInfoById?id="+id;
+		common.getData(url,function(data){
+			$("#addressId").val(data.result.id);
+			$("#name").val(data.result.name);
+			$("input[name='sex'][value='"+data.result.sex+"']").attr("checked",true); 
+			$("#phone").val(data.result.phone);
+			$("#address").val(data.result.address);
+			$("#detailAddress").val(data.result.detailAddress);
+			$(".dialog-address").css("display","block");
+		});
+	});
+	
 });
 </script>
 </body>

@@ -3,6 +3,7 @@ package com.fullstack.shop.order.entity;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.fullstack.common.persistence.DataEntity;
+import com.fullstack.shop.goods.entity.Goods;
 
 /**
  * 
@@ -20,6 +21,8 @@ public class OrderDetail extends DataEntity<OrderDetail> {
 	private Integer count;		// 数量
 	private String price;		// 价格 
 	
+	@TableField(exist=false)
+	private Goods goods;
 	@Override
 	public String toString(){
 		StringBuffer str = new StringBuffer();
@@ -67,6 +70,14 @@ public class OrderDetail extends DataEntity<OrderDetail> {
 
 	public void setGoodsId(Integer goodsId) {
 		this.goodsId = goodsId;
+	}
+
+	public Goods getGoods() {
+		return goods;
+	}
+
+	public void setGoods(Goods goods) {
+		this.goods = goods;
 	}
 	
 }

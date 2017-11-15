@@ -46,7 +46,13 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderDao, Order> implement
 	
 	@Override
 	public Page<Order> findPage(Page<Order> page, Wrapper<Order> wrapper) throws BusinessException {
+		wrapper.orderBy("create_date", false);
 		page = super.findPage(page, wrapper);
+		for(Order order:page.getRecords()){
+			order.getExtraData().put("orderDelivery", orderDeliveryService.getInfoByOrderId(order.getId()));
+			List<OrderDetail> list = orderDetailService.getListByOrderId(order.getId());
+			order.getExtraData().put("details", this.getDetails(list));
+		}
 		return page;
 	}
 
@@ -58,7 +64,7 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderDao, Order> implement
     	ew.setEntity(order);
     	ew.where("create_date > '"+DateUtils.getDate(DateUtils.parsePatterns[1])+"'");
     	int count = super.selectCount(ew)+1;
-		return DateUtils.getDate(DateUtils.parsePatterns[2])+"-"+CommonUtils.numberPrefixZeroToString1(count);
+		return DateUtils.getDate(DateUtils.parsePatterns[2])+CommonUtils.numberPrefixZeroToString(3,MathUtils.getRandom(1000))+CommonUtils.numberPrefixZeroToString1(count);
 	}
 
 	@Override
@@ -67,6 +73,7 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderDao, Order> implement
 		//1.创建订单
 		order.setNumber(this.getOrderNumber());
 		order.setOrderTime(DateUtils.getDate());
+		order.setPersons(this.getCounts(order.getListOrderDetail()));
 		order.setTotal(this.getTotal(order.getListOrderDetail()));
 		order.setCreateBy(memberService.getByWxId(wxId).getId());
 		super.create(order);
@@ -87,12 +94,37 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderDao, Order> implement
 	 * @param list
 	 * @return
 	 */
-	public String getTotal(List<OrderDetail> list){
+	private String getTotal(List<OrderDetail> list){
 		double t = 0;
 		for(OrderDetail detail:list){
 			t+=(detail.getCount()*MathUtils.getDouble2(detail.getPrice()));
 		}
 		return t+"";
+	}
+	
+	private int getCounts(List<OrderDetail> list){
+		int c = 0;
+		for(OrderDetail detail:list){
+			c+=detail.getCount();
+		}
+		return c;
+	}
+	
+	/**
+	 * 获取详情的集合名称
+	 * @param list
+	 * @return
+	 */
+	private String getDetails(List<OrderDetail> list){
+		String names = "";
+		for(OrderDetail orderDetail : list){
+			names+=(orderDetail.getGoods().getName()+"x"+orderDetail.getCount()+"、");
+		}
+		//if(names.lastIndexOf("、"))
+		if((names.lastIndexOf("、")+1)==names.length()){
+			names = names.substring(0, names.length()-1);
+		}
+		return names;
 	}
 	
 }

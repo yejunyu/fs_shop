@@ -40,6 +40,8 @@ public class Order extends DataEntity<Order> {
 	private Date updateDate;	// 更新日期
 	
 	@TableField(exist=false)
+	private String statusDis;
+	@TableField(exist=false)
 	private OrderDelivery orderDelivery;
 	@TableField(exist=false)
 	private List<OrderDetail> listOrderDetail;
@@ -141,6 +143,26 @@ public class Order extends DataEntity<Order> {
 		this.listOrderDetail = listOrderDetail;
 	}
 
+	public String getStatusDis() {
+		if(this.status==Order.STATUS_DEFAULT){
+			this.statusDis = "待处理";
+		}else if(this.status==Order.STATUS_WAIT){
+			this.statusDis = "处理中";
+		}else if(this.status==Order.STATUS_SEND){
+			this.statusDis = "配送中";
+		}else if(this.status==Order.STATUS_END){
+			this.statusDis = "已完成";
+		}else if(this.status==Order.STATUS_RETURN){
+			this.statusDis = "退款中";
+		}else if(this.status==Order.STATUS_REBUT){
+			this.statusDis = "退款中";
+		}
+		return statusDis;
+	}
+
+//	public void setStatusDis(String statusDis) {
+//		this.statusDis = statusDis;
+//	}
 
 
 
@@ -150,10 +172,12 @@ public class Order extends DataEntity<Order> {
 
 
 
-	public static int STATUS_DEFAULT = 0;	// 初始默认
+
+	public static int STATUS_DEFAULT = 0;	// 待处理
 	public static int STATUS_WAIT = 1;		// 处理中
-	public static int STATUS_SEND = 2;		// 配送
-	public static int STATUS_END = 3;		// 订单结束
-	public static int STATUS_REBUT = 4;		// 订单驳回退款
+	public static int STATUS_SEND = 2;		// 配送中
+	public static int STATUS_END = 3;		// 已完成
+	public static int STATUS_RETURN = 4;	// 退款中
+	public static int STATUS_REBUT = 5;		// 已退款
 	
 }

@@ -2,6 +2,7 @@ package com.fullstack.shop.order.service.impl;
 
 import org.springframework.stereotype.Service;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.fullstack.common.exceptions.BusinessException;
@@ -23,6 +24,14 @@ public class OrderDeliveryServiceImpl extends BaseServiceImpl<OrderDeliveryDao, 
 		page = super.findPage(page, wrapper);
 		
 		return page;
+	}
+
+	@Override
+	public OrderDelivery getInfoByOrderId(Integer orderId) throws BusinessException {
+		OrderDelivery orderDelivery = new OrderDelivery();
+		orderDelivery.setOrderId(orderId);
+		EntityWrapper<OrderDelivery> wrapper = this.entityInit(orderDelivery);
+		return super.selectOne(wrapper);
 	}
 	
 }
