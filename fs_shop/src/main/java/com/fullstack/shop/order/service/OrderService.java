@@ -22,4 +22,12 @@ public interface OrderService<T> extends BaseService<Order> {
 	 * @throws BusinessException
 	 */
 	public String getOrderNumber() throws BusinessException;
+	/**
+	 * 
+	 * @param id
+	 * @param status
+	 * @return
+	 * @throws BusinessException
+	 */
+	public boolean editStatusById(int id,int status) throws BusinessException;
 }

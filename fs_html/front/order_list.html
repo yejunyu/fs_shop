@@ -49,36 +49,52 @@
 <script type="text/javascript">
 $(function(){
 	loadData();
-	//加载数据
-	function loadData(){
-		$("#memberName").html($("#memberName").html()+common.currentMember.name);
-		
-		var url = "/order/list?pageNum=-1";
-		common.getData(url,function(data){
-			var list = data.result.records;
-			var html="";
-			for(var i=0;i<list.length;i++){
-				var obj = list[i];
-				html+='<div>\
-						<div class="order-item clearfix">\
-							<div class="order-img"><a href="" class="link" target="_blank">'+obj.orderTime+'</a></div>\
-							<div class="order-info"><div class="info-box"><a href="" class="link" target="_blank">\
-								<p class="order-title">'+obj.number+'</p></a>\
-								<p class="info" title="'+obj.extraData.details+'">'+common.stringLengthUtils(80,obj.extraData.details)+'</p>\
-							</div>\
-							</div>\
-							<div class="order-price">\
-								总价: ￥'+obj.total+'<br>\
-								数量：'+obj.persons+'</div>\
-							<div class="order-status">'+obj.statusDis+'</div>\
-							<div class="order-btn">取消订单</div>\
-						</div>\
-					</div>';
-			}
-			$("#order_list").html(html);
-		});
-	}
 });
+//加载数据
+function loadData(){
+	$("#memberName").html($("#memberName").html()+common.currentMember.name);
+	
+	var url = "/order/list?pageNum=-1";
+	common.getData(url,function(data){
+		var list = data.result.records;
+		var html="";
+		for(var i=0;i<list.length;i++){
+			var obj = list[i];
+			html+='<div>\
+					<div class="order-item clearfix">\
+						<div class="order-img"><a href="" class="link" target="_blank">'+obj.orderTime+'</a></div>\
+						<div class="order-info"><div class="info-box"><a href="" class="link" target="_blank">\
+							<p class="order-title">'+obj.number+'</p></a>\
+							<p class="info" title="'+obj.extraData.details+'">'+common.stringLengthUtils(80,obj.extraData.details)+'</p>\
+						</div>\
+						</div>\
+						<div class="order-price">\
+							总价: ￥'+obj.total+'<br>\
+							数量：'+obj.persons+'</div>\
+						<div class="order-status">'+obj.statusDis+'</div>\
+						<div class="order-btn">'+statusUtils(obj)+'</div>\
+					</div>\
+				</div>';
+		}
+		$("#order_list").html(html);
+	});
+}
+function statusUtils(obj){
+	var s = ""; 
+	if(obj.status==0){
+		s = '<a title="取消订单" href="javascript:;" onclick="editStatus(\''+obj.id+'\',\'6\')" class="ml-5" style="text-decoration:none">取消订单</a>';
+	}
+	return s;
+}
+//修改订单状态
+function editStatus(id,status){
+	var url = "/order/editStatusById";
+	var data={id:id,status:status};
+	common.postData(url,data,function(data){
+		common.msg(data.msg);
+		loadData();
+	});
+}
 </script>
 </body>
 </html>

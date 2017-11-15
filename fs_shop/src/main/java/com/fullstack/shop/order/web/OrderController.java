@@ -68,6 +68,18 @@ public class OrderController extends ServiceController {
         return this.retResult(success_update);
     }
 	/**
+	 * 修改状态
+	 * @param request
+	 * @param order
+	 * @return
+	 * @throws BusinessException
+	 */
+	@RequestMapping("editStatusById")
+    public JSONObject editStatusById(HttpServletRequest request,Order order) throws BusinessException {
+		orderService.editStatusById(order.getId(),order.getStatus());
+        return this.retResult(success_update);
+    }
+	/**
 	 * 删除
 	 * @param request
 	 * @param Order

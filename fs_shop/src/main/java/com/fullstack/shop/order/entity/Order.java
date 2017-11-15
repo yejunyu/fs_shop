@@ -3,6 +3,8 @@ package com.fullstack.shop.order.entity;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.fullstack.common.persistence.DataEntity;
@@ -103,7 +105,14 @@ public class Order extends DataEntity<Order> {
 		this.orderTime = orderTime;
 	}
 
+	/**
+	 * 如果没有填写配送时间，则下单时间为配送时间，即尽快配送
+	 * @return
+	 */
 	public String getDeliveryDate() {
+		if(StringUtils.isBlank(this.deliveryDate)){
+			this.deliveryDate = this.orderTime;
+		}
 		return deliveryDate;
 	}
 
@@ -156,6 +165,8 @@ public class Order extends DataEntity<Order> {
 			this.statusDis = "退款中";
 		}else if(this.status==Order.STATUS_REBUT){
 			this.statusDis = "退款中";
+		}else if(this.status==Order.STATUS_CANCEL){
+			this.statusDis = "已取消";
 		}
 		return statusDis;
 	}
@@ -179,5 +190,6 @@ public class Order extends DataEntity<Order> {
 	public static int STATUS_END = 3;		// 已完成
 	public static int STATUS_RETURN = 4;	// 退款中
 	public static int STATUS_REBUT = 5;		// 已退款
+	public static int STATUS_CANCEL = 6;	// 已取消
 	
 }

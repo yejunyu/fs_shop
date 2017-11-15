@@ -120,11 +120,23 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderDao, Order> implement
 		for(OrderDetail orderDetail : list){
 			names+=(orderDetail.getGoods().getName()+"x"+orderDetail.getCount()+"、");
 		}
-		//if(names.lastIndexOf("、"))
 		if((names.lastIndexOf("、")+1)==names.length()){
 			names = names.substring(0, names.length()-1);
 		}
 		return names;
+	}
+
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED,rollbackFor={BusinessException.class})
+	public boolean editStatusById(int id, int status) throws BusinessException {
+		Order order = super.getInfoById(id);
+		order.setStatus(status);
+		super.updateById(order);
+		//TODO 订单执行完成 ，自动生成报表（后续正式上线考虑调整为每天凌晨生成前一天，现在为了方便调试暂时放在这里触发）
+		if(status == Order.STATUS_END){
+			
+		}
+		return true;
 	}
 	
 }

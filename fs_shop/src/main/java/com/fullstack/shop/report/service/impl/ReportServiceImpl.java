@@ -24,5 +24,11 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDao, Report> implem
 		
 		return page;
 	}
+
+	@Override
+	public void generateReportByDate(String date) throws BusinessException {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }
