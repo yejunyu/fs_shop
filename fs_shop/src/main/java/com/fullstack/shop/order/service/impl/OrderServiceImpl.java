@@ -22,6 +22,8 @@ import com.fullstack.shop.order.entity.OrderDetail;
 import com.fullstack.shop.order.service.OrderDeliveryService;
 import com.fullstack.shop.order.service.OrderDetailService;
 import com.fullstack.shop.order.service.OrderService;
+import com.fullstack.shop.report.entity.Report;
+import com.fullstack.shop.report.service.ReportService;
 import com.fullstack.shop.user.entity.Member;
 import com.fullstack.shop.user.entity.MemberAddress;
 import com.fullstack.shop.user.service.MemberAddressService;
@@ -36,6 +38,9 @@ import com.fullstack.shop.user.service.MemberService;
 public class OrderServiceImpl extends BaseServiceImpl<OrderDao, Order> implements OrderService<Order>{
 	
 	@Autowired  
+    private OrderDao orderDao;  
+	
+	@Autowired  
     private OrderDetailService<OrderDetail> orderDetailService;  
 	@Autowired  
     private OrderDeliveryService<OrderDelivery> orderDeliveryService;  
@@ -43,6 +48,8 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderDao, Order> implement
     private MemberService<Member> memberService;  
 	@Autowired  
     private MemberAddressService<MemberAddress> memberAddressService;
+	@Autowired  
+    private ReportService<Report> reportService;
 	
 	@Override
 	public Page<Order> findPage(Page<Order> page, Wrapper<Order> wrapper) throws BusinessException {
@@ -134,9 +141,14 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderDao, Order> implement
 		super.updateById(order);
 		//TODO 订单执行完成 ，自动生成报表（后续正式上线考虑调整为每天凌晨生成前一天，现在为了方便调试暂时放在这里触发）
 		if(status == Order.STATUS_END){
-			
+			reportService.generateReportByDate(order.getDeliveryDate());
 		}
 		return true;
+	}
+
+	@Override
+	public Double getSumTotalByCondition(Order order) throws BusinessException {
+		return orderDao.getSumTotalByCondition(order);
 	}
 	
 }

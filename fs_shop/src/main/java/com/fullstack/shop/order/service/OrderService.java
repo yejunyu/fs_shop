@@ -30,4 +30,12 @@ public interface OrderService<T> extends BaseService<Order> {
 	 * @throws BusinessException
 	 */
 	public boolean editStatusById(int id,int status) throws BusinessException;
+	/**
+	 *  根据日期统计订单总额
+	 * @param deliveryDate
+	 * @return
+	 * @throws BusinessException
+	 */
+	public Double getSumTotalByCondition(Order order) throws BusinessException;
+	
 }

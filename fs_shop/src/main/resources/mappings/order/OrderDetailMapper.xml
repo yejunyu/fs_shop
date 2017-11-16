@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fullstack.shop.order.dao.OrderDetailDao">
+    
+	<select id="getByOrderCondition" parameterType="com.fullstack.shop.order.entity.Order" resultType="OrderDetail">
+		select 
+			d.id as id,
+			d.goods_id as goodsId,
+			d.count as count,
+			d.price as price
+		from shop_order o
+			join shop_order_detail d on d.order_id=o.id
+		<where>
+			<if test="deliveryDate!=null and deliveryDate!=''">
+				and INSTR(o.delivery_date,#{deliveryDate}) &gt; 0
+			</if>
+			<if test="status!=null">
+				and o.status = #{status}
+			</if>
+		</where>
+    </select>  
+    
+	
+	
+</mapper>

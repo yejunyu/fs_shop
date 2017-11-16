@@ -70,7 +70,22 @@ public class Report extends DataEntity<Report> {
 	}
 
 	
-	public static final int TYPE_ALL = 1;		//	销售总额
-	public static final int TYPE_GOODS = 2;		//	商品销售额
+	
+	
+	
+	
+	/**
+	 * 日销售总额报表
+	 */
+	public static final int TYPE_ALL_OF_DAY = 1;		//	销售总额
+	/**
+	 * 日销售单个商品总额报表
+	 */
+	public static final int TYPE_GOODS_OF_DAY = 2;		//	商品销售额
+	
+	
+	public static final String CYCLE_YEAR = "year";
+	public static final String CYCLE_MONTH = "month";
+	public static final String CYCLE_DAY = "day";
 	
 }

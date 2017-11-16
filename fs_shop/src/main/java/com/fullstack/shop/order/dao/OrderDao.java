@@ -9,5 +9,10 @@ import com.fullstack.shop.order.entity.Order;
  * @version 2017-04-17
  */
 public interface OrderDao extends BaseMapper<Order> {
-	
+	/**
+	 * 根据日期统计订单总额
+	 * @param deliveryDate
+	 * @return
+	 */
+	Double getSumTotalByCondition(Order order);
 }

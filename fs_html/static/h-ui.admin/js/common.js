@@ -3,7 +3,7 @@
  */
 var common = function(){};
 
-common.basePath = "http://192.168.1.102:8888";
+common.basePath = "http://127.0.0.1:8888";
 common.htmlPath = "";
 common.cookieKey = "token";
 common.cookieParams = "params";

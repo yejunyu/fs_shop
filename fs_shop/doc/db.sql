@@ -119,9 +119,9 @@ DROP TABLE IF EXISTS `shop_report`;
 CREATE TABLE `shop_report` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
   `count_date` varchar(30) NOT NULL COMMENT '统计日期',
-  `goods_id` int(11) NOT NULL COMMENT '商品id',
+  `goods_id` int(11) DEFAULT NULL COMMENT '商品id',
   `type` tinyint(2) NOT NULL COMMENT '类型',
-  `total` varchar(20) NOT NULL COMMENT '总计',
+  `total` varchar(20) DEFAULT '0' COMMENT '总计',
   `remarks` varchar(255) DEFAULT NULL COMMENT '备注信息',
   `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT '删除标记',
   PRIMARY KEY (`id`)
@@ -138,6 +138,7 @@ CREATE TABLE `shop_member_address` (
   `default_flag` tinyint(2) NOT NULL DEFAULT '0' COMMENT '是否默认使用',
 	`create_by` int(11) NOT NULL COMMENT '创建者',
   `create_date` datetime NOT NULL COMMENT '创建时间',
+  `update_date` datetime NOT NULL COMMENT '更新时间',
   `remarks` varchar(255) DEFAULT NULL COMMENT '备注信息',
   `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT '删除标记',
   PRIMARY KEY (`id`)

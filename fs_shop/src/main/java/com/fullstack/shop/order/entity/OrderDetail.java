@@ -26,9 +26,10 @@ public class OrderDetail extends DataEntity<OrderDetail> {
 	@Override
 	public String toString(){
 		StringBuffer str = new StringBuffer();
-		str.append("  fieldset:"+this.fieldset);
-		str.append("  listFieldset:"+this.listFieldset);
-		str.append("  extraData:"+this.extraData);
+		str.append("  id:"+this.id);
+		str.append("  goodsId:"+this.goodsId);
+		str.append("  count:"+this.count);
+		str.append("  price:"+this.price);
 		return str.toString();
 	}
 	

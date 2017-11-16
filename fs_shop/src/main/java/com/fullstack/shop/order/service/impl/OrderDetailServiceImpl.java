@@ -13,6 +13,7 @@ import com.fullstack.common.service.impl.BaseServiceImpl;
 import com.fullstack.shop.goods.entity.Goods;
 import com.fullstack.shop.goods.service.GoodsService;
 import com.fullstack.shop.order.dao.OrderDetailDao;
+import com.fullstack.shop.order.entity.Order;
 import com.fullstack.shop.order.entity.OrderDetail;
 import com.fullstack.shop.order.service.OrderDetailService;
 
@@ -23,6 +24,9 @@ import com.fullstack.shop.order.service.OrderDetailService;
  */
 @Service
 public class OrderDetailServiceImpl extends BaseServiceImpl<OrderDetailDao, OrderDetail> implements OrderDetailService<OrderDetail>{
+	
+	@Autowired  
+    private OrderDetailDao orderDetailDao;  
 	
 	@Autowired  
     private GoodsService<Goods> goodsService;  
@@ -53,6 +57,11 @@ public class OrderDetailServiceImpl extends BaseServiceImpl<OrderDetailDao, Orde
 			orderDetail.setGoods(goodsService.getInfoById(orderDetail.getGoodsId()));
 		}
 		return list;
+	}
+
+	@Override
+	public List<OrderDetail> getByOrderCondition(Order order) throws BusinessException {
+		return orderDetailDao.getByOrderCondition(order);
 	}
 	
 }
