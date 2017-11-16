@@ -20,9 +20,9 @@ public interface ReportDao extends BaseMapper<Report> {
 	
 	List<Map<String,String>> groupByYearMonth();
 	
-	List<Map<String, Object>> getDataGroupByYear(Report report);
+	List<Report> getDataGroupByYear(Report report);
 	
-	List<Map<String, Object>> getDataGroupByMonth(Report report);
+	List<Report> getDataGroupByMonth(Report report);
 	
-	List<Map<String, Object>> getDataGroupByDay(Report report);
+	List<Report> getDataGroupByDay(Report report);
 }

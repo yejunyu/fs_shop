@@ -21,19 +21,19 @@
 		<!-- order by count_date asc -->
     </select> 
 	
-	<select id="getDataGroupByYear" resultType="java.util.HashMap">
+	<select id="getDataGroupByYear" resultType="Report">
 		select 
-			DATE_FORMAT(count_date,'%Y') as `key`, 
-			sum(total) as `val`
+			DATE_FORMAT(count_date,'%Y') as `countDate`, 
+			sum(total) as `total`
 		from 
 			shop_report 
 		group by DATE_FORMAT(count_date,'%Y') 
     </select> 
     
-    <select id="getDataGroupByMonth" resultType="java.util.HashMap">
+    <select id="getDataGroupByMonth" resultType="Report">
 		select 
-			DATE_FORMAT(count_date,'%m') as `key`, 
-			sum(total) as `val`
+			DATE_FORMAT(count_date,'%m') as `countDate`, 
+			sum(total) as `total`
 		from 
 			shop_report 
 		<where>
@@ -44,10 +44,10 @@
 		group by DATE_FORMAT(count_date,'%Y-%m') 
     </select> 
     
-    <select id="getDataGroupByDay" resultType="java.util.HashMap">
+    <select id="getDataGroupByDay" resultType="Report">
 		select 
-			DATE_FORMAT(count_date,'%d') as `key`, 
-			sum(total) as `val`
+			DATE_FORMAT(count_date,'%d') as `countDate`, 
+			sum(total) as `total`
 		from 
 			shop_report 
 		<where>

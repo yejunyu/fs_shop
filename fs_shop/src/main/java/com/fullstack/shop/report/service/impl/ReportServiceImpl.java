@@ -135,7 +135,7 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDao, Report> implem
 	@Override
 	public Map<String, Object> getDataGroupByCycle(String timeCycle, String year, String month) throws BusinessException {
 		Report report = new Report();
-		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		List<Report> list = new ArrayList<Report>();
 		int defaultX = 0;	//x轴默认数据
 		if(Report.CYCLE_YEAR.equals(timeCycle)){
 			report.setCountDate(null);
@@ -149,20 +149,22 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDao, Report> implem
 			defaultX=DateUtils.getDays(year+"-"+month);
 			list = reportDao.getDataGroupByDay(report);
 		}
-		Map<String, String> res = new HashMap<String,String>();
+		
 		List<String> listX = new ArrayList<String>();
 		List<Double> listY = new ArrayList<Double>();
-		for(Map<String, Object> map:list){
-			res.put(map.get("key").toString(),	map.get("val").toString());
-		}
+		
 		
 		//处理返回前端报表数据，尽量避免前端做过多的处理
 		if(Report.CYCLE_YEAR.equals(timeCycle)){
-			for(String k:res.keySet()){
-				listX.add(k);
-				listY.add(MathUtils.parseDouble(res.get(k)));
+			for(Report r:list){
+				listX.add(r.getCountDate());
+				listY.add(MathUtils.parseDouble(r.getTotal()));
 			}
 		}else{
+			Map<String, String> res = new HashMap<String,String>();
+			for(Report r:list){
+				res.put(r.getCountDate(), r.getTotal());
+			}
 			for(int i=1;i<=defaultX;i++){
 				listX.add(i+"");
 				listY.add(MathUtils.parseDouble(res.get(CommonUtils.numberPrefixZeroToString(1, i)+"")));
