@@ -11,22 +11,29 @@
 			count_date=#{countDate}
     </select>  
     
-    <select id="groupByYearMonth" resultType="java.util.HashMap">
+    <select id="groupByYearMonthDay" resultType="java.util.HashMap">
 		select 
 			DATE_FORMAT(count_date,'%Y') as `year`, 
-			DATE_FORMAT(count_date,'%m') as `month`
+			DATE_FORMAT(count_date,'%m') as `month`, 
+			DATE_FORMAT(count_date,'%d') as `day`
 		from 
 			shop_report 
-		group by DATE_FORMAT(count_date,'%Y-%m') 
+		group by DATE_FORMAT(count_date,'%Y-%m-%d') 
 		<!-- order by count_date asc -->
     </select> 
 	
+	<!-- getDataGroupByCycle start -->
 	<select id="getDataGroupByYear" resultType="Report">
 		select 
 			DATE_FORMAT(count_date,'%Y') as `countDate`, 
 			sum(total) as `total`
 		from 
 			shop_report 
+		<where>
+			<if test="type != null and type != ''">
+				and type=#{type}
+			</if>
+		</where>
 		group by DATE_FORMAT(count_date,'%Y') 
     </select> 
     
@@ -37,6 +44,9 @@
 		from 
 			shop_report 
 		<where>
+			<if test="type != null and type != ''">
+				and type=#{type}
+			</if>
 			<if test="countDate!=null and countDate!=''">
 				and INSTR(count_date,#{countDate}) &gt; 0
 			</if>
@@ -51,11 +61,69 @@
 		from 
 			shop_report 
 		<where>
+			<if test="type != null and type != ''">
+				and type=#{type}
+			</if>
 			<if test="countDate!=null and countDate!=''">
 				and INSTR(count_date,#{countDate}) &gt; 0
 			</if>
 		</where>
 		group by DATE_FORMAT(count_date,'%Y-%m-%d') 
     </select> 
+	<!-- getDataGroupByCycle end -->
+	
+	<!-- getDataGroupByGoodsId start -->
+	<select id="getDataGroupByGoodsIdByYear" resultType="Report">
+		select 
+			DATE_FORMAT(count_date,'%Y') as `countDate`, 
+			sum(total) as `total`,
+			goods_id as goodsId
+		from 
+			shop_report 
+		<where>
+			<if test="type != null and type != ''">
+				and type=#{type}
+			</if>
+		</where>
+		group by DATE_FORMAT(count_date,'%Y') ,goods_id
+    </select> 
+    
+    <select id="getDataGroupByGoodsIdByMonth" resultType="Report">
+		select 
+			DATE_FORMAT(count_date,'%Y-%m') as `countDate`, 
+			sum(total) as `total`,
+			goods_id as goodsId
+		from 
+			shop_report 
+		<where>
+			<if test="type != null and type != ''">
+				and type=#{type}
+			</if>
+			<if test="countDate!=null and countDate!=''">
+				and INSTR(count_date,#{countDate}) &gt; 0
+			</if>
+		</where>
+		group by DATE_FORMAT(count_date,'%Y-%m') ,goods_id
+    </select> 
+    
+    <select id="getDataGroupByGoodsIdByDay" resultType="Report">
+		select 
+			DATE_FORMAT(count_date,'%Y-%m-%d') as `countDate`, 
+			sum(total) as `total`,
+			goods_id as goodsId
+		from 
+			shop_report 
+		<where>
+			<if test="type != null and type != ''">
+				and type=#{type}
+			</if>
+			<if test="countDate!=null and countDate!=''">
+				and INSTR(count_date,#{countDate}) &gt; 0
+			</if>
+		</where>
+		group by DATE_FORMAT(count_date,'%Y-%m-%d')	,goods_id 
+    </select> 
+	<!-- getDataGroupByGoodsId end -->
+	
 	
 </mapper>

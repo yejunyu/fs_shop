@@ -55,7 +55,18 @@
 		<button name="loadData" id="loadData" class="btn btn-success" type="button"><i class="Hui-iconfont">&#xe692;</i> 重新生成报表</button>
 	</div>
 	<div class="mt-20">
-		<div id="container" style="min-width:400px;height:400px"></div>
+		<table class="table table-border table-bordered table-hover table-bg table-sort">
+			<thead>
+				<tr class="text-c">
+					<th width="10%">日期</th>
+					<th width="30%">商品</th>
+					<th width="10%">总额</th>
+				</tr>
+			</thead>
+			<tbody id="data">
+				
+			</tbody>
+		</table>
 	</div>
 </div>
 <!--_footer 作为公共模版分离出去-->
@@ -101,11 +112,12 @@ $(function () {
 	
     
 });
-var initReportConditionRes;
+var initReportConditionRes,initReportConditionResMonthDay;
 function initReportCondition(){
 	var url = "/report/groupByYearMonthDay";
 	common.getData(url,function(data){
 		initReportConditionRes = data.result.resYearMoth;
+		initReportConditionResMonthDay = data.result.resMothDay;
 		var html="";
 		$.each(initReportConditionRes,function(key,val){     
 			html='<option value="'+key+'"> '+key+' </option>'+html; 
@@ -123,68 +135,44 @@ function loadDateScopeMonth(year){
 	$("#date_scope_month").html(html);
 }
 
+
+function sortDataTable(){
+	$('.table-sort').dataTable({
+		"aaSorting": [[ 2, "desc" ]],//默认第几个排序
+		"bStateSave": true,//状态保存
+		"aoColumnDefs": [
+		  //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
+		  //{"orderable":false,"aTargets":[10]}// 制定列不参与排序
+		]
+	});
+}
+function cleanDataTable(){
+	if ($('.table-sort').hasClass('dataTable')) {
+		var dttable = $('.table-sort').dataTable();
+		dttable.fnClearTable(); //清空一下table
+		dttable.fnDestroy(); //还原初始化了的datatable
+	}
+}
 function loadData(){
 	var timeCycle = $("#time_cycle").val();
 	var year = $("#date_scope_year").val();
 	var month = $("#date_scope_month").val();
-	var url = "/report/getDataGroupByCycle?timeCycle="+timeCycle+"&year="+year+"&month="+month;
+	var url = "/report/getDataGroupByGoodsId?timeCycle="+timeCycle+"&year="+year+"&month="+month;
 	common.getData(url,function(data){
-		var resMap = data.result;
-		var x = resMap.x;
-		var y = resMap.y;
-		//res = [0,12.0,0,0,0,0];
-		debugger;
-		var cycle = "年";
-		if(timeCycle=="year"){
-			cycle = "年";
-		}else if(timeCycle=="month"){
-			cycle = "月";
-		}else if(timeCycle=="day"){
-			cycle = "日";
+		cleanDataTable();
+		var list = data.result;
+		var html="";
+		for(var i=0;i<list.length;i++){
+			var obj = list[i];
+			html+='<tr class="text-c" attrId="'+obj.id+'">\
+					<td>'+obj.countDate+'</td>\
+					<td>'+obj.goods.name+'</td>\
+					<td>'+obj.total+'</td>\
+				</tr>';
 		}
-		$('#container').highcharts({
-			chart: {
-				plotBorderWidth: 1,
-				marginLeft: 80
-			},
-			credits: {
-				enabled: false
-			},
-			navigation: {
-				buttonOptions: {
-					enabled: false
-				}
-			},
-			title: {
-				text: '销售总额统计',
-				style: {
-					"font-size": '16px',
-					"font-weight": 'bold'
-				}
-			},
-			xAxis: {
-				categories:x,
-				title:{
-					text: cycle
-				}
-			},
-			yAxis: {
-				type: 'logarithmic',
-				minorTickInterval: 1,
-				max:10000,
-				title:{
-					text: "总额"
-				}
-			},
-			series: [{
-				data:y,
-				pointStart: 0,
-				name:"总额/"+cycle
-			}]
-		});
+		$("#data").html(html);
+		sortDataTable();
 	});
-	
-	
 }
 
 

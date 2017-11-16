@@ -1,6 +1,5 @@
 package com.fullstack.report;
 
-import java.util.List;
 import java.util.Map;
 
 import org.junit.Test;
@@ -31,7 +30,7 @@ public class ReportTest extends AppTest{
     
     @Test
     public void groupByYearMonth() throws BusinessException{  
-    	Map<String,List<String>> res = service.groupByYearMonth();
+    	Map<String,Object> res = service.groupByYearMonthDay();
     	for(String key:res.keySet()){
     		System.out.println(key+"->"+res.get(key));
     	}

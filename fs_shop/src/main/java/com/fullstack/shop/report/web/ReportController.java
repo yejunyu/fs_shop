@@ -1,8 +1,5 @@
 package com.fullstack.shop.report.web;
 
-import java.util.List;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,17 +16,16 @@ import com.fullstack.shop.report.entity.Report;
 public class ReportController extends ServiceController {
 	
 	/**
-	 * 根据年月分组获取对应的数据
+	 * 根据年月日分组获取对应的数据
 	 * 用于筛选报表时的数据维度的选择
 	 * @param request
 	 * @param report
 	 * @return
 	 * @throws BusinessException
 	 */
-	@RequestMapping("groupByYearMonth")
-    public JSONObject groupByYearMonth(HttpServletRequest request,Report report) throws BusinessException {
-		Map<String,List<String>> res = reportService.groupByYearMonth();
-        return this.retResult(res);
+	@RequestMapping("groupByYearMonthDay")
+    public JSONObject groupByYearMonthDay(HttpServletRequest request,Report report) throws BusinessException {
+        return this.retResult(reportService.groupByYearMonthDay());
     }
 	
 	/**
@@ -46,5 +42,19 @@ public class ReportController extends ServiceController {
         return this.retResult(reportService.getDataGroupByCycle(timeCycle, year, month));
     }
 	
+	/**
+	 * 
+	 * @param request
+	 * @param report
+	 * @return
+	 * @throws BusinessException
+	 */
+	@RequestMapping("getDataGroupByGoodsId")
+    public JSONObject getDataGroupByGoodsId(HttpServletRequest request,Report report) throws BusinessException {
+		String timeCycle = RequestUtils.getParameter(request, "timeCycle");
+		String year = RequestUtils.getParameter(request, "year");
+		String month = RequestUtils.getParameter(request, "month");
+        return this.retResult(reportService.getDataGroupByGoodsId(timeCycle, year, month));
+    }
 	
 }

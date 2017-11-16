@@ -3,6 +3,7 @@ package com.fullstack.shop.report.entity;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.fullstack.common.persistence.DataEntity;
+import com.fullstack.shop.goods.entity.Goods;
 
 /**
  *  
@@ -18,7 +19,12 @@ public class Report extends DataEntity<Report> {
 	@TableField("goods_id")
 	private Integer goodsId;		// 商品id
 	private Integer type;		// 类型
-	protected String total;	// 总计
+	private String total;	// 总计
+	
+	
+	@TableField(exist=false)
+	private Goods goods;
+	
 	
 	@Override
 	public String toString(){
@@ -68,12 +74,22 @@ public class Report extends DataEntity<Report> {
 	public void setTotal(String total) {
 		this.total = total;
 	}
+	
+	public Goods getGoods() {
+		return goods;
+	}
+
+	public void setGoods(Goods goods) {
+		this.goods = goods;
+	}
+
 
 	
 	
-	
-	
-	
+
+
+
+
 	/**
 	 * 日销售总额报表
 	 */

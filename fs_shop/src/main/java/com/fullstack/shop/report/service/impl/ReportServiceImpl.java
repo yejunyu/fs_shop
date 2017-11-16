@@ -17,6 +17,8 @@ import com.fullstack.common.service.impl.BaseServiceImpl;
 import com.fullstack.common.utils.CommonUtils;
 import com.fullstack.common.utils.DateUtils;
 import com.fullstack.common.utils.MathUtils;
+import com.fullstack.shop.goods.entity.Goods;
+import com.fullstack.shop.goods.service.GoodsService;
 import com.fullstack.shop.order.entity.Order;
 import com.fullstack.shop.order.entity.OrderDetail;
 import com.fullstack.shop.order.service.OrderDetailService;
@@ -40,6 +42,8 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDao, Report> implem
     private OrderService<Order> orderService;
 	@Autowired  
     private OrderDetailService<OrderDetail> orderDetailService;
+	@Autowired  
+    private GoodsService<Goods> goodsService;
 	
 	
 	@Override
@@ -112,31 +116,53 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDao, Report> implem
 	}
 
 	@Override
-	public Map<String,List<String>> groupByYearMonth() throws BusinessException {
-		List<Map<String, String>> list = reportDao.groupByYearMonth();
-		Map<String,List<String>> res = new HashMap<String,List<String>>();
-		List<String> resVal;
+	public Map<String,Object> groupByYearMonthDay() throws BusinessException {
+		List<Map<String, String>> list = reportDao.groupByYearMonthDay();
+		Map<String,List<String>> resYearMoth = new HashMap<String,List<String>>();
+		Map<String,List<String>> resMothDay = new HashMap<String,List<String>>();
+		List<String> resMonth,resDay;
 		for(Map<String, String> map : list){
-			String resKey = map.get("year");
+			String year = map.get("year");
 			String month = map.get("month");
-			if(res.containsKey(resKey)){
-				resVal = res.get(resKey);
-				resVal.add(month);
-				res.put(resKey, resVal);
+			String day = map.get("day");
+			//year - months
+			if(resYearMoth.containsKey(year)){
+				resMonth = resYearMoth.get(year);
+				if(!resMonth.contains(month)){
+					resMonth.add(month);
+				}
+				resYearMoth.put(year, resMonth);
 			}else{
-				resVal = new ArrayList<String>();
-				resVal.add(month);
-				res.put(resKey, resVal);
+				resMonth = new ArrayList<String>();
+				resMonth.add(month);
+				resYearMoth.put(year, resMonth);
+			}
+			//month - days
+			if(resMothDay.containsKey(month)){
+				resDay = resMothDay.get(month);
+				if(!resDay.contains(day)){
+					resDay.add(day);
+				}
+				resMothDay.put(month, resDay);
+			}else{
+				resDay = new ArrayList<String>();
+				resDay.add(day);
+				resMothDay.put(month, resDay);
 			}
 		}
-		return res;
+		
+		Map<String,Object> resMap = new HashMap<String,Object>();
+		resMap.put("resYearMoth", resYearMoth);
+		resMap.put("resMothDay", resMothDay);
+		return resMap;
 	}
 
 	@Override
 	public Map<String, Object> getDataGroupByCycle(String timeCycle, String year, String month) throws BusinessException {
-		Report report = new Report();
 		List<Report> list = new ArrayList<Report>();
 		int defaultX = 0;	//x轴默认数据
+		Report report = new Report();
+		report.setType(Report.TYPE_ALL_OF_DAY);
 		if(Report.CYCLE_YEAR.equals(timeCycle)){
 			report.setCountDate(null);
 			list = reportDao.getDataGroupByYear(report);
@@ -175,6 +201,30 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDao, Report> implem
 		resMap.put("x", listX);
 		resMap.put("y", listY);
 		return resMap;
+	}
+
+	@Override
+	public List<Report> getDataGroupByGoodsId(String timeCycle, String year, String month)
+			throws BusinessException {
+		List<Report> list = new ArrayList<Report>();
+		Report report = new Report();
+		report.setType(Report.TYPE_GOODS_OF_DAY);
+		if(Report.CYCLE_YEAR.equals(timeCycle)){
+			report.setCountDate(null);
+			list = reportDao.getDataGroupByGoodsIdByYear(report);
+		}else if(Report.CYCLE_MONTH.equals(timeCycle)){
+			report.setCountDate(year);
+			list = reportDao.getDataGroupByGoodsIdByMonth(report);
+		}else if(Report.CYCLE_DAY.equals(timeCycle)){
+			report.setCountDate(year+"-"+month);
+			list = reportDao.getDataGroupByGoodsIdByDay(report);
+		}
+		for(Report r:list){
+			if(r.getGoodsId()!=null){
+				r.setGoods(goodsService.getInfoById(r.getGoodsId()));
+			}
+		}
+		return list;
 	}
 	
 }

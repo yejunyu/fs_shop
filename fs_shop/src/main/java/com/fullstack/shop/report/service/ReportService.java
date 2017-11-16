@@ -29,7 +29,9 @@ public interface ReportService<T> extends BaseService<Report> {
 	 * @return	key-year val-months
 	 * @throws BusinessException
 	 */
-	public Map<String,List<String>> groupByYearMonth() throws BusinessException;
+	public Map<String,Object> groupByYearMonthDay() throws BusinessException;
 	
 	public Map<String, Object> getDataGroupByCycle(String timeCycle,String year,String month) throws BusinessException;
+	
+	public List<Report> getDataGroupByGoodsId(String timeCycle,String year,String month) throws BusinessException;
 }
