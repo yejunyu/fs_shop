@@ -1,0 +1,46 @@
+{
+  "pages": [
+    "pages/shop/index/index",
+    "pages/shop/list/list",
+    "pages/shop/list/settlement/settlement",
+    "pages/shop/cart/cart",
+    "pages/shop/mine/mine",
+    "pages/shop/mine/address/address",
+    "pages/shop/mine/address/address/edit",
+    "pages/shop/detail/detail"
+  ],
+  "tabBar": {
+    "color": "#858585",
+    "selectedColor": "#008842",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/shop/index/index",
+        "iconPath": "images/icons/index.png",
+        "selectedIconPath": "images/icons/index_0.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/shop/list/list",
+        "iconPath": "images/icons/list.png",
+        "selectedIconPath": "images/icons/list_0.png",
+        "text": "列表"
+      },
+      
+      {
+        "pagePath": "pages/shop/mine/mine",
+        "iconPath": "images/icons/mine.png",
+        "selectedIconPath": "images/icons/mine_0.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#008842",
+    "navigationBarTitleText": "FStack点餐系统",
+    "navigationBarTextStyle": "white"
+  },
+  "debug": true
+}

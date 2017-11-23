@@ -1,0 +1,17 @@
+<!--index.wxml-->
+<scroll-view class="container" scroll-y="true" scroll-into-view="{{toView}}"  scroll-top="{{scrollTop}}" bindscroll="scroll">
+
+<swiper indicator-dots="{{indicatorDots}}"
+  autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" class="swiper-box" id="top">
+  <block wx:for-items="{{banner_list[0].banner}}" wx:key="index">
+    <swiper-item >
+      <image class="slide-image" src="{{item.pic_url}}"/>
+    </swiper-item>
+  </block>
+</swiper>
+
+ 
+
+
+
+</scroll-view>
