@@ -39,8 +39,10 @@ public class GoodsServiceImpl extends BaseServiceImpl<GoodsDao, Goods> implement
 				super.fieldsetUtils(goodsTemp.getFieldset(), goods);
 			}
 			GoodsImg goodsImg = goodsImgService.getLastGoodsImgByGoodsId(goods.getId());
-			goods.getExtraData().put(ImgUtils.IMG_KEY, 
-					ImgUtils.commonPathUtils(PropertiesUtil.getGoodsImgLoadPath(),goodsImg.getPath(),goodsImg.getName()));
+			if(goodsImg!=null){
+				goods.getExtraData().put(ImgUtils.IMG_KEY, 
+						ImgUtils.commonPathUtils(PropertiesUtil.getGoodsImgLoadPath(),goodsImg.getPath(),goodsImg.getName()));
+			}
 		}
 		return page;
 	}
