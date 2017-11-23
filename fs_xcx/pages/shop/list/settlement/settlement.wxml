@@ -26,86 +26,13 @@
         <view class="txt"><text >已选商品</text></view>
       </view>
       <view class="list">
-          <view class="detail">
-            <view class="title"><text>番茄鸡蛋</text></view>
-            <view class="count"><text>x1</text></view>
-            <view class="price"><text>￥15</text></view>
+        <view wx:for="{{cartlist}}" wx:for-index="i" wx:for-item="goods" wx:key="unique">
+          <view class="detail"data-goods="{{goods}}" data-price="{{goods.price}}" data-goodsid="{{goods.id}}" data-name="{{goods.name}}" data-img="{{goods.extraData.imgPath}}">
+            <view class="title"><text>{{goods.name}}</text></view>
+            <view class="count"><text>x{{goods.count}}</text></view>
+            <view class="price"><text>￥{{goods.price}}</text></view>
           </view>
-          <view class="detail">
-            <view class="title"><text>酸菜鱼</text></view>
-            <view class="count"><text>x1</text></view>
-            <view class="price"><text>￥42</text></view>
-          </view>
-          <view class="detail">
-            <view class="title"><text>农家小炒肉</text></view>
-            <view class="count"><text>x1</text></view>
-            <view class="price"><text>￥18</text></view>
-          </view>
-          <view class="detail">
-            <view class="title"><text>农家小炒肉</text></view>
-            <view class="count"><text>x1</text></view>
-            <view class="price"><text>￥18</text></view>
-          </view>
-          <view class="detail">
-            <view class="title"><text>农家小炒肉</text></view>
-            <view class="count"><text>x1</text></view>
-            <view class="price"><text>￥18</text></view>
-          </view>
-          <view class="detail">
-            <view class="title"><text>农家小炒肉</text></view>
-            <view class="count"><text>x1</text></view>
-            <view class="price"><text>￥18</text></view>
-          </view>
-          <view class="detail">
-            <view class="title"><text>农家小炒肉</text></view>
-            <view class="count"><text>x1</text></view>
-            <view class="price"><text>￥18</text></view>
-          </view>
-          <view class="detail">
-            <view class="title"><text>农家小炒肉</text></view>
-            <view class="count"><text>x1</text></view>
-            <view class="price"><text>￥18</text></view>
-          </view>
-          <view class="detail">
-            <view class="title"><text>农家小炒肉</text></view>
-            <view class="count"><text>x1</text></view>
-            <view class="price"><text>￥18</text></view>
-          </view>
-          <view class="detail">
-            <view class="title"><text>农家小炒肉</text></view>
-            <view class="count"><text>x1</text></view>
-            <view class="price"><text>￥18</text></view>
-          </view>
-          <view class="detail">
-            <view class="title"><text>农家小炒肉</text></view>
-            <view class="count"><text>x1</text></view>
-            <view class="price"><text>￥18</text></view>
-          </view>
-          <view class="detail">
-            <view class="title"><text>农家小炒肉</text></view>
-            <view class="count"><text>x1</text></view>
-            <view class="price"><text>￥18</text></view>
-          </view>
-          <view class="detail">
-            <view class="title"><text>农家小炒肉</text></view>
-            <view class="count"><text>x1</text></view>
-            <view class="price"><text>￥18</text></view>
-          </view>
-          <view class="detail">
-            <view class="title"><text>农家小炒肉</text></view>
-            <view class="count"><text>x1</text></view>
-            <view class="price"><text>￥18</text></view>
-          </view>
-          <view class="detail">
-            <view class="title"><text>农家小炒肉</text></view>
-            <view class="count"><text>x1</text></view>
-            <view class="price"><text>￥18</text></view>
-          </view>
-          <view class="detail">
-            <view class="title"><text>农家小炒肉</text></view>
-            <view class="count"><text>x1</text></view>
-            <view class="price"><text>￥18</text></view>
-          </view>
+        </view>
       </view>
     </view>
     <view class="extra">
@@ -130,7 +57,7 @@
     </view>
 </view>
 <view class="pay {{payFlag}}" > 
-	<text class="total">￥ <text class="txt">199.80</text></text>
+	<text class="total">￥ <text class="txt">{{cartTotal}}</text></text>
 	<text class="payoff" catchtap="settlement">去支付</text>
 </view>
 

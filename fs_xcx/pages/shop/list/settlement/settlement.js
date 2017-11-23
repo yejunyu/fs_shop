@@ -10,6 +10,8 @@ Page({
     payFlag:"show",
     listpopup: [],
     listaddress:[],
+    cartlist:[],
+    cartTotal:0,
     address:null,
     time0:"立即送出",
     time1:"预计12：00送达",
@@ -34,6 +36,8 @@ Page({
         let addr = res.data.result.records[0];
         that.setData({
           listaddress: res.data.result.records,
+          cartlist:wx.getStorageSync('key_shop_cart'),
+          cartTotal: wx.getStorageSync('key_shop_cart_total'),
           address: addr
         });
         wx.setStorage({

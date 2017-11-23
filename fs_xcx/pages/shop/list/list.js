@@ -158,6 +158,14 @@ Page({
     });
   },
   settlement(){
+    wx.setStorage({
+      key: "key_shop_cart",
+      data: this.data.cart
+    });
+    wx.setStorage({
+      key: "key_shop_cart_total",
+      data: this.data.cartTotal
+    });
     wx.navigateTo({
       url: 'settlement/settlement'
     });
