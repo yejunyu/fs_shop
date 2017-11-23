@@ -10,7 +10,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "1.6.6",
 	"appid": "wx8f3f2adb2038cc7c",
-	"projectname": "FStack_shop",
+	"projectname": "fs_shop",
 	"condition": {
 		"search": {
 			"current": -1,

@@ -13,6 +13,7 @@ Page({
     address:null,
     time0:"立即送出",
     time1:"预计12：00送达",
+    listtimes:[],
     dtype: "商家配送",
     paytype: "在线支付",
     defaults:""
@@ -42,6 +43,18 @@ Page({
         wx.setStorage({
           key: "key_shop_address",
           data: addr
+        });
+      }
+    });
+
+    //加载可以选择配送的时间
+    wx.request({
+      url: app.common.basePath + "/common/getSendTimeList", //
+      success: function (res) {
+        let time1 = "预计" + res.data.result[0]+"送达";
+        that.setData({
+          listtimes: res.data.result,
+          time1: time1
         });
       }
     });
@@ -101,10 +114,42 @@ Page({
     });
   },
   timeChange(){
-
+    this.setData({
+      payFlag: "hide",
+      popupFlag: "show",
+      popupTitle: "请选择到达的时间",
+      popuptype: "time",
+      listpopup: this.data.listtimes
+    });
+  },
+  popupSelect(e) {
+    var val = e.currentTarget.dataset.val;
+    var popuptype = e.currentTarget.dataset.popuptype;
+    if (popuptype == "time"){
+      this.setData({
+        payFlag: "show",
+        popupFlag: "hide",
+        time0: "按时送出",
+        time1: val + "送达"
+      });
+    } else if (popuptype == "dtype"){
+      this.setData({
+        payFlag: "show",
+        popupFlag: "hide",
+        dtype: val
+      });
+    }
+    
   },
   dtypeChange(){
-
+    var list = ["商家配送","门店自取"];
+    this.setData({
+      payFlag: "hide",
+      popupFlag: "show",
+      popupTitle: "请选择配送方式",
+      popuptype: "dtype",
+      listpopup: list
+    });
   },
   payChange(){
 
@@ -116,7 +161,8 @@ Page({
 
   },
   cancel(){
-    that.setData({
+    this.setData({
+      payFlag: "show",
       popupFlag: "hide"
     });
   }

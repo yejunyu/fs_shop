@@ -1,9 +1,12 @@
+
 package com.fullstack.common.utils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.commons.lang3.time.DateFormatUtils;
 
@@ -85,14 +88,62 @@ public class DateUtils {
 		return rightNow.getActualMaximum(Calendar.DAY_OF_MONTH);
 	}
 	
+	/**
+	 * 根据当前时间返回派送时间列表
+	 * @return
+	 */
+	@SuppressWarnings("deprecation")
+	public static List<String> getSendTimeList(){
+		List<String> list = new ArrayList<String>();
+		Calendar nowTime = Calendar.getInstance();
+		//立即送出时间
+		Date dt = nowTime.getTime();
+		if(dt.getHours()<6){
+			nowTime.set(Calendar.MINUTE, 00);
+			nowTime.set(Calendar.HOUR_OF_DAY, 6);
+		}else{
+			nowTime.add(Calendar.MINUTE, 30);
+		}
+		dt = nowTime.getTime();
+		list.add(DateUtils.numZero(dt.getHours())+":"+DateUtils.numZero(dt.getMinutes()));
+		
+		//调整规范下一个时间
+		int min = dt.getMinutes();
+		if(0<min && min<=20){
+			nowTime.set(Calendar.MINUTE, 20);
+		}else if(20<min && min<=40){
+			nowTime.set(Calendar.MINUTE, 40);
+		}else if(40<min){
+			nowTime.set(Calendar.MINUTE, 00);
+			nowTime.add(Calendar.HOUR_OF_DAY, 1);
+		}
+		//开始往后生成相应的时间
+		for(int i=0;i<60;i++){
+			nowTime.add(Calendar.MINUTE, 20);
+			dt = nowTime.getTime();
+			if(dt.getHours()<6){
+				break;
+			}
+			list.add(DateUtils.numZero(dt.getHours())+":"+DateUtils.numZero(dt.getMinutes()));
+		}
+		return list;
+	}
 	
-	
+	public static String numZero(int num){
+		if(num<10){
+			return "0"+num;
+		}else{
+			return num+"";
+		}
+	}
 	
 	
 	public static void main(String[] args) {
-		for(int i=1;i<=12;i++){
-			System.out.println(getDays("2017-"+i));
-		}
+		System.out.println(getSendTimeList());
+		System.out.println(getSendTimeList().size());
+//		for(int i=1;i<=12;i++){
+//			System.out.println(getDays("2017-"+i));
+//		}
 		
 //		System.out.println(getYesterdayDate(parsePatterns[1]));
 //		for(int i=0;i<=10;i++){

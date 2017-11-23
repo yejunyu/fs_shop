@@ -8,12 +8,12 @@
         <text class="address_0">{{address.address}} {{address.detailAddress}}</text>
         <text class="address_1">{{address.name}}  {{address.phone}}</text>
       </view>
-      <view class="time">
+      <view class="time" catchtap="timeChange">
         <image class="img_time" src="../../../../images/time.jpg"></image>
         <text class="bracket_r" > > </text>
         <text class="txt">{{time0}} [<text class="fs16">{{time1}}</text>]</text>
       </view>
-      <view class="type">
+      <view class="type" catchtap="dtypeChange">
         <image class="img_delivery" src="../../../../images/delivery.jpg"></image>
         <text class="bracket_r" > > </text>
         <text class="txt">配送方式 [<text class="fs16">{{dtype}}</text>]</text>
@@ -137,13 +137,13 @@
 <view class="popup {{popupFlag}}">
   <view class="content">
     <view class="titles">
-      <text class="txt">已选商品</text>
+      <text class="txt">{{popupTitle}}</text>
     </view>
     <view class="details">
       <scroll-view scroll-y class="list">
         <view wx:for="{{listpopup}}" wx:for-index="i" wx:for-item="item" wx:key="unique">
-          <view class="detail">
-            <text class="txt">{{item.name}}</text>
+          <view class="detail" data-val="{{item}}" data-popuptype="{{popuptype}}" catchtap="popupSelect">
+            <text class="txt">{{item}}</text>
           </view>
         </view>
       </scroll-view>
