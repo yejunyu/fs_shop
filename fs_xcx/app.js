@@ -4,12 +4,35 @@ App({
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
-
+    wx.setStorageSync('logs', logs);
     // 登录
     wx.login({
-      success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
+      success: function (res) {
+        if (res.code) {
+          //发起网络请求
+          var url = 'https://api.weixin.qq.com/sns/jscode2session';
+          var appid = 'wx8f3f2adb2038cc7c'; //填写微信小程序appid  
+          var secret = 'f3a8128894edb194de71e4cfabaecefb'; //填写微信小程序secret  
+          url += '?appid=' + appid + '&secret=' + secret + '&grant_type=authorization_code&js_code=' + res.code;
+          wx.request({
+            url: url,
+            success: function (res) {
+              console.log('openid-->'+res.data.openid) //获取openid  
+              wx.setStorageSync('openid', res.data.openid);
+              var d = { 'wxId': res.data.openid};
+              var url = 'http://192.168.1.120:8888' + "/member/createMemberByWxId";
+              wx.request({
+                url: url, //
+                data: d,
+                success: function (res) {
+                  console.log("微信用户保存成功");
+                }
+              });
+            }
+          })  
+        } else {
+          console.log('获取用户登录态失败！' + res.errMsg)
+        }
       }
     })
     // 获取用户信息
@@ -20,7 +43,7 @@ App({
           wx.getUserInfo({
             success: res => {
               // 可以将 res 发送给后台解码出 unionId
-              this.globalData.userInfo = res.userInfo
+              this.globalData.userInfo = res.userInfo;
 
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
               // 所以此处加入 callback 以防止这种情况
@@ -51,8 +74,8 @@ App({
     return ndata;
   },
   globalData: {
-    
-    userInfo: null
+    userInfo: null,
+    openid:''
   },
   common:{
     basePath:"http://192.168.1.120:8888"

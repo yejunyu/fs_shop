@@ -11,7 +11,7 @@
       <view class="time" catchtap="timeChange">
         <image class="img_time" src="../../../../images/time.jpg"></image>
         <text class="bracket_r" > > </text>
-        <text class="txt">{{time0}} [<text class="fs16">{{time1}}</text>]</text>
+        <text class="txt">{{time0}} [<text class="fs16">预计{{time1}}送达</text>]</text>
       </view>
       <view class="type" catchtap="dtypeChange">
         <image class="img_delivery" src="../../../../images/delivery.jpg"></image>
@@ -48,9 +48,9 @@
           <text class="txt_1 gainsboro">未选择</text>
           <text class="bracket_r"> > </text>
         </view> -->
-        <view class="view">
+        <view class="view" catchtap="remarksChange">
           <text class="txt_0">备注/说明</text>
-          <text class="txt_1 gainsboro">口味/偏好等要求</text>
+          <text class="txt_1 gainsboro">{{remarkstips}}</text>
           <text class="bracket_r"> > </text>
         </view>
       </view>
@@ -58,7 +58,7 @@
 </view>
 <view class="pay {{payFlag}}" > 
 	<text class="total">￥ <text class="txt">{{cartTotal}}</text></text>
-	<text class="payoff" catchtap="settlement">去支付</text>
+	<text class="payoff" catchtap="pay">去支付</text>
 </view>
 
 <view class="popup {{popupFlag}}">
@@ -67,16 +67,19 @@
       <text class="txt">{{popupTitle}}</text>
     </view>
     <view class="details">
-      <scroll-view scroll-y class="list">
+      <scroll-view scroll-y class="list {{popupContent ? 'show' : 'hide'}}">
         <view wx:for="{{listpopup}}" wx:for-index="i" wx:for-item="item" wx:key="unique">
           <view class="detail" data-val="{{item}}" data-popuptype="{{popuptype}}" catchtap="popupSelect">
             <text class="txt">{{item}}</text>
           </view>
         </view>
       </scroll-view>
+      <view class="{{popupContent ? 'hide' : 'show'}}">
+        <textarea data-name="remarks" placeholder="请输入给店家的留言" bindblur="textareablur" type='text' class='inptxt'></textarea>
+      </view>
     </view>
   </view>
   <view class="cancel" catchtap="cancel"> 
-    <text class="txt">取消</text>
+    <text class="txt">{{cancels}}</text>
   </view>
 </view>

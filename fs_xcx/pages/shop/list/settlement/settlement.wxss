@@ -251,6 +251,12 @@
   width: 100%;
   height: 88%;
 }
+.popup .content .details .inptxt{
+  margin-top: 5px;
+  border: 1px solid #ddd;
+  width: 95%;
+  height: 100px;
+}
 .popup .content .details .list{
   width: 100%;
   height: 88%;

@@ -36,6 +36,24 @@ public class MemberController extends ServiceController {
         return this.retResult(member);
     }
 	/**
+	 * 根据用户的微信开发id生成用户信息
+	 * @param request
+	 * @return
+	 * @throws BusinessException
+	 */
+	@RequestMapping("createMemberByWxId")
+    public JSONObject createMemberByWxId(HttpServletRequest request) throws BusinessException {
+		String wxId = RequestUtils.getParameter(request, "wxId");
+		Member member = new Member();
+		member.setWxId(wxId);
+		Member m = memberService.getByWxId(wxId);
+		if(m==null){
+			member.setName("微信用户"+(memberService.getCount(new Member())+1));
+			memberService.createMember(member);
+		}
+        return this.retResult(member);
+    }
+	/**
 	 * 用户列表
 	 * @param request
 	 * @return
