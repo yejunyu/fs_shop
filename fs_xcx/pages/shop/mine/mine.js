@@ -1,66 +1,72 @@
 // pages/shop/mine/mine.js
+var app = getApp()
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-  
+    userInfo: wx.getStorageSync('userinfo'),
+    mine_list: [
+      {
+        "pic_url": "/images/icons/mine_01.png",
+        "title": "我的订单",
+        "key": "order",
+      },
+      {
+        "pic_url": "/images/icons/mine_02.png",
+        "title": "收货地址",
+        "key": "address",
+      },
+      {
+        "pic_url": "/images/icons/mine_02.png",
+        "title": "收货地址",
+        "key": "address",
+      },
+      {
+        "pic_url": "/images/icons/mine_02.png",
+        "title": "收货地址",
+        "key": "address",
+      }
+    ],
+    item: {
+      signinHidden: false,
+      userlocal: {
+        nickName: '',
+        nickPwd: ''
+      },
+    }
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
-  
-  },
+    // 页面初始化 options为页面跳转所带来的参数
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
+  },
   onReady: function () {
-  
-  },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
+    // 页面渲染完成
+  },
   onShow: function () {
-  
-  },
+    if (this.data.userInfo == '') {
+      this.setData({
+        'item.signinHidden': false
+      })
+    }
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
+  },
   onHide: function () {
-  
+    // 页面隐藏
   },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
   onUnload: function () {
-  
+    // 页面关闭
   },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
+  menuclick(e){
+    let k = e.currentTarget.dataset.key;
+    console.log("--->"+k);
+    if(k=="order"){
+      wx.navigateTo({
+        url: 'order/list'
+      });
+    } else if (k == "address"){
+      wx.navigateTo({
+        url: 'address/address'
+      });
+    }
+    
   }
 })

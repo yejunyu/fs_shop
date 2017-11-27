@@ -1,0 +1,16 @@
+
+<view class="">
+  <view class="content">
+    <view class="list">
+      <view wx:for="{{list}}" wx:for-index="i" wx:for-item="item" wx:key="unique">
+        <view class="order" data-address="{{item}}" catchtap="addrSelect">
+          <view> <image class="img_l" src="../../../../images/icons/order_01.png"></image> </view>
+          <view class="v_r"> > </view>
+          <text class="titles">{{item.extraData.details}}</text>
+          <text class="times">下单时间：{{item.orderTime}}</text>
+          <text class="totals" decode="{{true}}">&nbsp;&nbsp;&nbsp;数量：{{item.count}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;总额：￥{{item.total}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

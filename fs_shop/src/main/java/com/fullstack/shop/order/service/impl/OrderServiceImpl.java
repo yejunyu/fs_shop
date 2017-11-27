@@ -58,7 +58,9 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderDao, Order> implement
 		for(Order order:page.getRecords()){
 			order.getExtraData().put("orderDelivery", orderDeliveryService.getInfoByOrderId(order.getId()));
 			List<OrderDetail> list = orderDetailService.getListByOrderId(order.getId());
-			order.getExtraData().put("details", this.getDetails(list));
+			if(list.size()>0){
+				order.getExtraData().put("details", this.getDetails(list));
+			}
 		}
 		return page;
 	}
@@ -77,6 +79,9 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderDao, Order> implement
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED,rollbackFor={BusinessException.class})
 	public boolean createOrder(String wxId,Integer memberAddresId,Order order) throws BusinessException {
+		if(order.getListOrderDetail().size()==0){
+			throw new BusinessException(9002002);
+		}
 		//1.创建订单
 		order.setNumber(this.getOrderNumber());
 		order.setOrderTime(DateUtils.getDate());

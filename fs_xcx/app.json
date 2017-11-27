@@ -5,6 +5,8 @@
     "pages/shop/list/settlement/settlement",
     "pages/shop/cart/cart",
     "pages/shop/mine/mine",
+    "pages/shop/mine/order/list",
+    "pages/shop/mine/order/detail/detail",
     "pages/shop/mine/address/address",
     "pages/shop/mine/address/address/edit",
     "pages/shop/detail/detail"

@@ -1,0 +1,45 @@
+/* pages/shop/mine/order/list.wxss */
+.content{
+  height: 100%;
+  width: 100%;
+  padding-bottom: 50px;
+}
+.list{
+  height: 100%;
+  width: 100%;
+}
+.list .order{
+  height: 70px;
+  width: 100%;
+  border-bottom: 1px solid gainsboro;
+  padding: 10px 0px 10px 0px;
+  color: #666;
+}
+.list .order .img_l{
+  float: left;
+  margin: 15px 5px 10px 5px;
+  width: 45px;
+  height: 45px;
+}
+.list .order .v_r{
+  float: right;
+  margin: 15px 5px 10px 5px;
+  font-size: 30px;
+  color: darkgray;
+}
+.list .order .titles{
+  float: left;
+  width: 70%;
+  color: black;
+  font-weight:  bolder;
+}
+.list .order .times{
+  float: left;
+  width: 70%;
+  font-size: 16px;
+}
+.list .order .totals{
+  float: left;
+  width: 70%;
+  font-size: 16px;
+}

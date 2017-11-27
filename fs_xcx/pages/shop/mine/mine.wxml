@@ -1,2 +1,19 @@
 <!--pages/shop/mine/mine.wxml-->
-<text>pages/shop/mine/mine.wxml</text>
+<view class="mine-box">
+    <view class="user">
+        <view class="user-pic"><image src="{{userInfo.avatarUrl}}"></image></view>
+        <view class="user-name">{{userInfo.nickName}}</view>
+        <view class="user-text">
+            <text>积分：0</text>
+        </view>
+    </view>
+
+    <view class="menu">
+        <ul>
+        <block wx:for="{{mine_list}}" wx:for-item="mine" wx:key="index" >
+            <li catchtap="menuclick" data-key="{{mine.key}}" ><image src="{{mine.pic_url}}"></image><span>{{mine.title}}</span></li>
+        </block>
+        </ul>
+    </view>
+</view>
+

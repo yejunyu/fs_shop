@@ -50,6 +50,8 @@ public class MemberController extends ServiceController {
 		if(m==null){
 			member.setName("微信用户"+(memberService.getCount(new Member())+1));
 			memberService.createMember(member);
+		}else{
+			member = m;
 		}
         return this.retResult(member);
     }

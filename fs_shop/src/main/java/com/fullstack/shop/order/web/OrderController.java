@@ -32,7 +32,7 @@ public class OrderController extends ServiceController {
 	@RequestMapping("list")
     public JSONObject list(HttpServletRequest request,Order order) throws BusinessException {
 		Page<Order> page = RequestUtils.getPage(request);
-		order.setCreateBy(null);
+//		order.setCreateBy(null);
 		EntityWrapper<Order> e = this.entityInit(order);
 		page = orderService.findPage(page,e);
         return this.retResult(page);
