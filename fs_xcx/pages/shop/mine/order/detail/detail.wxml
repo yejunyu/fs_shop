@@ -49,7 +49,7 @@
           <text class="txt_0" style='margin-left:10px;'>备注/说明：</text>
           <text class="txt_1 "></text>
         </view>
-        <textarea class="remarks_txt" auto-height value="  {{order.remarks}}"></textarea>
+        <textarea class="remarks_txt" disabled="true" auto-height value="  {{order.remarks}}"></textarea>
       </view>
     </view>
 </view>
