@@ -207,12 +207,18 @@ Page({
     data['memberAddressId'] = this.data.address.id;
     data['wxId'] = wx.getStorageSync('openid');
     data['remarks'] = this.data.remarks;
-    debugger;
+    data['deliveryDate'] = this.data.time1;
+    data['deliveryType'] = this.data.dtype;
+    data['payMethod'] = this.data.paytype;
+    
     wx.request({
       url: app.common.basePath + "/order/create", //
       data: data,
       success: function (res) {
-        
+        wx.showToast({
+          title: res.data.msg,
+          duration: 2000
+        });
       }
     });
 

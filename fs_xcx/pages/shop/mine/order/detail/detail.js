@@ -1,35 +1,22 @@
-// pages/shop/mine/order/list.js
-var app = getApp();
+// pages/shop/mine/order/detail/detail.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    list:[]
+    order:{}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var url = app.common.basePath + "/order/list?pageNum=-1";
-    var d = { 'pageNum': '-1', 'createBy': wx.getStorageSync('userid')};
-    var that = this;
-    wx.request({
-      url: url, //
-      data:d,
-      success: function (res) {
-        var list = res.data.result.records;
-        list.forEach(function (obj, i) {
-          if (obj.extraData.details.length > 15) {
-            obj.extraData.details = obj.extraData.details.substring(0,13)+'...';
-          }
-        });
-        that.setData({
-          list: list
-        });
-      }
+    var order = wx.getStorageSync('key_mine_order_detail');
+    
+    this.setData({
+      order: order,
+      list: order.listOrderDetail
     });
   },
 
@@ -80,15 +67,5 @@ Page({
    */
   onShareAppMessage: function () {
   
-  },
-  orderdetail(e){
-    var d = e.currentTarget.dataset.order;
-    wx.setStorage({
-      key: "key_mine_order_detail",
-      data: d
-    });
-    wx.navigateTo({
-      url: 'detail/detail'
-    });
   }
 })

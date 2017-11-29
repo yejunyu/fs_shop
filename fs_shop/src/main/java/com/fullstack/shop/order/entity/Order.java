@@ -23,11 +23,13 @@ public class Order extends DataEntity<Order> {
 	private String tableNo;		// 台号
 	private Integer persons;		// 人数
 	@TableField("pay_method")
-	protected Integer payMethod;	// 支付方式
+	private String payMethod;	// 支付方式
 	@TableField("order_time")
 	private String orderTime;		// 下单时间
 	@TableField("delivery_date")
 	private String deliveryDate;		// 配送时间
+	@TableField("delivery_type")
+	private String deliveryType;		// 配送方式
 	private Integer status;		// 状态
 	private String total;		// 总计
 	
@@ -89,11 +91,11 @@ public class Order extends DataEntity<Order> {
 		this.persons = persons;
 	}
 
-	public Integer getPayMethod() {
+	public String getPayMethod() {
 		return payMethod;
 	}
 
-	public void setPayMethod(Integer payMethod) {
+	public void setPayMethod(String payMethod) {
 		this.payMethod = payMethod;
 	}
 
@@ -171,6 +173,14 @@ public class Order extends DataEntity<Order> {
 		return statusDis;
 	}
 
+
+	public String getDeliveryType() {
+		return deliveryType;
+	}
+
+	public void setDeliveryType(String deliveryType) {
+		this.deliveryType = deliveryType;
+	}
 //	public void setStatusDis(String statusDis) {
 //		this.statusDis = statusDis;
 //	}

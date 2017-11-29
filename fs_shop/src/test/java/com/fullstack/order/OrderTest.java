@@ -38,7 +38,7 @@ public class OrderTest extends AppTest{
     	entity.setNumber(service.getOrderNumber());
     	entity.setTableNo("001");
     	entity.setPersons(10);
-    	entity.setPayMethod(1);
+    	entity.setPayMethod(1+"");
     	entity.setOrderTime(DateUtils.getDate());
     	entity.setDeliveryDate(DateUtils.getDate());
     	entity.setTotal(1000+"");

@@ -1,0 +1,58 @@
+<!--pages/shop/mine/order/detail/detail.wxml-->
+<view class="">
+  <view class="content">
+    <view class="delivery">
+      <view class="address" catchtap="addrChange">
+        <image class="img_timg" src="../../../../../images/timg.jpg"></image>
+        <text class="address_0">{{order.orderDelivery.deliveryAddress}} {{address.detailAddress}}</text>
+        <text class="address_1">{{order.orderDelivery.customer}}  {{order.orderDelivery.contactWay}}</text>
+      </view>
+      <view class="time" catchtap="timeChange">
+        <image class="img_time" src="../../../../../images/time.jpg"></image>
+        <text class="txt">配送时间 [<text class="fs16">预计{{order.deliveryDate}}送达</text>]</text>
+      </view>
+      <view class="type" catchtap="dtypeChange">
+        <image class="img_delivery" src="../../../../../images/delivery.jpg"></image>
+        <text class="txt">配送方式 [<text class="fs16">{{order.deliveryType}}</text>]</text>
+      </view>
+    </view>
+
+    <view class="details">
+      <view class="titles">
+        <view class='line'></view>
+        <view class="txt"><text >已选商品</text></view>
+      </view>
+      <view class="list">
+        <view wx:for="{{list}}" wx:for-index="i" wx:for-item="goods" wx:key="unique">
+          <view class="detail"data-goods="{{goods}}" data-price="{{goods.price}}" data-goodsid="{{goods.id}}" data-name="{{goods.name}}" data-img="{{goods.extraData.imgPath}}">
+            <view class="title"><text>{{goods.goods.name}}</text></view>
+            <view class="count"><text>x{{goods.count}}</text></view>
+            <view class="price"><text>￥{{goods.price}}</text></view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="extra">
+        <view class="view">
+          <text class="txt_0">支付方式</text>
+          <text class="txt_1 ">{{order.payMethod}}</text>
+          <!-- <text class="bracket_r"> > </text> -->
+        </view>
+        <!-- 暂时注释餐具数量 -->
+        <!-- 
+        <view class="view">
+          <text class="txt_0">餐具数量</text>
+          <text class="txt_1 gainsboro">未选择</text>
+          <text class="bracket_r"> > </text>
+        </view> -->
+        <view class="view">
+          <text class="txt_0" style='margin-left:10px;'>备注/说明：</text>
+          <text class="txt_1 "></text>
+        </view>
+        <textarea class="remarks_txt" auto-height value="  {{order.remarks}}"></textarea>
+      </view>
+    </view>
+</view>
+
+
+

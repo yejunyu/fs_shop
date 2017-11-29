@@ -56,8 +56,9 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderDao, Order> implement
 		wrapper.orderBy("create_date", false);
 		page = super.findPage(page, wrapper);
 		for(Order order:page.getRecords()){
-			order.getExtraData().put("orderDelivery", orderDeliveryService.getInfoByOrderId(order.getId()));
+			order.setOrderDelivery(orderDeliveryService.getInfoByOrderId(order.getId()));
 			List<OrderDetail> list = orderDetailService.getListByOrderId(order.getId());
+			order.setListOrderDetail(list);
 			if(list.size()>0){
 				order.getExtraData().put("details", this.getDetails(list));
 			}

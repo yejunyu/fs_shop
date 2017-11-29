@@ -1,0 +1,170 @@
+/* pages/shop/mine/order/detail/detail.wxss */
+/* pages/shop/list/settlement/settlement.wxss */
+.content{
+  height: 100%;
+  width: 100%;
+  background-color: ghostwhite;
+  padding-top:10px;
+}
+.delivery{
+  height: 30%;
+  width: 95%;
+  margin: 0px 10px 10px 10px;
+}
+.delivery  .circle_r{
+  width: 10%;
+  float: right;
+  margin: 10px 10px 0px 0px;
+}
+.delivery .address{
+  width: 100%;
+  height: 70px;
+  text-align: center;
+  background-color: #fff;
+  border-bottom: 1px solid gainsboro;
+  padding-top: 5px;
+}
+.delivery .img_timg{
+  width: 30px;
+  height: 30px;
+  float: left;
+  margin: 15px 5px 10px 10px;
+}
+.delivery .img_time{
+  width: 23px;
+  height: 23px;
+  float: left;
+  margin: 10px 8px 0px 13px;
+}
+.delivery .img_delivery{
+  width: 30px;
+  height: 30px;
+  float: left;
+  margin: 5px 5px 0px 10px;
+}
+.delivery .address .address_0{
+  float: left;
+  height: 40px;
+  width: 70%;
+  font-weight: bolder;
+  text-align: left;
+  font-size: 18px;
+}
+.delivery .address .address_1{
+  float: left;
+  width: 70%;
+  text-align: left;
+  font-size: 18px;
+}
+.delivery .time{
+  width: 100%;
+  height: 45px;
+  background-color: white;
+  text-align: center;
+  border-bottom: 1px solid gainsboro;
+}
+.delivery .time .txt{
+  float: left;
+  width: 70%;
+  margin-top: 10px;
+  text-align: left;
+}
+.delivery .type{
+  width: 100%;
+  height: 45px;
+  background-color: white;
+  text-align: center;
+}
+.delivery .type .txt{
+  float: left;
+  margin-top: 10px;
+  width: 70%;
+  text-align: left;
+}
+.details{
+  width: 95%;
+  margin: 0px 10px 10px 10px;
+  border-radius: 5% ;
+}
+.details .titles{
+  height: 40px;
+  width: 100%;
+  background-color: lavender;
+}
+.details .titles .line{
+  float: left;
+  height: 20px;
+  border-bottom: 1px solid gainsboro;
+  width: 100%;
+}
+.details .titles .txt{
+  width: 30%;
+  color: black;
+  margin: 8px 20px 0px 20px;
+	position: absolute;
+  z-index: 2;
+  text-align: center;
+  background-color: lavender;
+}
+.details .list .detail{
+  width: 100%;
+  height: 30px;
+  background-color: #fff;
+  padding-top: 10px;
+  border-bottom: 1px solid snow;
+  font-size: 16px;
+}
+.details .list .detail .title{
+  float: left;
+  width: 50%;
+  padding-left: 10px;
+}
+.details .list .detail .count{
+  float: left;
+  width: 10%;
+}
+.details .list .detail .price{
+  float: right;
+  width: 20%;
+}
+
+/* 额外属性 */
+.extra{
+  height: 30%;
+  width: 95%;
+  margin: 0px 10px 10px 10px;
+}
+.extra .view{
+  width: 100%;
+  height: 45px;
+  background-color: white;
+  text-align: center;
+  border-bottom: 1px solid gainsboro;
+}
+.extra .view .txt_0{
+  float: left;
+  width: 30%;
+  margin-top: 10px;
+}
+.extra .view .txt_1{
+  float: left;
+  width: 60%;
+  margin-top: 10px;
+  text-align: right;
+  font-size: 16px;
+}
+.extra .remarks_txt {
+  background-color: white;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  font-size: 18px;
+  color: darkgray;
+}
+
+.fs16{
+  font-size: 16px;
+}
+.gainsboro{
+  color: gainsboro;
+}
