@@ -3,6 +3,7 @@ var app = getApp()
 Page({
   data: {
     userInfo: wx.getStorageSync('userinfo'),
+    fromname:"mine",
     mine_list: [
       {
         "pic_url": "/images/icons/mine_01.png",
@@ -13,25 +14,8 @@ Page({
         "pic_url": "/images/icons/mine_02.png",
         "title": "收货地址",
         "key": "address",
-      },
-      {
-        "pic_url": "/images/icons/mine_02.png",
-        "title": "收货地址",
-        "key": "address",
-      },
-      {
-        "pic_url": "/images/icons/mine_02.png",
-        "title": "收货地址",
-        "key": "address",
       }
-    ],
-    item: {
-      signinHidden: false,
-      userlocal: {
-        nickName: '',
-        nickPwd: ''
-      },
-    }
+    ]
   },
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
@@ -63,6 +47,10 @@ Page({
         url: 'order/list'
       });
     } else if (k == "address"){
+      wx.setStorage({
+        key: "key_address_list",
+        data: "addrEdit"
+      });
       wx.navigateTo({
         url: 'address/address'
       });

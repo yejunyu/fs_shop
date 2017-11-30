@@ -21,6 +21,7 @@ Page({
     paytype: "在线支付",
     cancels: "取消", 
     remarkstips: "口味/偏好等要求",
+    remarks:"",
     defaults:""
   },
 
@@ -210,15 +211,37 @@ Page({
     data['deliveryDate'] = this.data.time1;
     data['deliveryType'] = this.data.dtype;
     data['payMethod'] = this.data.paytype;
-    
+    debugger;
     wx.request({
       url: app.common.basePath + "/order/create", //
       data: data,
       success: function (res) {
         wx.showToast({
           title: res.data.msg,
-          duration: 2000
+          duration: 1000
         });
+        setTimeout(function () {
+          var pages = getCurrentPages();
+          var prevPage = pages[pages.length - 2];
+          prevPage.data.listgoods.forEach(function (obj, i) {
+            obj.count=0;
+          });
+          wx.setStorage({
+            key: "key_shop_cart_total",
+            data: 0
+          });
+          wx.setStorage({
+            key: "key_shop_cart",
+            data: []
+          });
+          prevPage.setData({
+            cartTotal: 0,
+            cartCount: 0,
+            listgoods: prevPage.data.listgoods,
+            cart: []
+          });
+          wx.navigateBack();
+        }, 1100);
       }
     });
 

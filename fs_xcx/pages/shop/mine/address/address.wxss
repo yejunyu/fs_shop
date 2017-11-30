@@ -22,10 +22,12 @@
   float: left;
   width: 65%;
   height: 50px;
+  margin-left: 10px;
 }
 .list .address .address_1{
   float: left;
   width: 65%;
+  margin-left: 10px;
 }
 .list .address .img_r{
   width: 35px;
@@ -54,4 +56,11 @@
 	text-align: center;
 	background: rgba(0,0,0,0.6);
   font-size: 20px;
+}
+
+.hide{
+  display: none;
+}
+.show{
+  display: block;
 }

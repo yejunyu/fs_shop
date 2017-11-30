@@ -157,10 +157,10 @@ page{
 }
 /* 购物车-详情 */
 .show{
-  display:block;
+  display:block !important;
 }
 .hide{
-  display:none;
+  display:none !important;
 }
 .cart_detail{
   width: 100%;

@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    
   },
 
   /**
@@ -15,7 +15,8 @@ Page({
   onLoad: function (options) {
     this.setData({
       listaddress: wx.getStorageSync('key_shop_listaddress'),
-      address: wx.getStorageSync('key_shop_address')
+      address: wx.getStorageSync('key_shop_address'),
+      tapval: wx.getStorageSync('key_address_list')
     });
   },
 

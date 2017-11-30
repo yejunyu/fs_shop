@@ -3,8 +3,8 @@
   <view class="content">
     <view class="list">
       <view wx:for="{{listaddress}}" wx:for-index="i" wx:for-item="item" wx:key="unique">
-        <view class="address" data-address="{{item}}" catchtap="addrSelect">
-          <icon  class="circle_l" type="{{item.id==address.id ? 'success' : 'circle'}}" color="#1e90ff" size="30"></icon>
+        <view class="address" data-address="{{item}}" catchtap="{{tapval}}">
+          <icon  class="circle_l {{tapval=='addrEdit'?'hide':'show'}}" type="{{item.id==address.id ? 'success' : 'circle'}}" color="#1e90ff" size="30"></icon>
           <image data-address="{{item}}" catchtap="addrEdit" class="img_r" src="../../../../images/edit.jpg"></image>
           <text class="address_0">{{item.address}} {{item.detailAddress}}</text>
           <text class="address_1">{{item.name}}  {{item.phone}}</text>

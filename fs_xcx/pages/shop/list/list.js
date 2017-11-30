@@ -158,6 +158,13 @@ Page({
     });
   },
   settlement(){
+    if(this.data.cart.length==0){
+      wx.showToast({
+        title: "购物车不能为空",
+        duration: 2000
+      });
+      return;
+    }
     wx.setStorage({
       key: "key_shop_cart",
       data: this.data.cart
@@ -165,6 +172,10 @@ Page({
     wx.setStorage({
       key: "key_shop_cart_total",
       data: this.data.cartTotal
+    });
+    wx.setStorage({
+      key: "key_address_list",
+      data: "addrSelect"
     });
     wx.navigateTo({
       url: 'settlement/settlement'

@@ -16,7 +16,7 @@
       </view>
       <view class="cart_add" catchtap="cartAdd" data-goods="{{goods}}">+</view>
       <view class="cart_input"><text class="">{{goods.count?goods.count:'0'}}</text></view>
-      <view class="cart_subtract" catchtap="cartSubtract" data-goods="{{goods}}">-</view>
+      <view class="cart_subtract {{goods.count?'':'hide'}}" catchtap="cartSubtract" data-goods="{{goods}}">-</view>
     </view>
   </view>
 </view>
