@@ -180,6 +180,12 @@ Page({
     wx.navigateTo({
       url: 'settlement/settlement'
     });
+  },
+  selectCurrent(event) {
+    var id = event.target.dataset.id;
+    this.setData({
+      current: id
+    });
   }
   
 

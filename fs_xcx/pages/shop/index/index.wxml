@@ -1,17 +1,45 @@
 <!--index.wxml-->
-<scroll-view class="container" scroll-y="true" scroll-into-view="{{toView}}"  scroll-top="{{scrollTop}}" bindscroll="scroll">
-
-<swiper indicator-dots="{{indicatorDots}}"
-  autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" class="swiper-box" id="top">
-  <block wx:for-items="{{banner_list[0].banner}}" wx:key="index">
-    <swiper-item >
-      <image class="slide-image" src="{{item.pic_url}}"/>
-    </swiper-item>
-  </block>
-</swiper>
-
- 
-
-
-
+<view>
+  <view class='map_top' catchtap="chooseLocation">
+    <image class="img" src="../../../images/map.png"></image>
+    <view class='txt'>{{localtion}}</view>
+  </view>
+</view>
+<!--  -->
+<scroll-view class="" scroll-y="true" >
+  <swiper indicator-dots="true" autoplay="true" interval="{{interval}}" duration="{{duration}}" class="swiper-box">
+    <block wx:for-items="{{banners}}" wx:key="index">
+      <swiper-item >
+        <image class="slide-image" src="{{item.pic_url}}"/>
+      </swiper-item>
+    </block>
+  </swiper>
 </scroll-view>
+
+<!--  -->
+<scroll-view class="" scroll-y="true" >
+  <swiper class="menu-box" indicator-dots="true" interval="{{interval}}" duration="{{duration}}" >
+    <block wx:for-items="{{banners}}" wx:key="index">
+      <swiper-item>
+        <view class='menu_v'>
+          <image class="img" src="{{}}"/>
+          <text class='txt'>外卖</text>
+        </view>
+        <view class='menu_v'>
+          <image class="img" src="{{}}"/>
+          <text class='txt'>水果蔬菜</text>
+        </view>
+        <view class='menu_v'>
+          <image class="img" src="{{}}"/>
+          <text class='txt'>熟食</text>
+        </view>
+        <view class='menu_v'>
+          <image class="img" src="{{}}"/>
+          <text class='txt'>鲜花蛋糕</text>
+        </view>
+        
+      </swiper-item>
+    </block>
+  </swiper>
+</scroll-view>
+
