@@ -19,25 +19,14 @@
 <!--  -->
 <scroll-view class="" scroll-y="true" >
   <swiper class="menu-box" indicator-dots="true" interval="{{interval}}" duration="{{duration}}" >
-    <block wx:for-items="{{banners}}" wx:key="index">
+    <block wx:for-items="{{menus}}" wx:key="index" wx:for-item="item">
       <swiper-item>
-        <view class='menu_v'>
-          <image class="img" src="{{}}"/>
-          <text class='txt'>外卖</text>
+        <view wx:for="{{item}}" wx:for-index="idx" wx:for-item="menu">
+          <view class='menu_v' catchtap="clickMenu">
+            <image class="img" src="{{menu.extraData.imgPath}}"/>
+            <text class='txt'>{{menu.name}}</text>
+          </view>
         </view>
-        <view class='menu_v'>
-          <image class="img" src="{{}}"/>
-          <text class='txt'>水果蔬菜</text>
-        </view>
-        <view class='menu_v'>
-          <image class="img" src="{{}}"/>
-          <text class='txt'>熟食</text>
-        </view>
-        <view class='menu_v'>
-          <image class="img" src="{{}}"/>
-          <text class='txt'>鲜花蛋糕</text>
-        </view>
-        
       </swiper-item>
     </block>
   </swiper>

@@ -40,6 +40,9 @@ public class GoodsTempController extends ServiceController {
 	@RequestMapping("create")
     public JSONObject createGoodsTemp(HttpServletRequest request,GoodsTemp goodsTemp) throws BusinessException {
 		goodsTempService.create(goodsTemp);
+		if(RequestUtils.getInteger(request, "attachId")!=null){
+			attachService.bindParentId(RequestUtils.getInteger(request, "attachId"),goodsTemp.getId());
+		}
         return this.retResult(success_create);
     }
 	/**
@@ -52,6 +55,9 @@ public class GoodsTempController extends ServiceController {
 	@RequestMapping("update")
     public JSONObject updateGoodsTemp(HttpServletRequest request,GoodsTemp goodsTemp) throws BusinessException {
 		goodsTempService.editById(goodsTemp);
+		if(RequestUtils.getInteger(request, "attachId")!=null){
+			attachService.bindParentId(RequestUtils.getInteger(request, "attachId"),goodsTemp.getId());
+		}
         return this.retResult(success_update);
     }
 	/**

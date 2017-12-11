@@ -25,7 +25,7 @@ public class GoodsTempTest extends AppTest {
     public void insert() throws BusinessException{
 		String fieldsets = "[{\"name\":\"长\",\"type\":\"11\"},{\"name\":\"宽\",\"type\":\"12\"},{\"name\":\"高\",\"type\":\"12\"}]";
 		GoodsTemp entity = new GoodsTemp();
-    	entity.setName("商品类型");
+    	entity.setName("水果");
     	entity.setFieldset(JSONArray.parseArray(fieldsets).toJSONString());
     	service.create(entity);
     	System.out.println(entity.getId());

@@ -15,64 +15,112 @@
 <link rel="stylesheet" type="text/css" href="lib/Hui-iconfont/1.0.8/iconfont.css" />
 <link rel="stylesheet" type="text/css" href="static/h-ui.admin/skin/default/skin.css" id="skin" />
 <link rel="stylesheet" type="text/css" href="static/h-ui.admin/css/style.css" />
+<link rel="stylesheet" href="lib/zTree/v3/css/zTreeStyle/zTreeStyle.css" type="text/css">
 <!--[if IE 6]>
 <script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js" ></script>
 <script>DD_belatedPNG.fix('*');</script>
 <![endif]-->
 <title></title>
+<style type="text/css">
+	div#rMenu {
+		position:absolute; 
+		visibility:hidden; 
+		top:0; 
+		text-align: left; 
+		padding:4px;
+		width:80px;
+		bolder:1px solid #cad4e6;  
+		}  
+    div#rMenu a{
+        padding: 3px 15px 3px 15px;  
+        background-color:#cad4e6;  
+        vertical-align:middle;  
+		width:80px;
+		height:30px;
+    }  
+	div#rMenu a:hover{
+		background-color:#fff;  
+	}
+</style>
 </head>
 <body>
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 商品管理 <span class="c-gray en">&gt;</span> 商品类型 <a class="btn btn-success radius r btn-refresh" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
-<div class="page-container">
-	<!-- <div class="text-c"> 日期范围：
-		<input type="text" onfocus="WdatePicker({ maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}' })" id="datemin" class="input-text Wdate" style="width:120px;">
-		-
-		<input type="text" onfocus="WdatePicker({ minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d' })" id="datemax" class="input-text Wdate" style="width:120px;">
-		<input type="text" class="input-text" style="width:250px" placeholder="输入会员名称、电话、邮箱" id="" name="">
-		<button type="submit" class="btn btn-success radius" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜用户</button>
-	</div> -->
-	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l">
-		<a href="javascript:;" onclick="batchdel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> 
-		<a href="javascript:;" onclick="add('添加类型','goods-temp-add.html','','510')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加类型 </a></span> 
-		<span class="r">共有数据：<strong id="count"></strong> 条</span> </div>
-	<div class="mt-20">
-	<table class="table table-border table-bordered table-hover table-bg table-sort">
-		<thead>
-			<tr class="text-c">
-				<th width="25"><input type="checkbox" name="" value=""></th>
-				<th width="100">名称</th>
-				<th width="">操作</th>
-			</tr>
-		</thead>
-		<tbody id="data">
-			
-		</tbody>
-	</table>
+<div class="pos-a" style="width:150px;left:0;top:0; bottom:0; height:100%; border-right:1px solid #e5e5e5; background-color:#f5f5f5; overflow:auto;">
+	<ul id="treeDemo" class="ztree"></ul>
+</div>
+<div style="margin-left:150px;">
+	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 商品管理 <span class="c-gray en">&gt;</span> 商品类型 <a class="btn btn-success radius r btn-refresh" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+	<div class="page-container">
+		<!-- <div class="text-c"> 日期范围：
+			<input type="text" onfocus="WdatePicker({ maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}' })" id="datemin" class="input-text Wdate" style="width:120px;">
+			-
+			<input type="text" onfocus="WdatePicker({ minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d' })" id="datemax" class="input-text Wdate" style="width:120px;">
+			<input type="text" class="input-text" style="width:250px" placeholder="输入会员名称、电话、邮箱" id="" name="">
+			<button type="submit" class="btn btn-success radius" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜用户</button>
+		</div> -->
+		<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l">
+			<a href="javascript:;" onclick="batchdel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> 
+			<a href="javascript:;" onclick="add()" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加类型 </a></span> 
+			<span class="r">共有数据：<strong id="count"></strong> 条</span> </div>
+		<div class="mt-20">
+			<input type="hidden" id="parentId" name="parentId" value="">
+			<input type="hidden" id="tId" name="tId" value="">
+			<input type="hidden" id="tempName" name="tname" value="">
+			<table class="table table-border table-bordered table-hover table-bg table-sort">
+				<thead>
+					<tr class="text-c">
+						<th width="25"><input type="checkbox" name="" value=""></th>
+						<th width="15%">名称</th>
+						<th width="15%">缩略图</th>
+						<th width="">操作</th>
+					</tr>
+				</thead>
+				<tbody id="data">
+					
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div id="infoDiv" class="bringins-content" style="display:none;">
+		<form action="" method="post" class="form form-horizontal" id="form-member-add">
+			<input type="hidden" id="id" name="id" value="">
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>名称：</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<input type="text" class="input-text text_width" value="" placeholder="" id="name" name="name">
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>logo：</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<input type="hidden" class="input-text goods" value="" id="fileId" name="fileId">
+					<span class="btn-upload">
+						<a href="javascript:void();" class="btn btn-primary radius">选择文件
+							<span class="red" style="font-size:11px;">(默认不修改)</span></a>
+						<input type="file" id="file" name="file" multiple name="file_0" class="input-file">
+					</span>
+					<br>
+					<img id="fileShow" style="display:none;padding-top:5px;" class="thumb_img100 goods " alt="" src="">
+				</div>
+			</div>
+			<br/>
+			<div class="line" ></div>
+			<div id="addBtn" class="row cl">
+				<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+					<a href="javascript:;" onclick="afterAdd()" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe604;</i> 添加字段</a> 
+				</div>
+			</div>
+			<div class="row cl">
+				<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+					<input class="btn btn-primary radius" id="submit" type="button" onclick="save()" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+				</div>
+			</div>
+		</form>
 	</div>
 </div>
-<div id="infoDiv" class="bringins-content" style="display:none;">
-	<form action="" method="post" class="form form-horizontal" id="form-member-add">
-		<input type="hidden" id="id" name="id" value="">
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>名称：</label>
-			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text text_width" value="" placeholder="" id="name" name="name">
-			</div>
-		</div>
-		<br/>
-		<div class="line" ></div>
-		<div id="addBtn" class="row cl">
-			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
-				<a href="javascript:;" onclick="afterAdd()" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe604;</i> 添加字段</a> 
-			</div>
-		</div>
-		<div class="row cl">
-			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
-				<input class="btn btn-primary radius" id="submit" type="button" onclick="save()" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
-			</div>
-		</div>
-	</form>
-</div>
+<div id="rMenu">  
+    <a href="#" onclick="add()" class="list-group-item" >添加</a>  
+    <a href="#" onclick="edit()" class="list-group-item" >修改</a>  
+</div>  
 <!--_footer 作为公共模版分离出去-->
 <script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script> 
 <script type="text/javascript" src="lib/layer/2.4/layer.js"></script>
@@ -82,10 +130,12 @@
 <script type="text/javascript" src="static/h-ui.admin/js/utils.js"></script>
 
 <!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="lib/zTree/v3/js/jquery.ztree.all-3.5.min.js"></script>
 <script type="text/javascript" src="lib/My97DatePicker/4.8/WdatePicker.js"></script> 
 <script type="text/javascript" src="lib/datatables/1.10.0/jquery.dataTables.min.js"></script> 
 <script type="text/javascript" src="lib/laypage/1.2/laypage.js"></script>
 <script type="text/javascript" src="lib/bringins/js/bringins.js"></script>
+<script type="text/javascript" src="lib/plupload/plupload.full.min.js"></script>
 <script type="text/javascript">
 $(function(){
 	loadData();
@@ -107,13 +157,43 @@ function loadData(){
 	common.getData(url,function(data){
 		var list = data.result.records;
 		var html="";
+		var zNodes = [];
+		for(var i=0;i<list.length;i++){
+			var obj = list[i];
+			html+='<tr class="text-c">\
+				<td><input type="checkbox" value="'+obj.id+'" name="id"></td>\
+				<td>'+obj.name+'</td>\
+				<td><img class="thumb_img60" alt="'+obj.name+'" src="'+obj.extraData.imgPath+'"></td>\
+				<td class="td-manage">\
+				<a title="编辑" href="javascript:;" onclick="edit(\'编辑\',\'task-temp-add.html\',\'\',\'510\',\''+obj.id+'\',\''+obj.name+'\')" class="ml-5" style="text-decoration:none">\
+				<i class="Hui-iconfont">&#xe6df;</i></a> <a title="删除" href="javascript:;" onclick="del(\''+obj.id+'\')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>\
+			</tr>';
+			var n = {id:obj.id,pId:obj.parentId,name:obj.name};
+			zNodes.push(n);
+		}
+		initTree(zNodes);
+		$("#data").html(html);
+		$("#count").html(data.result.total);
+		sortDataTable();
+	});
+}
+function loadList(parentId){
+	if(!parentId){
+		return;
+	}
+	var url = "/goodsTemp/list?pageNum=-1&parentId="+parentId;
+	common.getData(url,function(data){
+		cleanDataTable();
+		var list = data.result.records;
+		var html="";
+		var zNodes = [];
 		for(var i=0;i<list.length;i++){
 			var obj = list[i];
 			html+='<tr class="text-c">\
 				<td><input type="checkbox" value="'+obj.id+'" name="id"></td>\
 				<td>'+obj.name+'</td>\
 				<td class="td-manage">\
-				<a title="编辑" href="javascript:;" onclick="edit(\'编辑\',\'task-temp-add.html\',\'\',\'510\',\''+obj.id+'\',\''+obj.name+'\')" class="ml-5" style="text-decoration:none">\
+				<a title="编辑" href="javascript:;" onclick="edit()" class="ml-5" style="text-decoration:none">\
 				<i class="Hui-iconfont">&#xe6df;</i></a> <a title="删除" href="javascript:;" onclick="del(\''+obj.id+'\')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>\
 			</tr>';
 		}
@@ -122,8 +202,66 @@ function loadData(){
 		sortDataTable();
 	});
 }
+//清除旧数据
+function cleanDataTable(){
+	if ($('.table-sort').hasClass('dataTable')) {
+		var dttable = $('.table-sort').dataTable();
+		dttable.fnClearTable(); //清空一下table
+		dttable.fnDestroy(); //还原初始化了的datatable
+	}
+}
+
+var setting = {
+	view: {
+		dblClickExpand: false,
+		showIcon: true,
+		showLine: false,
+		selectedMulti: true
+	},
+	data: {
+		simpleData: {
+			enable:true,
+			idKey: "id",
+			pIdKey: "pId",
+			rootPId: ""
+		}
+	},
+	callback: {
+		beforeClick: function(treeId, treeNode) {
+			var zTree = $.fn.zTree.getZTreeObj("tree");
+			loadList(treeNode.id);
+			$("#id").val(treeNode.id);
+			$("#tempName").val(treeNode.name);
+			//$("#officeNameSpan").html('<span class="c-gray en">&gt;</span> '+treeNode.name);
+		},
+		onRightClick: function(event, treeId, treeNode){
+			debugger;
+			var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
+			//var node = treeObj.getNodeByParam("id", treeId);
+			treeObj.selectNode(treeNode);
+			$("#id").val(treeNode.id);
+			$("#tempName").val(treeNode.name);
+			showRMenu( event.clientX, event.clientY);   
+		}
+	}
+};
+//显示右键菜单  
+function showRMenu( x, y) {  
+    $("#rMenu").show();  
+    $("#rMenu").css({"top":y+"px", "left":(x+5)+"px", "visibility":"visible"}); //设置右键菜单的位置、可见    
+}  
+
+//初始加载左侧菜单
+function initTree(zNodes){
+	var t = $("#treeDemo");
+	t = $.fn.zTree.init(t, setting, zNodes);
+}
+
+
 /*添加*/
-function add(title,url,w,h){
+function add(){
+	var parentId = $("#id").val();
+	$("#rMenu").hide();  
 	common.addParams({func:"add"});
 	//layer_show(title,url,w,h);
 	$('#infoDiv').bringins({
@@ -132,10 +270,14 @@ function add(title,url,w,h){
 		"width":"60%",
 		"closeButton":"white"
 	});
+	$("#parentId").val(parentId);
 	$("#id").val("");
 	loadDataInfo();
 }
-function edit(title,url,w,h,id,name){
+function edit(){
+	$("#rMenu").hide();  
+	var id = $("#id").val();
+	var name = $("#tempName").val();
 	common.addParams({id:id,name:name,func:"edit"});
 	//layer_show(title,url,w,h);
 	$('#infoDiv').bringins({
@@ -206,6 +348,7 @@ $(document).on("click",".removeDiv",function(){
 //保存数据
 function save(){
 	var name = $("#name").val();
+	var attachId = $("#fileId").val();
 	var fieldset = [];
 	$('div[name="fieldsets"]').each(function(i,e){ 
 		var div = $(e);
@@ -216,13 +359,15 @@ function save(){
 	}); 
 	var attr1 = $("#submit").attr("attr1");
 	if(attr1=="add"){
+		var parentId = $("#parentId").val();
 		var url = "/goodsTemp/create";
-		var data={name:name,fieldset:JSON.stringify(fieldset)};
+		var data={name:name,parentId:parentId,fieldset:JSON.stringify(fieldset),attachId:attachId};
 	}else{
 		var url = "/goodsTemp/update";
 		var id = $("#id").val();
-		var data={id:id,name:name,fieldset:JSON.stringify(fieldset)};
+		var data={id:id,name:name,fieldset:JSON.stringify(fieldset),attachId:attachId};
 	}
+	debugger;
 	common.postData(url,data,function(data){
 		window.location.reload();
 		common.alertX(data.msg);
@@ -269,6 +414,29 @@ function loadDataInfo(){
 		}
 	});
 }
+
+//上传图片
+//实例化一个plupload上传对象
+var uploader = new plupload.Uploader({
+	browse_button : 'file', //触发文件选择对话框的按钮，为那个元素id
+	url : common.basePath+'/attach/create', //服务器端的上传页面地址
+	flash_swf_url : 'js/Moxie.swf', //swf文件，当需要使用swf方式进行上传时需要配置该参数
+	silverlight_xap_url : 'js/Moxie.xap' //silverlight文件，当需要使用silverlight方式进行上传时需要配置该参数
+});    
+uploader.bind('FilesAdded',function(uploader,files){
+	uploader.start(); 
+});
+
+uploader.bind('FileUploaded',function(uploader,files,responseObject){
+	var res = $.parseJSON(responseObject.response);
+	var id = res.result.id;
+	$("#fileShow").show();
+	$("#fileShow").attr('src',res.result.extraData.imgPath); 
+	$("#fileId").val(res.result.id);
+	//bindGoodsId(id,goodsId);
+});
+//在实例对象上调用init()方法进行初始化
+uploader.init();
 
 </script> 
 </body>

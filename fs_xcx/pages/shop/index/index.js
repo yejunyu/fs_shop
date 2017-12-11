@@ -10,6 +10,7 @@ Page({
 
     motto: 'MiHome_Store',
     userInfo: {},
+    menus:[],
     banners: [
       {
         "pic_url": "http://192.168.1.120:8080/business_images/wx_xcx/banner/1.png",
@@ -30,7 +31,37 @@ Page({
     
   },
   onLoad: function () {
-    
+    var url = app.common.basePath + "/goodsTemp/list";
+    var that = this;
+    wx.request({
+      url: url, //仅为示例，并非真实的接口地址
+      data: {
+        pageNum: '-1',
+        parentId:"-1"
+      },
+      success: function (res) {
+        var list = res.data.result.records;
+        var res = [];
+        var objs = [];
+        var idx = 1;
+        for(var i=0;i<list.length;i++){
+          objs.push(list[i]);
+          if (idx==4){
+            res.push(objs);
+            idx = 1;
+            objs = [];
+          }else{
+            idx = idx+1;
+          }
+        }
+        if (idx>1){
+          res.push(objs);
+        }
+        that.setData({
+          menus: res
+        });
+      }
+    });
   },
   //当前位置选择
   chooseLocation: function () {
@@ -42,5 +73,8 @@ Page({
         });
       }
     })
+  },
+  clickMenu(){
+    console.log("点击");
   }
 })

@@ -21,6 +21,12 @@ public class PropertiesUtil {
 	/** 加载地址  **/
 	private static String goods_img_load_path = null;
 	
+	/** 存储地址  **/
+	private static String attach_base_path = null;
+	
+	/** 加载地址  **/
+	private static String attach_load_path = null;
+	
 	static {
 		InputStream inputStream = PropertiesUtil.class
 				.getResourceAsStream("/business.properties");
@@ -32,8 +38,10 @@ public class PropertiesUtil {
 			redis_password = properties.getProperty("redis.password");
 			
 			goods_img_base_path = properties.getProperty("goods.img.base.path");
-			
 			goods_img_load_path = properties.getProperty("goods.img.load.path");
+			
+			attach_base_path = properties.getProperty("attach.base.path");
+			attach_load_path = properties.getProperty("attach.load.path");
 			
 		} catch (Exception e) {
 			
@@ -62,6 +70,14 @@ public class PropertiesUtil {
 
 	public static String getGoodsImgLoadPath() {
 		return goods_img_load_path;
+	}
+
+	public static String getAttachBasePath() {
+		return attach_base_path;
+	}
+
+	public static String getAttachLoadPath() {
+		return attach_load_path;
 	}
 
 	

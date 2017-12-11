@@ -16,6 +16,8 @@ public class GoodsTemp extends DataEntity<GoodsTemp> {
 	
 	private static final long serialVersionUID = 1L;
 	
+	@TableField("parent_id")
+	private Integer parentId;	// 上级id
 	private String name;		// 名称
 	private String fieldset;	// 自定义字段
 	
@@ -47,6 +49,14 @@ public class GoodsTemp extends DataEntity<GoodsTemp> {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Integer getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(Integer parentId) {
+		this.parentId = parentId;
 	}
 	
 }
