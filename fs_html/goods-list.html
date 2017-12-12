@@ -300,7 +300,7 @@ function loadGoodsData(tempId){
 	var url = "/goods/list?pageNum=-1&tempId="+tempId;
 	common.getData(url,function(data){
 		cleanDataTable();
-		var list = data.result.records;
+		var list = data.result;
 		var html="";
 		for(var i=0;i<list.length;i++){
 			var obj = list[i];

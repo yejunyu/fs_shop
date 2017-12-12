@@ -1,13 +1,13 @@
 package com.fullstack.shop.goods.web;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSONObject;
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.plugins.Page;
 import com.fullstack.common.exceptions.BusinessException;
 import com.fullstack.common.web.RequestUtils;
 import com.fullstack.common.web.ServiceController;
@@ -25,10 +25,11 @@ public class GoodsController extends ServiceController {
 	 */
 	@RequestMapping("list")
     public JSONObject list(HttpServletRequest request,Goods goods) throws BusinessException {
-		Page<Goods> page = RequestUtils.getPage(request);
-		EntityWrapper<Goods> e = this.entityInit(goods);
-		page = goodsService.findPage(page,e);
-        return this.retResult(page);
+//		Page<Goods> page = RequestUtils.getPage(request);
+//		EntityWrapper<Goods> e = this.entityInit(goods);
+//		page = goodsService.findPage(page,e);
+		List<Goods> list = goodsService.selByCondition(goods);
+        return this.retResult(list);
     }
 	/**
 	 * 新增

@@ -8,23 +8,36 @@ Page({
     cartTotal: 0,
     cartCount: 0,
     cartDetailFlag: "hide",
+    temps:[],
     listgoods: []
   },
   onPullDownRefresh: function () {
     console.log('onPullDownRefresh')
   },
   onLoad: function (options) {
+    var tempId = wx.getStorageSync('key_goods_goodsTemp_id');
     var url = app.common.basePath + "/goods/list";
+    var data = { pageNum: '-1', tempId: tempId};
     var that = this;
     wx.request({
       url: url, //仅为示例，并非真实的接口地址
-      data: {
-        pageNum: '-1'
-      },
+      data: data,
       success: function (res) {
         that.setData({
           listgoods: res.data.result,
           oldlistgoods: res.data.result
+        });
+      }
+    });
+
+    var url = app.common.basePath + "/goodsTemp/list";
+    var data = { pageNum: '-1', parentId: tempId };
+    wx.request({
+      url: url, //仅为示例，并非真实的接口地址
+      data: data,
+      success: function (res) {
+        that.setData({
+          temps: res.data.result.records
         });
       }
     });
@@ -185,6 +198,18 @@ Page({
     var id = event.target.dataset.id;
     this.setData({
       current: id
+    });
+    var url = app.common.basePath + "/goods/list";
+    var data = { pageNum: '-1', tempId: id };
+    var that = this;
+    wx.request({
+      url: url, //仅为示例，并非真实的接口地址
+      data: data,
+      success: function (res) {
+        that.setData({
+          listgoods: res.data.result
+        });
+      }
     });
   }
   

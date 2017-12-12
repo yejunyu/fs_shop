@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fullstack.shop.goods.dao.GoodsDao">
+    
+    
+    <!-- private String name;		// 名称
+	private String description;		// 描述
+	private Integer type;		// 类型
+	@TableField("temp_id")
+	protected Integer tempId;	// 模板id
+	private Integer score;		// 积分
+	private String price;		// 价格
+	private Integer min;		// 最小值
+	private Integer max;		// 最大值 -->
+	
+	<sql id="cols">
+		a.name as 'name',
+		a.description as 'description',
+		a.type as 'type',
+		a.temp_id as 'tempId',
+		a.score as 'score',
+		a.price as 'price',
+		a.min as 'min',
+		a.max as 'max'
+	</sql>
+	
+	
+	<select id="selByCondition" resultType="Goods">  
+        select 
+        	<include refid="cols"></include>
+         from shop_goods a
+         <where>
+			<if test="tempId != null and tempId != ''">
+				and (a.temp_id=#{tempId} or 
+						a.temp_id in 
+					(select id from shop_goods_temp where parent_id=#{tempId}))
+			</if>
+		</where>
+    </select>  
+    
+	
+	
+</mapper>

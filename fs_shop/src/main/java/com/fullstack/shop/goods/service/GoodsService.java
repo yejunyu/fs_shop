@@ -1,5 +1,8 @@
 package com.fullstack.shop.goods.service;
 
+import java.util.List;
+
+import com.fullstack.common.exceptions.BusinessException;
 import com.fullstack.common.service.BaseService;
 import com.fullstack.shop.goods.entity.Goods;
 
@@ -10,4 +13,5 @@ import com.fullstack.shop.goods.entity.Goods;
  */
 public interface GoodsService<T> extends BaseService<Goods> {
 	
+	public List<Goods> selByCondition(Goods goods) throws BusinessException;
 }

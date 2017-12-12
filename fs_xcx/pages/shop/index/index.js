@@ -74,7 +74,16 @@ Page({
       }
     })
   },
-  clickMenu(){
-    console.log("点击");
+  clickMenu(event){
+    var tempId = event.currentTarget.dataset.id;
+    console.log("tempId:" + tempId);
+    wx.setStorage({
+      key: "key_goods_goodsTemp_id",
+      data: tempId
+    });
+    wx.navigateTo({
+      url: '../goods/list'
+    });
+    
   }
 })

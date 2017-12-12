@@ -1,5 +1,7 @@
 package com.fullstack.shop.goods.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,9 +28,28 @@ import com.fullstack.shop.goods.service.GoodsTempService;
 public class GoodsServiceImpl extends BaseServiceImpl<GoodsDao, Goods> implements GoodsService<Goods>{
 	
 	@Autowired  
+	private GoodsDao goodsDao;
+	@Autowired  
     private GoodsTempService<GoodsTemp> goodsTempService;  
 	@Autowired  
     private GoodsImgService<GoodsImg> goodsImgService;  
+	
+	@Override
+	public List<Goods> selByCondition(Goods goods) throws BusinessException {
+		List<Goods> list = goodsDao.selByCondition(goods);
+		for(Goods g : list){
+			if(g.getTempId()!=null){
+				GoodsTemp goodsTemp = goodsTempService.getInfoById(g.getTempId());
+				super.fieldsetUtils(goodsTemp.getFieldset(), g);
+			}
+			GoodsImg goodsImg = goodsImgService.getLastGoodsImgByGoodsId(g.getId());
+			if(goodsImg!=null){
+				g.getExtraData().put(ImgUtils.IMG_KEY, 
+						ImgUtils.commonPathUtils(PropertiesUtil.getGoodsImgLoadPath(),goodsImg.getPath(),goodsImg.getName()));
+			}
+		}
+		return list;
+	}
 	
 	@Override
 	public Page<Goods> findPage(Page<Goods> page, Wrapper<Goods> wrapper) throws BusinessException {
@@ -56,4 +77,6 @@ public class GoodsServiceImpl extends BaseServiceImpl<GoodsDao, Goods> implement
 		}
 		return goods;
 	}
+
+	
 }
