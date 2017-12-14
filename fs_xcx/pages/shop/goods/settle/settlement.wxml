@@ -1,0 +1,85 @@
+<!--pages/shop/list/settlement/settlement.wxml-->
+<view class="">
+  <view class="content">
+    <view class="delivery">
+      <view class="address" catchtap="addrChange">
+        <image class="img_timg" src="../../../../images/timg.jpg"></image>
+        <text class="bracket_r "> > </text>
+        <text class="address_0">{{address.address}} {{address.detailAddress}}</text>
+        <text class="address_1">{{address.name}}  {{address.phone}}</text>
+      </view>
+      <view class="time" catchtap="timeChange">
+        <image class="img_time" src="../../../../images/time.jpg"></image>
+        <text class="bracket_r" > > </text>
+        <text class="txt">{{time0}} [<text class="fs16">预计{{time1}}送达</text>]</text>
+      </view>
+      <view class="type" catchtap="dtypeChange">
+        <image class="img_delivery" src="../../../../images/delivery.jpg"></image>
+        <text class="bracket_r" > > </text>
+        <text class="txt">配送方式 [<text class="fs16">{{dtype}}</text>]</text>
+      </view>
+    </view>
+
+    <view class="details">
+      <view class="titles">
+        <view class='line'></view>
+        <view class="txt"><text >已选商品</text></view>
+      </view>
+      <view class="list">
+        <view wx:for="{{cartlist}}" wx:for-index="i" wx:for-item="goods" wx:key="unique">
+          <view class="detail"data-goods="{{goods}}" data-price="{{goods.price}}" data-goodsid="{{goods.id}}" data-name="{{goods.name}}" data-img="{{goods.extraData.imgPath}}">
+            <view class="title"><text>{{goods.name}}</text></view>
+            <view class="count"><text>x{{goods.count}}</text></view>
+            <view class="price"><text>￥{{goods.price}}</text></view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="extra">
+        <view class="view">
+          <text class="txt_0">支付方式</text>
+          <text class="txt_1 ">{{paytype}}</text>
+          <!-- <text class="bracket_r"> > </text> -->
+        </view>
+        <!-- 暂时注释餐具数量 -->
+        <!-- 
+        <view class="view">
+          <text class="txt_0">餐具数量</text>
+          <text class="txt_1 gainsboro">未选择</text>
+          <text class="bracket_r"> > </text>
+        </view> -->
+        <view class="view" catchtap="remarksChange">
+          <text class="txt_0">备注/说明</text>
+          <text class="txt_1 gainsboro">{{remarkstips}}</text>
+          <text class="bracket_r"> > </text>
+        </view>
+      </view>
+    </view>
+</view>
+<view class="pay {{payFlag}}" > 
+	<text class="total">￥ <text class="txt">{{cartTotal}}</text></text>
+	<text class="payoff" catchtap="pay">去支付</text>
+</view>
+
+<view class="popup {{popupFlag}}">
+  <view class="content">
+    <view class="titles">
+      <text class="txt">{{popupTitle}}</text>
+    </view>
+    <view class="details">
+      <scroll-view scroll-y class="list {{popupContent ? 'show' : 'hide'}}">
+        <view wx:for="{{listpopup}}" wx:for-index="i" wx:for-item="item" wx:key="unique">
+          <view class="detail" data-val="{{item}}" data-popuptype="{{popuptype}}" catchtap="popupSelect">
+            <text class="txt">{{item}}</text>
+          </view>
+        </view>
+      </scroll-view>
+      <view class="{{popupContent ? 'hide' : 'show'}}">
+        <textarea data-name="remarks" placeholder="请输入给店家的留言" bindblur="textareablur" type='text' class='inptxt'></textarea>
+      </view>
+    </view>
+  </view>
+  <view class="cancel" catchtap="cancel"> 
+    <text class="txt">{{cancels}}</text>
+  </view>
+</view>

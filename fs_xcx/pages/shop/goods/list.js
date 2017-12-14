@@ -191,7 +191,7 @@ Page({
       data: "addrSelect"
     });
     wx.navigateTo({
-      url: 'settlement/settlement'
+      url: 'settle/settlement'
     });
   },
   selectCurrent(event) {

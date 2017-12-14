@@ -15,7 +15,7 @@
           <image class="img" src="{{goods.extraData.imgPath}}"></image>
           <view class="txt">
             <view class="title">
-              <text class="">{{goods.name}}福建师范袋附加是的控件</text>
+              <text class="">{{goods.name}}开发的就是坑垃</text>
             </view>
             <view class="con">
               <view class="price">￥{{goods.price}}</view>
@@ -43,7 +43,7 @@
 </view>
 
 <view class="cart_detail {{cartDetailFlag}}">
-  <view class="content">
+  <view class="conts">
     <view class="titles">
       <view class="txt">
         <text class="l">已选商品</text>
