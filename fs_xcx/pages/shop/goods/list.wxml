@@ -3,9 +3,9 @@
     <text class="">最新消息，你是不是傻</text>
   </view>
   <view class="left">
-    <view class="txt {{current == '0' ? 'active' : ''}}" data-id="0" catchtap="selectCurrent">默认</view>
+    <view class="txt {{current == parentTempId ? 'active' : ''}}" data-id="{{parentTempId}}" catchtap="tempChoose">默认</view>
     <view wx:for="{{temps}}" wx:for-index="idx" wx:for-item="temp" wx:key="unique">
-      <view class="txt {{current == temp.id ? 'active' : ''}}" data-id="{{temp.id}}" catchtap="selectCurrent">{{temp.name}}</view>
+      <view class="txt {{current == temp.id ? 'active' : ''}}" data-id="{{temp.id}}" catchtap="tempChoose">{{temp.name}}</view>
     </view>
   </view>
   <view class="content ">
@@ -15,7 +15,7 @@
           <image class="img" src="{{goods.extraData.imgPath}}"></image>
           <view class="txt">
             <view class="title">
-              <text class="">{{goods.name}}开发的就是坑垃</text>
+              <text class="">{{goods.name}}</text>
             </view>
             <view class="con">
               <view class="price">￥{{goods.price}}</view>

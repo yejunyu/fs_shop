@@ -6,7 +6,7 @@
         <image class="img_timg" src="../../../../images/timg.jpg"></image>
         <text class="bracket_r "> > </text>
         <text class="address_0">{{address.address}} {{address.detailAddress}}</text>
-        <text class="address_1">{{address.name}}  {{address.phone}}</text>
+        <text class="address_1">{{address.name}} {{address.sex}}  {{address.phone}}</text>
       </view>
       <view class="time" catchtap="timeChange">
         <image class="img_time" src="../../../../images/time.jpg"></image>

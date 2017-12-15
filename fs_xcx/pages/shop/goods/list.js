@@ -1,4 +1,3 @@
-
 var app = getApp()
 Page({
   data: {
@@ -15,31 +14,12 @@ Page({
     console.log('onPullDownRefresh')
   },
   onLoad: function (options) {
-    var tempId = wx.getStorageSync('key_goods_goodsTemp_id');
-    var url = app.common.basePath + "/goods/list";
-    var data = { pageNum: '-1', tempId: tempId};
-    var that = this;
-    wx.request({
-      url: url, //仅为示例，并非真实的接口地址
-      data: data,
-      success: function (res) {
-        that.setData({
-          listgoods: res.data.result,
-          oldlistgoods: res.data.result
-        });
-      }
-    });
-
-    var url = app.common.basePath + "/goodsTemp/list";
-    var data = { pageNum: '-1', parentId: tempId };
-    wx.request({
-      url: url, //仅为示例，并非真实的接口地址
-      data: data,
-      success: function (res) {
-        that.setData({
-          temps: res.data.result.records
-        });
-      }
+    var tempId = wx.getStorageSync(app.storageKey.goodsTempId);
+    this.loadGoodsList(tempId);
+    this.loadGoodsTemp(tempId);
+    this.setData({
+      parentTempId: tempId,
+      current: tempId
     });
   },
   onReady: function () {
@@ -50,12 +30,64 @@ Page({
   },
   onHide: function () {
     // 页面隐藏
+    this.storageCart();
   },
   onUnload: function () {
     // 页面关闭
+    this.storageCart();
   },
-
-  //自定义事件
+  storageCart: function(){
+    var d = this.data.cart;
+    wx.setStorage({
+      key: app.storageKey.cart,
+      data: this.data.cart
+    });
+  },
+  loadGoodsList: function (tempId){    //加载商品列表
+    var url = app.common.basePath + "/goods/list";
+    var data = { pageNum: '-1', tempId: tempId };
+    var that = this;
+    wx.request({
+      url: url, //仅为示例，并非真实的接口地址
+      data: data,
+      success: function (res) {
+        //还原已经加在购物车中的数据
+        var cart = wx.getStorageSync(app.storageKey.cart);
+        if(cart){
+          cart.forEach(function (obj, i) {
+            res.data.result.forEach(function (g, j) {
+              if (obj.id == g.id) {
+                g.count = obj.count;
+              }
+            });
+          });
+          that.setData({
+            listgoods: res.data.result,
+            cart: cart
+          });
+        }else{
+          that.setData({
+            listgoods: res.data.result
+          });
+        }
+        that.calculation();
+      }
+    });
+  },
+  loadGoodsTemp: function (tempId){  //加载商品类型数据
+    var url = app.common.basePath + "/goodsTemp/list";
+    var data = { pageNum: '-1', parentId: tempId };
+    var that = this;
+    wx.request({
+      url: url, //仅为示例，并非真实的接口地址
+      data: data,
+      success: function (res) {
+        that.setData({
+          temps: res.data.result.records
+        });
+      }
+    });
+  },
   cartAdd(event){ //添加到购物车
     let goods = event.currentTarget.dataset.goods;
     let goodsId = goods.id;
@@ -85,24 +117,38 @@ Page({
     this.calculation();
   },
   calculation(){  //计算总量以及总价
-    let cart = [];
     let total = 0;
     let count = 0;
+    let cart = wx.getStorageSync(app.storageKey.cart);
+    if(!cart){
+      cart = [];
+    }
     this.data.listgoods.forEach(function (obj, i) {
       if (obj.count && obj.count > 0) {
-        total = total+(obj.count*obj.price);
-        count = count+obj.count;
-        cart.push(obj);
+        let goodsFlag = true;
+        cart.forEach(function (c, j) {
+          if(c.id==obj.id){
+            c.count = obj.count;
+            goodsFlag = false;
+          }
+        });
+        if(goodsFlag){
+          cart.push(obj);
+        }
       }
+    });
+    cart.forEach(function (obj, i) {
+      total = total + (obj.count * obj.price);
+      count = count + obj.count;
     });
     this.setData({
       cartTotal: total,
       cartCount: count,
-      listgoods: this.data.listgoods,
-      cart: cart
+      cart:cart,
+      listgoods: this.data.listgoods
     });
   },
-  cartDetail(){
+  cartDetail(){   //购物车详情
     if (this.data.cartDetailFlag=="hide"){
       this.setData({
         cartDetailFlag: "show"
@@ -113,7 +159,7 @@ Page({
       });
     }
   },
-  cartClear(){
+  cartClear(){    //清空购物车
     this.cartDetail();
     this.data.listgoods.forEach(function (obj, i) {
       obj.count = 0;
@@ -124,53 +170,12 @@ Page({
       listgoods: this.data.listgoods,
       cart: []
     });
-  },
-  switchSlider: function (e) {
-    var index = e.target.dataset.index;
-    this.setData({
-      current: e.target.dataset.index
-    });
-    if(index==0){
-      this.setData({
-        listgoods: this.data.oldlistgoods
-      });
-    }else if (index==1){
-      this.sortByPrice();
-    }
-  },
-  sortByPrice(flag){
-    let list = this.data.listgoods;
-    let current = this.data.current;
-    var flag = true;
-    if (this.data.sortPriceFlag) {
-      flag = false;
-      for (let i = 0; i < list.length; ++i) {
-        for (let j = 0; j < list.length; ++j) {
-          if ((list[i].price * 1) < (list[j].price * 1)) {
-            let goods = list[i];
-            list[i] = list[j];
-            list[j] = goods;
-          }
-        }
-      }
-    }else{
-      flag = true;
-      for (let i = 0; i < list.length; ++i) {
-        for (let j = 0; j < list.length; ++j) {
-          if ((list[i].price * 1) > (list[j].price * 1)) {
-            let goods = list[i];
-            list[i] = list[j];
-            list[j] = goods;
-          }
-        }
-      }
-    }
-    this.setData({
-      sortPriceFlag: flag,
-      listgoods: list
+    wx.setStorage({
+      key: app.storageKey.cart,
+      data: []
     });
   },
-  settlement(){
+  settlement(){   //结算
     if(this.data.cart.length==0){
       wx.showToast({
         title: "购物车不能为空",
@@ -178,41 +183,16 @@ Page({
       });
       return;
     }
-    wx.setStorage({
-      key: "key_shop_cart",
-      data: this.data.cart
-    });
-    wx.setStorage({
-      key: "key_shop_cart_total",
-      data: this.data.cartTotal
-    });
-    wx.setStorage({
-      key: "key_address_list",
-      data: "addrSelect"
-    });
     wx.navigateTo({
       url: 'settle/settlement'
     });
   },
-  selectCurrent(event) {
-    var id = event.target.dataset.id;
+  tempChoose(event) {  //商品类型选择
+    var tempId = event.target.dataset.id;
     this.setData({
-      current: id
+      current: tempId
     });
-    var url = app.common.basePath + "/goods/list";
-    var data = { pageNum: '-1', tempId: id };
-    var that = this;
-    wx.request({
-      url: url, //仅为示例，并非真实的接口地址
-      data: data,
-      success: function (res) {
-        that.setData({
-          listgoods: res.data.result
-        });
-      }
-    });
+    this.storageCart();
+    this.loadGoodsList(tempId);
   }
-  
-
-
 })

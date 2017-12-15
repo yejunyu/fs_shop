@@ -14,9 +14,9 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      listaddress: wx.getStorageSync('key_shop_listaddress'),
-      address: wx.getStorageSync('key_shop_address'),
-      tapval: wx.getStorageSync('key_address_list')
+      listaddress: wx.getStorageSync(app.storageKey.addressList),
+      address: wx.getStorageSync(app.storageKey.addressCurrent),
+      tapval: wx.getStorageSync(app.storageKey.addressListCatchtap)
     });
   },
 
@@ -74,10 +74,6 @@ Page({
       listaddress: this.data.listaddress,
       address: address
     });
-    wx.setStorage({
-      key: "key_shop_address",
-      data: address
-    });
 
     //更新上个页面的数据
     var pages = getCurrentPages();
@@ -88,7 +84,7 @@ Page({
       address: address
     });
     wx.setStorage({
-      key: "key_shop_address",
+      key: app.storageKey.addressCurrent,
       data: address
     });
     wx.navigateBack();
@@ -96,7 +92,7 @@ Page({
   addrEdit(e){
     let address = e.currentTarget.dataset.address;
     wx.setStorage({
-      key: "key_shop_address",
+      key: app.storageKey.addressCurrent,
       data: address
     });
     wx.navigateTo({

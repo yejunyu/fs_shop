@@ -6,9 +6,6 @@ Page({
     localtion: '广州市政府',
     interval: 3000,
     duration: 1000,
-
-
-    motto: 'MiHome_Store',
     userInfo: {},
     menus:[],
     banners: [
@@ -31,30 +28,33 @@ Page({
     
   },
   onLoad: function () {
+    this.loadGoodsTemp();
+  },
+  loadGoodsTemp: function () {  //  加载商品类型
     var url = app.common.basePath + "/goodsTemp/list";
     var that = this;
     wx.request({
-      url: url, //仅为示例，并非真实的接口地址
+      url: url, //
       data: {
         pageNum: '-1',
-        parentId:"-1"
+        parentId: "-1"
       },
       success: function (res) {
         var list = res.data.result.records;
         var res = [];
         var objs = [];
         var idx = 1;
-        for(var i=0;i<list.length;i++){
+        for (var i = 0; i < list.length; i++) {
           objs.push(list[i]);
-          if (idx==4){
+          if (idx == 4) {
             res.push(objs);
             idx = 1;
             objs = [];
-          }else{
-            idx = idx+1;
+          } else {
+            idx = idx + 1;
           }
         }
-        if (idx>1){
+        if (idx > 1) {
           res.push(objs);
         }
         that.setData({
@@ -63,8 +63,7 @@ Page({
       }
     });
   },
-  //当前位置选择
-  chooseLocation: function () {
+  chooseLocation: function () { //当前位置选择
     var that = this
     wx.chooseLocation({
       success: function (res) {
@@ -74,16 +73,14 @@ Page({
       }
     })
   },
-  clickMenu(event){
+  clickMenu: function(event){
     var tempId = event.currentTarget.dataset.id;
-    console.log("tempId:" + tempId);
     wx.setStorage({
-      key: "key_goods_goodsTemp_id",
+      key: app.storageKey.goodsTempId,
       data: tempId
     });
     wx.navigateTo({
       url: '../goods/list'
     });
-    
   }
 })

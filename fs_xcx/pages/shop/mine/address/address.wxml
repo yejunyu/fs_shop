@@ -7,7 +7,7 @@
           <icon  class="circle_l {{tapval=='addrEdit'?'hide':'show'}}" type="{{item.id==address.id ? 'success' : 'circle'}}" color="#1e90ff" size="30"></icon>
           <image data-address="{{item}}" catchtap="addrEdit" class="img_r" src="../../../../images/edit.jpg"></image>
           <text class="address_0">{{item.address}} {{item.detailAddress}}</text>
-          <text class="address_1">{{item.name}}  {{item.phone}}</text>
+          <text class="address_1">{{item.name}} {{item.sex}}  {{item.phone}}</text>
         </view>
       </view>
     </view>

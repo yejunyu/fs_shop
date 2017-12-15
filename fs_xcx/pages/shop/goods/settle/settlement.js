@@ -29,43 +29,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var url = app.common.basePath + "/memberAddress/list";
-    var that = this;
-    wx.request({
-      url: url, //
-      data: {
-        pageNum: '-1'
-      },
-      success: function (res) {
-        let addr = res.data.result.records[0];
-        that.setData({
-          listaddress: res.data.result.records,
-          cartlist:wx.getStorageSync('key_shop_cart'),
-          cartTotal: wx.getStorageSync('key_shop_cart_total'),
-          address: addr
-        });
-        wx.setStorage({
-          key: "key_shop_listaddress",
-          data: res.data.result.records
-        });
-        wx.setStorage({
-          key: "key_shop_address",
-          data: addr
-        });
-      }
-    });
-
+    this.loadCard();
+    this.loadMemberAddress();
     //加载可以选择配送的时间
-    wx.request({
-      url: app.common.basePath + "/common/getSendTimeList", //
-      success: function (res) {
-        let time1 = res.data.result[0];
-        that.setData({
-          listtimes: res.data.result,
-          time1: time1
-        });
-      }
-    });
+    this.loadSendTimeList();
   },
 
   /**
@@ -116,12 +83,69 @@ Page({
   onShareAppMessage: function () {
   
   },
-  addrChange(){
+  loadCard: function(){   //加载购物车的信息
+    var cart = wx.getStorageSync(app.storageKey.cart);
+    var total = 0;
+    var count = 0;
+    cart.forEach(function (obj, i) {
+      total = total + (obj.count * obj.price);
+      count = count + obj.count;
+    });
+    this.setData({
+      cartTotal: total,
+      cartCount: count,
+      cartlist: cart
+    });
+    
+  },
+  loadMemberAddress: function(){  //加载地址
+    var url = app.common.basePath + "/memberAddress/list";
+    var that = this;
+    wx.request({
+      url: url, //
+      data: {
+        pageNum: '-1'
+      },
+      success: function (res) {
+        let addr = res.data.result.records[0];
+        that.setData({
+          listaddress: res.data.result.records,
+          address: addr
+        });
+        wx.setStorage({
+          key: app.storageKey.addressList,
+          data: res.data.result.records
+        });
+        wx.setStorage({
+          key: app.storageKey.addressCurrent,
+          data: addr
+        });
+      }
+    });
+  },
+  loadSendTimeList: function(){   //加载送货时间
+    var that = this;
+    wx.request({
+      url: app.common.basePath + "/common/getSendTimeList", //
+      success: function (res) {
+        let time1 = res.data.result[0];
+        that.setData({
+          listtimes: res.data.result,
+          time1: time1
+        });
+      }
+    });
+  },
+  addrChange(){ //地址调整
+    wx.setStorage({
+      key: app.storageKey.addressListCatchtap,
+      data: "addrSelect"
+    });
     wx.navigateTo({
       url: '../../mine/address/address'
     });
   },
-  timeChange(){
+  timeChange(){ //配送时间
     this.setData({
       payFlag: "hide",
       popupFlag: "show",
@@ -130,7 +154,7 @@ Page({
       listpopup: this.data.listtimes
     });
   },
-  popupSelect(e) {
+  popupSelect(e) {  //配送时间
     var val = e.currentTarget.dataset.val;
     var popuptype = e.currentTarget.dataset.popuptype;
     if (popuptype == "time"){
@@ -149,7 +173,7 @@ Page({
     }
     
   },
-  dtypeChange(){
+  dtypeChange(){  //配送方式
     var list = ["商家配送","门店自取"];
     this.setData({
       payFlag: "hide",
@@ -196,7 +220,6 @@ Page({
     });
   },
   pay(){
-    //var data = { wxId: common.currentMember.wxId, remarks: remarks, memberAddressId: memberAddressId, listDetail: JSON.stringify(list) };
     var memberAddressId = this.data.address.id;
     var listDetail = this.data.cartlist;
     var time = this.data.time1;
@@ -211,7 +234,6 @@ Page({
     data['deliveryDate'] = this.data.time1;
     data['deliveryType'] = this.data.dtype;
     data['payMethod'] = this.data.paytype;
-    debugger;
     wx.request({
       url: app.common.basePath + "/order/create", //
       data: data,
@@ -227,11 +249,7 @@ Page({
             obj.count=0;
           });
           wx.setStorage({
-            key: "key_shop_cart_total",
-            data: 0
-          });
-          wx.setStorage({
-            key: "key_shop_cart",
+            key: app.storageKey.cart,
             data: []
           });
           prevPage.setData({

@@ -14,7 +14,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var obj = wx.getStorageSync('key_shop_address');
+    var obj = wx.getStorageSync(app.storageKey.addressCurrent);
     this.setData({
       address: obj,
       sexval:obj.sex
@@ -134,11 +134,11 @@ Page({
                 address: address
               });
               wx.setStorage({
-                key: "key_shop_address",
+                key: app.storageKey.addressCurrent,
                 data: address
               });
               wx.setStorage({
-                key: "key_shop_listaddress",
+                key: app.storageKey.addressList,
                 data: res.data.result.records
               });
               wx.navigateBack();

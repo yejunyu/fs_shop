@@ -26,7 +26,7 @@
         "text": "首页"
       },
       {
-        "pagePath": "pages/shop/list/list",
+        "pagePath": "pages/shop/cart/list",
         "iconPath": "images/icons/cart.png",
         "selectedIconPath": "images/icons/cart_0.png",
         "text": "购物车"

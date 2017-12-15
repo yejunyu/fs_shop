@@ -48,7 +48,7 @@ Page({
       });
     } else if (k == "address"){
       wx.setStorage({
-        key: "key_address_list",
+        key: app.storageKey.addressListCatchtap,
         data: "addrEdit"
       });
       wx.navigateTo({
