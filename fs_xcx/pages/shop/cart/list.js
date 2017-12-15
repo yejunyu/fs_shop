@@ -1,11 +1,12 @@
 // pages/shop/cart/list.js
+var app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    cart: wx.getStorageSync('key_cart_cache_list'),
+    cart: [],
     cartTotal: 0,
     cartCount: 0
   
@@ -15,7 +16,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    
   },
 
   /**
@@ -29,7 +30,21 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    console.log("生命周期函数--监听页面显示");
+    var cart = wx.getStorageSync(app.storageKey.cart);
+    if (cart) {
+      var total = 0;
+      var count = 0;
+      cart.forEach(function (obj, i) {
+        total = total + (obj.count * obj.price);
+        count = count + obj.count;
+      });
+      this.setData({
+        cartTotal: total,
+        cartCount: count,
+        cart: cart
+      });
+    }
   },
 
   /**
@@ -66,72 +81,66 @@ Page({
   onShareAppMessage: function () {
   
   },
-  cartDetail() {
-    if (this.data.cartDetailFlag == "hide") {
-      this.setData({
-        cartDetailFlag: "show"
-      });
-    } else {
-      this.setData({
-        cartDetailFlag: "hide"
-      });
-    }
-  },
   cartClear() {
-    this.cartDetail();
-    this.data.listgoods.forEach(function (obj, i) {
-      obj.count = 0;
-    });
     this.setData({
       cartTotal: 0,
       cartCount: 0,
-      listgoods: this.data.listgoods,
       cart: []
     });
-  },
-  switchSlider: function (e) {
-    var index = e.target.dataset.index;
-    this.setData({
-      current: e.target.dataset.index
+    wx.setStorage({
+      key: app.storageKey.cart,
+      data: []
     });
-    if (index == 0) {
-      this.setData({
-        listgoods: this.data.oldlistgoods
-      });
-    } else if (index == 1) {
-      this.sortByPrice();
-    }
   },
-  sortByPrice(flag) {
-    let list = this.data.listgoods;
-    let current = this.data.current;
-    var flag = true;
-    if (this.data.sortPriceFlag) {
-      flag = false;
-      for (let i = 0; i < list.length; ++i) {
-        for (let j = 0; j < list.length; ++j) {
-          if ((list[i].price * 1) < (list[j].price * 1)) {
-            let goods = list[i];
-            list[i] = list[j];
-            list[j] = goods;
+  cartAdd(event){ //数量增加
+    let goods = event.currentTarget.dataset.goods;
+    let goodsId = goods.id;
+    this.data.cart.forEach(function (obj, i) {
+      if (obj.id == goodsId) {
+        if (obj.count) {
+          obj.count += 1;
+        } else {
+          obj.count = 1;
+        }
+      }
+    });
+    this.calculation();
+  },
+  cartSubtract(event) {   //数量减少
+    let goods = event.currentTarget.dataset.goods;
+    let goodsId = goods.id;
+    var cart = this.data.cart;
+    var that = this;
+    this.data.cart.forEach(function (obj, i) {
+      if (obj.id == goodsId) {
+        if (obj.count && obj.count > 0) {
+          obj.count -= 1;
+          if (obj.count==0){
+            cart.splice(i,1);
+            that.setData({
+              cart: cart
+            });
           }
         }
       }
-    } else {
-      flag = true;
-      for (let i = 0; i < list.length; ++i) {
-        for (let j = 0; j < list.length; ++j) {
-          if ((list[i].price * 1) > (list[j].price * 1)) {
-            let goods = list[i];
-            list[i] = list[j];
-            list[j] = goods;
-          }
-        }
-      }
-    }
+    });
+    this.calculation();
+  },
+  calculation(){  //计算总量以及总价
+    let total = 0;
+    let count = 0;
+    this.data.cart.forEach(function (obj, i) {
+      total = total + (obj.count * obj.price);
+      count = count + obj.count;
+    });
     this.setData({
-      sortPriceFlag: flag,
-      listgoods: list
+      cartTotal: total,
+      cartCount: count,
+      cart: this.data.cart
+    });
+    wx.setStorage({
+      key: app.storageKey.cart,
+      data: this.data.cart
     });
   },
   settlement() {
@@ -142,20 +151,8 @@ Page({
       });
       return;
     }
-    wx.setStorage({
-      key: "key_shop_cart",
-      data: this.data.cart
-    });
-    wx.setStorage({
-      key: "key_shop_cart_total",
-      data: this.data.cartTotal
-    });
-    wx.setStorage({
-      key: "key_address_list",
-      data: "addrSelect"
-    });
     wx.navigateTo({
-      url: 'settle/settlement'
+      url: '../goods/settle/settlement'
     });
   }
 })
