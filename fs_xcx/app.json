@@ -1,8 +1,6 @@
 {
   "pages": [
     "pages/shop/index/index",
-    "pages/shop/list/list",
-    "pages/shop/list/settlement/settlement",
     "pages/shop/goods/list",
     "pages/shop/goods/settle/settlement",
     "pages/shop/cart/list",
@@ -10,8 +8,7 @@
     "pages/shop/mine/order/list",
     "pages/shop/mine/order/detail/detail",
     "pages/shop/mine/address/address",
-    "pages/shop/mine/address/address/edit",
-    "pages/shop/detail/detail"
+    "pages/shop/mine/address/address/edit"
   ],
   "tabBar": {
     "color": "#858585",
@@ -42,7 +39,7 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#008842",
-    "navigationBarTitleText": "FStack点餐系统",
+    "navigationBarTitleText": "掌中宝",
     "navigationBarTextStyle": "white"
   },
   "debug": true

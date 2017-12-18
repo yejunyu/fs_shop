@@ -32,3 +32,67 @@
   </swiper>
 </scroll-view>
 
+<!-- 附加菜单 -->
+<view class='extra_menu'>
+  <view class='extra_menu_box'>
+    <image class='em_img' src='../../../images/em_01.png'></image>
+    <view class='em_txt'>
+      <view class='em_txt_0'>
+        <text>跑腿代办</text>
+      </view>
+      <view class='em_txt_1' >
+        把时间留给自己，跑腿的事交给我们
+      </view>
+    </view>
+  </view>
+  <view class='extra_menu_box'>
+    <image class='em_img' src='../../../images/em_02.png'></image>
+    <view class='em_txt'>
+      <view class='em_txt_0'>
+        <text>送药上门</text>
+      </view>
+      <view class='em_txt_1' >
+        您健康，我快乐，健康相随一切最美
+      </view>
+    </view>
+  </view>
+  <view class='extra_menu_box'>
+    <image class='em_img' src='../../../images/em_03.png'></image>
+    <view class='em_txt'>
+      <view class='em_txt_0'>
+        <text>积分兑换</text>
+      </view>
+      <view class='em_txt_1' >
+        激情换购，好礼多多，精彩无限
+      </view>
+    </view>
+  </view>
+  <view class='extra_menu_box'>
+    <image class='em_img' src='../../../images/em_04.png'></image>
+    <view class='em_txt'>
+      <view class='em_txt_0'>
+        <text>敬请期待</text>
+      </view>
+      <view class='em_txt_1' >
+        努力创建中,如果您有好的建议请留言
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class='foot'>
+  <view class='foot_0'>
+    <image class='foot_0_img' src='http://192.168.1.120:8080/business_images/wx_xcx/banner/foot_01.jpg'></image>
+  </view>
+  <view class='foot_0'>
+    <image class='foot_0_img' src='http://192.168.1.120:8080/business_images/wx_xcx/banner/foot_02.jpg'></image>
+  </view>
+  <view class='foot_0'>
+    <image class='foot_0_img' src='http://192.168.1.120:8080/business_images/wx_xcx/banner/foot_03.jpg'></image>
+  </view>
+  <view class='foot_0'>
+    <image class='foot_0_img' src='http://192.168.1.120:8080/business_images/wx_xcx/banner/foot_04.jpg'></image>
+  </view>
+</view>
+
+

@@ -7,7 +7,7 @@
   flex-direction: column
 }
 .user{
-  height: 500rpx;
+  height: 600rpx;
   width: 100%;
 }
 .user-pic{
@@ -41,12 +41,12 @@
 }
 
 .menu{
-   flex: 1;
+  flex: 1;
   width: 100%;
 }
 .menu image{
-  height: 100rpx;
-  width: 100rpx;
+  height: 150rpx;
+  width: 150rpx;
 }
 .menu ul{
   display: flex;

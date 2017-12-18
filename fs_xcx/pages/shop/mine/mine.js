@@ -14,6 +14,11 @@ Page({
         "pic_url": "/images/icons/mine_02.png",
         "title": "收货地址",
         "key": "address",
+      },
+      {
+        "pic_url": "/images/icons/mine_03.png",
+        "title": "优惠券",
+        "key": "address",
       }
     ]
   },
