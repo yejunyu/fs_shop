@@ -2,6 +2,7 @@ package com.fullstack.common.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.fullstack.shop.agency.entity.Agency;
 import com.fullstack.shop.agency.service.AgencyService;
 import com.fullstack.shop.dict.entity.Attach;
 import com.fullstack.shop.dict.entity.Dict;
@@ -59,7 +60,7 @@ public abstract class ServiceController extends BaseController {
 	protected ReportService<Report> reportService;
 	
 	@Autowired  
-	protected AgencyService<Report> agencyService;
+	protected AgencyService<Agency> agencyService;
 	
 	@Autowired  
 	protected AttachService<Attach> attachService;

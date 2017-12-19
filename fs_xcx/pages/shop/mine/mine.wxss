@@ -56,10 +56,11 @@
 }
 .menu ul li{
   width: 30%;
-  height: 200rpx;
+  height: 210rpx;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-size: 14px;
+  font-size: 0.8em;
+  float: left;
 }

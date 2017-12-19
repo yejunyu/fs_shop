@@ -1,0 +1,33 @@
+/* pages/shop/agency/list.wxss */
+.content{
+  height: 100%;
+  width: 100%;
+}
+.list{
+  height: 100%;
+  width: 100%;
+}
+.list .agency{
+  height: 100rpx;
+  width: 100%;
+  border-bottom: 1px solid gainsboro;
+  padding: 10rpx 0rpx 10rpx 20rpx;
+  color: #666;
+}
+.list .agency .v_r{
+  float: right;
+  margin: 15rpx 30rpx 0rpx 0rpx;
+  font-size: 1.8em;
+  color: darkgray;
+}
+.list .agency .titles{
+  float: left;
+  width: 80%;
+  color: black;
+  font-weight:  bolder;
+}
+.list .agency .times{
+  float: left;
+  width: 70%;
+  font-size: 0.8em;
+}

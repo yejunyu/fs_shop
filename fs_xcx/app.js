@@ -87,6 +87,9 @@ App({
     addressCurrent: "menber_address_current",       // 当前选中地址
     addressList: "menber_address_list",             // 地址列表
     addressListCatchtap: "address_list_catchtap",   // 地址列表点击事件 addrSelect 选中 addrEdit 修改
+    agencyCurrent:"agency_currnt",                  // 当前代办对象的值
+
+    
 
     demo:"demo"
   }

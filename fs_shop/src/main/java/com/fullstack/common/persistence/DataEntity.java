@@ -10,6 +10,7 @@ import java.util.Map;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.enums.IdType;
+import com.fullstack.common.utils.DateUtils;
 
 /**
  * Entity支持类
@@ -85,6 +86,9 @@ public abstract class DataEntity<T> implements Serializable {
 
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
+		if(createDate!=null){
+			this.extraData.put("createDateStr", DateUtils.formats(createDate));
+		}
 	}
 
 	public Integer getUpdateBy() {

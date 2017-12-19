@@ -226,7 +226,7 @@ Page({
     var dtype = this.data.dtype;
     var remarks = this.data.remarks;
 
-    let data = {};
+    var data = {};
     data['listDetail'] = this.data.cartlist;
     data['memberAddressId'] = this.data.address.id;
     data['wxId'] = wx.getStorageSync('openid');

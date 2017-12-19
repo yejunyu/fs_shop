@@ -11,7 +11,10 @@
     <view class="menu">
         <ul>
         <block wx:for="{{mine_list}}" wx:for-item="mine" wx:key="index" >
-            <li catchtap="menuclick" data-key="{{mine.key}}" ><image src="{{mine.pic_url}}"></image><span>{{mine.title}}</span></li>
+            <li catchtap="menuclick" data-key="{{mine.key}}" >
+              <image src="{{mine.pic_url}}"></image>
+              <span>{{mine.title}}</span>
+            </li>
         </block>
         </ul>
     </view>

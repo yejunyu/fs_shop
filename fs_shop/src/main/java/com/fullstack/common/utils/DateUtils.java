@@ -36,6 +36,18 @@ public class DateUtils {
 		return DateFormatUtils.format(new Date(), pattern);
 	}
 	/**
+	 * 
+	 * @param d
+	 * @param pattern
+	 * @return
+	 */
+	public static String formats(Date d,String pattern) {
+		return DateFormatUtils.format(d, pattern);
+	}
+	public static String formats(Date d) {
+		return formats(d, parsePatterns[0]);
+	}
+	/**
 	 * 根据日期格式获取昨天时间
 	 * @param pattern
 	 * @return

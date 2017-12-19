@@ -20,7 +20,10 @@ public class Agency extends DataEntity<Agency> {
 	private String address;		// 地址
 	private String demand;		// 其他要求
 	private Integer type;		// 类型
-	private String cost;		// 成本（服务费）
+	@TableField("basic_cost")
+	private String basicCost;	// 基础费用
+	@TableField("service_cost")
+	private String serviceCost;	// 成本（服务费）
 	
 	
 	@TableField("create_by")
@@ -75,12 +78,21 @@ public class Agency extends DataEntity<Agency> {
 		this.type = type;
 	}
 
-	public String getCost() {
-		return cost;
+	public String getBasicCost() {
+		return basicCost;
 	}
 
-	public void setCost(String cost) {
-		this.cost = cost;
+	public void setBasicCost(String basicCost) {
+		this.basicCost = basicCost;
 	}
+
+	public String getServiceCost() {
+		return serviceCost;
+	}
+
+	public void setServiceCost(String serviceCost) {
+		this.serviceCost = serviceCost;
+	}
+
 	
 }

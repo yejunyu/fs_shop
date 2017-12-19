@@ -19,6 +19,21 @@ Page({
         "pic_url": "/images/icons/mine_03.png",
         "title": "优惠券",
         "key": "address",
+      },
+      {
+        "pic_url": "/images/icons/mine_04.png",
+        "title": "代办列表",
+        "key": "agency",
+      },
+      {
+        "pic_url": "/images/icons/mine_04.png",
+        "title": "代办列表",
+        "key": "agency",
+      },
+      {
+        "pic_url": "/images/icons/mine_04.png",
+        "title": "代办列表",
+        "key": "agency",
       }
     ]
   },
@@ -58,6 +73,10 @@ Page({
       });
       wx.navigateTo({
         url: 'address/address'
+      });
+    } else if (k =='agency'){
+      wx.navigateTo({
+        url: '../agency/list'
       });
     }
     

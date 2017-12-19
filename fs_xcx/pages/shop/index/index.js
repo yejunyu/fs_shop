@@ -1,9 +1,9 @@
 //获取应用实例
-var app = getApp()
+var app = getApp();
 
 Page({
   data: {
-    localtion: '广州市政府',
+    localtion: '请选择您当前的位置',
     interval: 3000,
     duration: 1000,
     userInfo: {},
@@ -29,6 +29,7 @@ Page({
   },
   onLoad: function () {
     this.loadGoodsTemp();
+    
   },
   loadGoodsTemp: function () {  //  加载商品类型
     var url = app.common.basePath + "/goodsTemp/list";
@@ -82,5 +83,11 @@ Page({
     wx.navigateTo({
       url: '../goods/list'
     });
+  },
+  agency: function(){
+    wx.navigateTo({
+      url: '../agency/add/add'
+    });
   }
+
 })

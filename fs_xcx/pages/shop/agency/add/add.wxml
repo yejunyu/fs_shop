@@ -1,0 +1,36 @@
+<view class="body">
+  <view class="content">
+    <view class="con_v">
+      <view class="txt">代办事情</view>
+      <textarea class='tarea' value="{{agency.content}}" bindinput="inputkeyin" data-name="content"/>
+    </view>
+    <view class="con_v">
+      <view class="txt">代办地址</view>
+      <textarea class='tarea' value="{{agency.address}}" bindinput="inputkeyin" data-name="address"/>
+    </view>
+    <view class="con_v">
+      <view class="txt">其他要求</view>
+      <textarea class='tarea' value="{{agency.demand}}" bindinput="inputkeyin" data-name="demand"/>
+    </view>
+    <view class="con_v">
+      <view class="txt">基础费用</view>
+      <input class='inp' type='number' placeholder='代办的事情需要的基本费用' value="{{agency.basicCost}}" bindinput="inputkeyin" data-name="basicCost"/>
+      <view style='margin-top: 30rpx;float: left;'> 元</view>
+    </view>
+  </view>
+  <view class="con_v" style='margin-top:50rpx;'>
+    <view class="txt">服务费</view>
+    <input class='inp' type='number' placeholder='10元起，服务费越多效率越高' value="{{agency.serviceCost}}" bindinput="inputkeyin" data-name="serviceCost"/>
+    <view style='margin-top: 30rpx;float: left;'> 元</view>
+  </view>
+  <view class="con_v" style='margin-top:50rpx;'>
+    <view class="txt">支付金额:</view>
+    <view style='margin-top: 30rpx;float: left;color:red;font-weight: bolder;'> ￥{{total}}</view>
+  </view>
+</view>
+
+
+
+<view class="save" catchtap="save"> 
+	<text class="btn">确定</text>
+</view>

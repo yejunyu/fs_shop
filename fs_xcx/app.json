@@ -8,6 +8,8 @@
     "pages/shop/mine/order/list",
     "pages/shop/mine/order/detail/detail",
     "pages/shop/mine/address/address",
+    "pages/shop/agency/list",
+    "pages/shop/agency/add/add",
     "pages/shop/mine/address/address/edit"
   ],
   "tabBar": {
