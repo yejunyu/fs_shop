@@ -22,6 +22,8 @@ import com.fullstack.shop.order.service.OrderDetailService;
 import com.fullstack.shop.order.service.OrderService;
 import com.fullstack.shop.report.entity.Report;
 import com.fullstack.shop.report.service.ReportService;
+import com.fullstack.shop.sys.entity.Feedback;
+import com.fullstack.shop.sys.service.FeedbackService;
 import com.fullstack.shop.user.entity.Member;
 import com.fullstack.shop.user.entity.MemberAddress;
 import com.fullstack.shop.user.service.MemberAddressService;
@@ -64,5 +66,8 @@ public abstract class ServiceController extends BaseController {
 	
 	@Autowired  
 	protected AttachService<Attach> attachService;
+	
+	@Autowired  
+	protected FeedbackService<Feedback> feedbackService;
 	
 }

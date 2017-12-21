@@ -1,0 +1,16 @@
+<!--pages/shop/sys/feedback/add/add.wxml-->
+<view class="body">
+  <view class="content">
+    <view class="con_v">
+      <view class="txt">意见建议：</view>
+      <textarea class='tarea' value="{{feedback.content}}" bindinput="inputkeyin" data-name="content"/>
+    </view>
+  </view>
+</view>
+
+
+
+<view class="save" catchtap="save"> 
+	<text class="btn">提交</text>
+</view>
+

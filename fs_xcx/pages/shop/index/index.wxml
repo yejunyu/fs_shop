@@ -67,7 +67,7 @@
       </view>
     </view>
   </view>
-  <view class='extra_menu_box'>
+  <view class='extra_menu_box' catchtap="feedback">
     <image class='em_img' src='../../../images/em_04.png'></image>
     <view class='em_txt'>
       <view class='em_txt_0'>

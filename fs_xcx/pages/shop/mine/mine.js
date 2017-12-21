@@ -27,8 +27,8 @@ Page({
       },
       {
         "pic_url": "/images/icons/mine_04.png",
-        "title": "代办列表",
-        "key": "agency",
+        "title": "我的反馈",
+        "key": "feedback",
       },
       {
         "pic_url": "/images/icons/mine_04.png",
@@ -74,11 +74,15 @@ Page({
       wx.navigateTo({
         url: 'address/address'
       });
-    } else if (k =='agency'){
+    } else if (k == 'agency') {
       wx.navigateTo({
         url: '../agency/list'
       });
-    }
+    } else if (k == 'feedback') {
+      wx.navigateTo({
+        url: '../sys/feedback/list'
+      });
+    } 
     
   }
 })

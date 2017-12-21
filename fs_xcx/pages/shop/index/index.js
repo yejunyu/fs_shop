@@ -85,8 +85,21 @@ Page({
     });
   },
   agency: function(){
+    wx.setStorage({
+      key: app.storageKey.agencyCurrent,
+      data: {}
+    });
     wx.navigateTo({
       url: '../agency/add/add'
+    });
+  },
+  feedback: function () {
+    wx.setStorage({
+      key: app.storageKey.feedbackCurrent,
+      data: {}
+    });
+    wx.navigateTo({
+      url: '../sys/feedback/add/add'
     });
   }
 

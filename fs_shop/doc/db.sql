@@ -30,7 +30,9 @@ CREATE TABLE `shop_member` (
 DROP TABLE IF EXISTS `shop_goods_temp`;
 CREATE TABLE `shop_goods_temp` (
   `id` int(11) NOT NULL auto_increment COMMENT 'id',
+	`parent_id` int(11) DEFAULT '-1' COMMENT '上级类型',
   `name` varchar(50) NOT NULL COMMENT '名称',
+  `img` varchar(50) default NULL COMMENT '图片',
   `fieldset` varchar(255) DEFAULT NULL COMMENT '自定义字段',
 	`update_by` int(11) NOT NULL COMMENT '更新者',
   `update_date` datetime NOT NULL COMMENT '更新时间',
@@ -76,9 +78,10 @@ CREATE TABLE `shop_order` (
 	`number` varchar(100) NOT NULL COMMENT '订单号',
 	`table_no` varchar(30) DEFAULT NULL COMMENT '台号',
 	`persons` int(11) DEFAULT NULL COMMENT '人数',
-	`pay_method` int(11) DEFAULT NULL COMMENT '支付方式',
+	`pay_method` varchar(30) DEFAULT NULL COMMENT '支付方式',
   `order_time` varchar(20) NOT NULL COMMENT '下单时间',
   `delivery_date` varchar(20) DEFAULT NULL COMMENT '配送日期',
+  `delivery_type` varchar(30) DEFAULT NULL COMMENT '配送方式',
 	`status` tinyint(2) DEFAULT '0' COMMENT '状态',
   `total` varchar(20) DEFAULT '0' COMMENT '总计',
 	`create_by` int(11) NOT NULL COMMENT '创建者',
@@ -144,3 +147,41 @@ CREATE TABLE `shop_member_address` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='顾客收餐地址信息表';
 
+DROP TABLE IF EXISTS `shop_agency`;
+CREATE TABLE `shop_agency` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `content` varchar(255) DEFAULT NULL COMMENT '内容',
+  `address` varchar(255) DEFAULT NULL COMMENT '地址',
+  `demand` varchar(255) DEFAULT NULL COMMENT '其它要求',
+	`type` int(11) DEFAULT NULL COMMENT '类型',
+	`basic_cost` varchar(30) DEFAULT NULL COMMENT '基础费用',
+	`service_cost` varchar(30) DEFAULT NULL COMMENT '服务费',
+	`create_by` int(11) NOT NULL COMMENT '创建者',
+  `create_date` datetime NOT NULL COMMENT '创建时间',
+  `remarks` varchar(255) DEFAULT NULL COMMENT '备注信息',
+  `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT '删除标记',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='代办表';
+
+DROP TABLE IF EXISTS `shop_attach`;
+CREATE TABLE `shop_attach` (
+  `id` int(11) NOT NULL auto_increment COMMENT 'id',
+  `parent_id` int(11) DEFAULT NULL COMMENT '来源id',
+  `name` varchar(100) DEFAULT NULL COMMENT '名称',
+	`path` varchar(100) DEFAULT NULL COMMENT '路径',
+  `bytes` MEDIUMBLOB DEFAULT NULL COMMENT '文件二进制存储',
+	`first_show` char(1) NOT NULL DEFAULT '0' COMMENT '优先展示',
+  `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT '删除标记',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='系统附件表（当数据量不大不想重新创建一张表就用这张）';
+
+DROP TABLE IF EXISTS `shop_feedback`;
+CREATE TABLE `shop_feedback` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `content` varchar(255) DEFAULT NULL COMMENT '内容',
+	`create_by` int(11) NOT NULL COMMENT '创建者',
+  `create_date` datetime NOT NULL COMMENT '创建时间',
+  `remarks` varchar(255) DEFAULT NULL COMMENT '备注信息',
+  `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT '删除标记',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='反馈表';

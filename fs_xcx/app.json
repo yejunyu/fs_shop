@@ -10,6 +10,8 @@
     "pages/shop/mine/address/address",
     "pages/shop/agency/list",
     "pages/shop/agency/add/add",
+    "pages/shop/sys/feedback/list",
+    "pages/shop/sys/feedback/add/add",
     "pages/shop/mine/address/address/edit"
   ],
   "tabBar": {

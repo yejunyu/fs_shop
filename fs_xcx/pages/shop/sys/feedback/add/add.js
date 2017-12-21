@@ -1,4 +1,4 @@
-// pages/shop/agency/add/add.js
+// pages/shop/sys/feedback/add/add.js
 var app = getApp();
 Page({
 
@@ -6,22 +6,19 @@ Page({
    * 页面的初始数据
    */
   data: {
-    agency:{},
-    total:0
+    feedback:{}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var agency = wx.getStorageSync(app.storageKey.agencyCurrent);
-    if (agency){
+    var feedback = wx.getStorageSync(app.storageKey.feedbackCurrent);
+    if (feedback) {
       this.setData({
-        agency: agency
+        feedback: feedback
       });
-      this.totals();
     }
-    
   },
 
   /**
@@ -75,38 +72,19 @@ Page({
   inputkeyin(e) {
     var val = e.detail.value;
     var key = e.currentTarget.dataset.name;
-    var agency = this.data.agency;
-    agency[key] = val;
+    var feedback = this.data.feedback;
+    feedback[key] = val;
     this.setData({
-      agency: agency
-    });
-    this.totals(key);   //统计金额
-  },
-  totals:function(key){
-    var basicCost = this.data.agency['basicCost'];
-    var serviceCost = this.data.agency['serviceCost'];
-    if (!basicCost) {
-      basicCost = 0;
-    } else {
-      basicCost = basicCost * 1;
-    }
-    if (!serviceCost) {
-      serviceCost = 0;
-    } else {
-      serviceCost = serviceCost * 1;
-    }
-    this.setData({
-      total: (basicCost + serviceCost)
+      feedback: feedback
     });
   },
-  save:function(){
-    var data = this.data.agency;
-    data['type']=0;
+  save: function () {
+    var data = this.data.feedback;
     var url = "";
-    if(data.id){
-      url = app.common.basePath + "/agency/update";
-    }else{
-      url = app.common.basePath + "/agency/create";
+    if (data.id) {
+      url = app.common.basePath + "/feedback/update";
+    } else {
+      url = app.common.basePath + "/feedback/create";
     }
     wx.request({
       url: url, //
