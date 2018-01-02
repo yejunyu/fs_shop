@@ -12,7 +12,7 @@ import com.fullstack.user.auth.entity.Auth;
  * @Roleor chay
  * @version 2017-5-12
  */
-@TableName("role_auth")
+@TableName("u_role_auth")
 public class RoleAuth extends DataEntity<RoleAuth> {
 	
 	private static final long serialVersionUID = 1L;
@@ -23,14 +23,6 @@ public class RoleAuth extends DataEntity<RoleAuth> {
 	
 	@TableField(exist=false)
 	private Integer id;		//
-	@TableField(exist=false)
-	private Integer createBy;	// 创建者
-	@TableField(exist=false)
-	private Date createDate;	// 创建日期
-	@TableField(exist=false)
-	private Integer updateBy;	// 
-	@TableField(exist=false)
-	private Date updateDate;	// 
 	@TableField(exist=false)
 	private String remarks;	// 
 	@TableField(exist=false)

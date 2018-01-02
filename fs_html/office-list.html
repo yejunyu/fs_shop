@@ -1,0 +1,276 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<!--[if lt IE 9]>
+<script type="text/javascript" src="lib/html5shiv.js"></script>
+<script type="text/javascript" src="lib/respond.min.js"></script>
+<![endif]-->
+<link rel="stylesheet" type="text/css" href="static/h-ui/css/H-ui.min.css" />
+<link rel="stylesheet" type="text/css" href="static/h-ui.admin/css/H-ui.admin.css" />
+<link rel="stylesheet" type="text/css" href="lib/Hui-iconfont/1.0.8/iconfont.css" />
+<link rel="stylesheet" type="text/css" href="static/h-ui.admin/skin/default/skin.css" id="skin" />
+<link rel="stylesheet" type="text/css" href="static/h-ui.admin/css/style.css" />
+<link rel="stylesheet" href="lib/zTree/v3/css/zTreeStyle/zTreeStyle.css" type="text/css">
+<style type="text/css">
+    #rMenu {
+		position:absolute; 
+		background-color: #fff;
+		border:1px solid #000;
+		text-align: left;
+		padding: 2px;
+		visibility:hidden;
+		top:0;
+	}
+    #rMenu a{
+        cursor: pointer;
+        list-style: none outside none;
+		font-size: 12px;
+    }
+	#rMenu li:hover{
+		background:#999;
+	}
+	.ztree * {
+		font-size: 14px;
+	}
+</style>
+<!--[if IE 6]>
+<script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script>DD_belatedPNG.fix('*');</script>
+<![endif]-->
+<title></title>
+</head>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 机构管理 <span class="c-gray en">&gt;</span> 机构管理 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<table class="table">
+	<tr>
+		<td width="200" class="va-t"><ul id="treeDemo" class="ztree"></ul></td>
+		<td class="va-t">
+			<div class="page-container">
+				<form action="" method="post" class="form form-horizontal" id="form-user-add">
+					<input type="hidden" id="id" name="id" value="">
+					<input type="hidden" id="parentId" name="parentId" value="">
+					<div class="row cl">
+						<label class="form-label col-xs-4 col-sm-2">
+							<span class="c-red">*</span>
+							上级机构：</label>
+						<div class="formControls col-xs-6 col-sm-6">
+							<input type="text" disabled="disabled" class="input-text" value="" placeholder="" id="parentName" name="parentName">
+						</div>
+					</div>
+					<div class="row cl">
+						<label class="form-label col-xs-4 col-sm-2">
+							<span class="c-red">*</span>
+							机构名称：</label>
+						<div class="formControls col-xs-6 col-sm-6">
+							<input type="text" class="input-text" value="" placeholder="" id="name" name="name">
+						</div>
+					</div>
+					<div class="row cl">
+						<label class="form-label col-xs-4 col-sm-2">备注：</label>
+						<div class="formControls col-xs-6 col-sm-6">
+							<textarea name="remarks" id="remarks" cols="" rows="" class="textarea"  placeholder="备注..." ></textarea>
+							<!-- <p class="textarea-numberbar"><em class="textarea-length">0</em>/100</p> -->
+						</div>
+					</div>
+					<div class="row cl">
+						<div class="col-9 col-offset-2">
+							<input class="btn btn-primary radius" id="submit" attr1="add" type="button" onclick="createOffice()" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+						</div>
+					</div>
+				</form>
+			</div>
+		</td>
+	</tr>
+</table>
+<div id="rMenu">
+	<ul>
+		<li>&nbsp;&nbsp;<a href="javascript:;" class="list-group-item" onclick="create()" >新增</a>&nbsp;&nbsp;</li>
+		<li>&nbsp;&nbsp;<a href="javascript:;" class="list-group-item" onclick="edit()" >修改</a>&nbsp;&nbsp;</li>
+		<li>&nbsp;&nbsp;<a href="javascript:;" class="list-group-item" onclick="del()" >删除</a>&nbsp;&nbsp;</li>
+	</ul>
+</div>
+<!--_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="static/h-ui/js/H-ui.min.js"></script>
+<script type="text/javascript" src="static/h-ui.admin/js/H-ui.admin.js"></script> <!--/_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="static/h-ui.admin/js/common.js"></script>
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="lib/zTree/v3/js/jquery.ztree.all-3.5.min.js"></script> 
+<script type="text/javascript">
+var setting = {
+	view: {
+		dblClickExpand: false,
+		showLine: false,
+		fontCss:{ "font-size": "14px"},
+		selectedMulti: false
+	},
+	data: {
+		simpleData: {
+			enable:true,
+			idKey: "id",
+			pIdKey: "pId",
+			rootPId: ""
+		}
+	},
+	callback: {
+		beforeClick: function(treeId, treeNode) {
+			var zTree = $.fn.zTree.getZTreeObj("tree");
+			
+			$("#id").val(treeNode.id);
+			$("#name").val(treeNode.name);
+			
+			loadInfo();
+		},
+		onRightClick:function(event,treeId,treeNode){
+			var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
+			var node = treeObj.getNodeByParam("id", treeNode.id);
+			treeObj.selectNode(node);
+			
+			$("#id").val(treeNode.id);
+			$("#name").val(treeNode.name);
+			//$("#parentId").val(treeNode.id);
+			//$("#parentName").val(treeNode.name);
+			
+			if (!treeNode && event.target.tagName.toLowerCase() != "button" && $(event.target).parents("a").length == 0) {
+				showRMenu("root", event.clientX, event.clientY);
+			} else if (treeNode && !treeNode.noR) {
+				showRMenu("node", event.clientX, event.clientY);
+			}
+			loadInfo();
+		}
+	}
+};
+//显示右键菜单
+function showRMenu(type, x, y) {
+	//debugger;
+    $("#rMenu ul").show();
+    $("#rMenu").css({"top":y+"px", "left":x+"px", "visibility":"visible"}); //设置右键菜单的位置、可见
+    $("body").bind("mousedown", rMenuHidden);
+}
+//隐藏右键菜单
+function hideRMenu() {
+    if ($("#rMenu")){
+		//$("#rMenu").css({"visibility": "hidden"}); //设置右键菜单不可见
+	} 
+    //$("body").unbind("mousedown", onBodyMouseDown);
+}
+//鼠标按下事件
+function rMenuHidden(hiddenFlag){
+	//$("#rMenu").css({"visibility" : "hidden"});
+	if (!(event.target.id == "rMenu" || $(event.target).parents("#rMenu").length>0) || (hiddenFlag==0)) {
+        $("#rMenu").css({"visibility" : "hidden"});
+    }
+}
+$(function(){
+	loadData();
+});
+//加载数据
+function loadData(){
+	var url = "/office/list";
+	common.getData(url,function(data){
+		var list = data.result;
+		var html="";
+		var zNodes = [];
+		for(var i=0;i<list.length;i++){
+			var obj = list[i];
+			var n = {id:obj.id,pId:obj.parentId,name:obj.name};
+			
+			zNodes.push(n);
+		}
+		initTree(zNodes);
+	});
+}
+//初始加载左侧菜单
+function initTree(zNodes){
+	var t = $("#treeDemo");
+	t = $.fn.zTree.init(t, setting, zNodes);
+}
+//创建机构
+function createOffice(){
+	var parentId = $("#parentId").val();
+	var name = $("#name").val();
+	var remarks = $("#remarks").val();
+	if(!name){
+		common.alertX("名称不能为空");
+		return;
+	}
+	
+	var attr1 = $("#submit").attr("attr1");
+	debugger;
+	if(attr1=="add"){
+		var url = "/office/createOffice";
+		var data={parentId:parentId,name:name,remarks:remarks};
+	}else{
+		var url = "/office/updateOffice";
+		var id = $("#id").val();
+		var data={id:id,parentId:parentId,name:name,remarks:remarks};
+	}
+	
+	common.postData(url,data,function(data){
+		parent.layer.msg(data.msg,{icon:1,time:1200});
+		window.location.reload();
+	});
+}
+//加载详情
+function loadInfo(){
+	$("#name").val("");
+	$("#remarks").val("");
+	$("#parentId").val("");
+	$("#parentName").val("");
+	$("#submit").attr("attr1","edit");
+	
+	var id = $("#id").val();
+	var url = "/office/getInfoById?id="+id;
+	common.getData(url,function(data){
+		var obj = data.result;
+		$("#name").val(obj.name);
+		$("#id").val(obj.id);
+		$("#remarks").val(obj.remarks);
+		if(obj.parentId && obj.parentId!="-1"){
+			var url = "/office/getInfoById?id="+obj.parentId;
+			common.getData(url,function(data){
+				var obj = data.result;
+				$("#parentId").val(obj.parentId);
+				$("#parentName").val(obj.name);
+			});
+		}
+	});
+}
+
+function create(){
+	rMenuHidden(0);
+	$("#submit").attr("attr1","add");
+	$("#parentId").val($("#id").val());
+	$("#parentName").val($("#name").val());
+	$("#id").val("");
+	$("#name").val("");
+	$("#remarks").val("");
+}
+
+function edit(){
+	rMenuHidden(0);
+	loadInfo();
+}
+
+function del(){
+	rMenuHidden(0);
+	layer.confirm('确认要删除吗？',function(index){
+		var id = $("#id").val();
+		var data={id:id};
+		var url = "/office/delOffice";
+		common.postData(url,data,function(data){
+			layer.msg(data.msg,{icon:1,time:1000});
+			window.location.reload();
+		});
+	});
+}		
+</script>
+</body>
+</html>

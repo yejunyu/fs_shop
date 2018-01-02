@@ -14,7 +14,7 @@ import com.fullstack.common.utils.UserUtils;
  * @Useror chay
  * @version 2017-5-12
  */
-@TableName("user")
+@TableName("u_user")
 public class User extends DataEntity<User> {
 	
 	private static final long serialVersionUID = 1L;
@@ -31,10 +31,10 @@ public class User extends DataEntity<User> {
 	private Date lastLoginTime;			// 最后登录时间
 	
 	
-	@TableField(exist=false)
-	private Integer createBy;	// 创建者
-	@TableField(exist=false)
-	private Date createDate;	// 创建日期
+	@TableField("update_by")
+	protected Integer updateBy;	// 更新者
+	@TableField("update_date")
+	protected Date updateDate;	// 更新日期
 	
 	@TableField(exist=false)
 	private List<UserRole> listUserRole;	//用户对应的角色关联关系

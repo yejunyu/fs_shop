@@ -11,17 +11,17 @@ import com.fullstack.common.persistence.DataEntity;
  * @author chay
  * @version 2017-5-12
  */
-@TableName("auth")
+@TableName("u_auth")
 public class Auth extends DataEntity<Auth> {
 	
 	private static final long serialVersionUID = 1L;
 	private String name;				// 名称
 	
 	
-	@TableField(exist=false)
-	private Integer createBy;	// 创建者
-	@TableField(exist=false)
-	private Date createDate;	// 创建日期
+	@TableField("update_by")
+	protected Integer updateBy;	// 更新者
+	@TableField("update_date")
+	protected Date updateDate;	// 更新日期
 	
 	@Override
 	public String toString(){

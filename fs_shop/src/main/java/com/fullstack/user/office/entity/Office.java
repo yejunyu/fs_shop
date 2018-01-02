@@ -11,7 +11,7 @@ import com.fullstack.common.persistence.DataEntity;
  * @author chay
  * @version 2017-5-12
  */
-@TableName("office")
+@TableName("u_office")
 public class Office extends DataEntity<Office> {
 	
 	private static final long serialVersionUID = 1L;
@@ -21,10 +21,10 @@ public class Office extends DataEntity<Office> {
 	@TableField("master_id")
 	private Integer masterId;		// 负责人
 
-	@TableField(exist=false)
-	private Integer createBy;	// 创建者
-	@TableField(exist=false)
-	private Date createDate;	// 创建日期
+	@TableField("update_by")
+	protected Integer updateBy;	// 更新者
+	@TableField("update_date")
+	protected Date updateDate;	// 更新日期
 
 	@Override
 	public String toString(){

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fullstack.user.user.dao.UserRoleDao">
+    
+	<sql id="userRoleColumns">
+		user.id AS "user.id",
+		user.name AS "user.name",
+		user.code AS "user.code",
+		user.login_name AS "user.loginName",
+		user.contact_way AS "user.contactWay",
+		user.email AS "user.email",
+		user.status AS "user.status",
+		user.last_login_time AS "user.lastLoginTime",
+		user.update_by AS "user.updateBy",
+		user.update_date AS "user.updateDate",
+		user.remarks AS "user.remarks",
+		user.del_flag AS "user.delFlag",
+		
+		role.id AS "role.id",
+		role.name AS "role.name",
+		
+		a.role_id AS "roleId",
+		a.user_id AS "userId"
+	</sql>
+	
+	<sql id="userRoleJoins">
+		join u_role role on role.id=a.role_id and role.del_flag = #{DEL_FLAG_NORMAL}
+		join u_user user on user.id=a.user_id and user.del_flag = #{DEL_FLAG_NORMAL}
+	</sql>
+	
+	<sql id="whereDefaultJoins">
+		
+	</sql>
+	
+	<update id="delByUserId">
+		delete from u_user_role 
+		WHERE user_id = #{userId}
+	</update>
+    
+    <update id="delByRoleId">
+		delete from u_user_role 
+		WHERE role_id = #{roleId}
+	</update>
+	
+	<update id="del">
+		delete from u_user_role 
+		WHERE role_id = #{roleId} and user_id = #{userId}
+	</update>
+	
+	<select id="selectByCondition" resultType="userRole">
+		SELECT 
+			<include refid="userRoleColumns"/>
+		FROM u_user_role a
+			<include refid="userRoleJoins"/>
+		<where>
+			<if test="roleId != null">
+				a.role_id = #{roleId}
+			</if>
+			<if test="userId != null">
+				a.user_id = #{userId}
+			</if>
+		</where>
+	</select>
+	
+</mapper>

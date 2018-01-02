@@ -7,8 +7,8 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.fullstack.AppTest;
 import com.fullstack.common.exceptions.BusinessException;
-import com.fullstack.shop.dict.entity.Dict;
-import com.fullstack.shop.dict.service.DictService;
+import com.fullstack.user.dict.entity.Dict;
+import com.fullstack.user.dict.service.DictService;
 
 
 public class DictTest extends AppTest{

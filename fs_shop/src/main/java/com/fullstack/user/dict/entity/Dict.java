@@ -12,7 +12,7 @@ import com.fullstack.common.persistence.DataEntity;
  * @author chay
  * @version 2017-5-9
  */
-@TableName("dict")
+@TableName("u_dict")
 public class Dict extends DataEntity<Dict> {
 	
 	private static final long serialVersionUID = 1L;
@@ -21,10 +21,10 @@ public class Dict extends DataEntity<Dict> {
 	private Integer sort;		// 最小值
 	
 	
-	@TableField(exist=false)
-	private Integer createBy;	// 创建者
-	@TableField(exist=false)
-	private Date createDate;	// 创建日期
+	@TableField("update_by")
+	protected Integer updateBy;	// 更新者
+	@TableField("update_date")
+	protected Date updateDate;	// 更新日期
 	
 	@Override
 	public String toString(){

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fullstack.user.role.dao.RoleAuthDao">
+    
+	<sql id="roleAuthColumns">
+		role.id AS "role.id",
+		role.name AS "role.name",
+		auth.id AS "auth.id",
+		auth.name AS "auth.name",
+		a.role_id AS "roleId",
+		a.auth_id AS "authId"
+	</sql>
+	
+	<sql id="roleAuthJoins">
+		join u_role role on role.id=a.role_id
+		join u_auth auth on auth.id=a.auth_id
+	</sql>
+	
+	<sql id="whereDefaultJoins">
+		
+	</sql>
+    
+    <update id="delByRoleId">
+		delete from u_role_auth 
+		WHERE role_id = #{roleId}
+	</update>
+	
+	<update id="delByAuthId">
+		delete from u_role_auth 
+		WHERE auth_id = #{authId}
+	</update>
+	
+	<select id="selectByRoleId" resultType="RoleAuth">
+		SELECT 
+			<include refid="roleAuthColumns"/>
+		FROM u_role_auth a
+			<include refid="roleAuthJoins"/>
+		WHERE a.role_id = #{roleId}
+	</select>
+	
+</mapper>

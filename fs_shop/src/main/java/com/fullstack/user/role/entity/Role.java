@@ -12,17 +12,17 @@ import com.fullstack.common.persistence.DataEntity;
  * @Roleor chay
  * @version 2017-5-12
  */
-@TableName("role")
+@TableName("u_role")
 public class Role extends DataEntity<Role> {
 	
 	private static final long serialVersionUID = 1L;
 	private String name;				// 名称
 	private String eName;				// 英文名称 用来做唯一标识，逻辑使用
 	
-	@TableField(exist=false)
-	private Integer createBy;	// 创建者
-	@TableField(exist=false)
-	private Date createDate;	// 创建日期
+	@TableField("update_by")
+	protected Integer updateBy;	// 更新者
+	@TableField("update_date")
+	protected Date updateDate;	// 更新日期
 	
 	@TableField(exist=false)
 	private List<RoleAuth> listRoleAuth;	//角色关联的权限列表

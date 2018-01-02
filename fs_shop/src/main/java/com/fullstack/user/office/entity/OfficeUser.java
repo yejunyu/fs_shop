@@ -12,7 +12,7 @@ import com.fullstack.user.user.entity.User;
  * @Roleor chay
  * @version 2017-8-14
  */
-@TableName("office_user")
+@TableName("u_office_user")
 public class OfficeUser extends DataEntity<OfficeUser> {
 	
 	private static final long serialVersionUID = 1L;
@@ -23,14 +23,6 @@ public class OfficeUser extends DataEntity<OfficeUser> {
 	
 	@TableField(exist=false)
 	private Integer id;		//
-	@TableField(exist=false)
-	private Integer createBy;	// 创建者
-	@TableField(exist=false)
-	private Date createDate;	// 创建日期
-	@TableField(exist=false)
-	private Integer updateBy;	// 
-	@TableField(exist=false)
-	private Date updateDate;	// 
 	@TableField(exist=false)
 	private String remarks;	// 
 	@TableField(exist=false)

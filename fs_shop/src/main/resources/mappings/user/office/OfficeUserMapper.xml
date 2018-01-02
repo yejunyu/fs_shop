@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fullstack.user.office.dao.OfficeUserDao">
+    
+	<sql id="officeUserColumns">
+		user.id AS "user.id",
+		user.name AS "user.name",
+		user.code AS "user.code",
+		user.login_name AS "user.loginName",
+		user.contact_way AS "user.contactWay",
+		user.email AS "user.email",
+		user.status AS "user.status",
+		user.last_login_time AS "user.lastLoginTime",
+		user.update_by AS "user.updateBy",
+		user.update_date AS "user.updateDate",
+		user.remarks AS "user.remarks",
+		user.del_flag AS "user.delFlag",
+		
+		office.id AS "office.id",
+		office.name AS "office.name",
+		
+		a.office_id AS "officeId",
+		a.user_id AS "userId"
+		
+	</sql>
+	
+	<sql id="officeUserJoins">
+		join u_office office on office.id=a.office_id and office.del_flag = #{DEL_FLAG_NORMAL}
+		join u_user user on user.id=a.user_id and user.del_flag = #{DEL_FLAG_NORMAL}
+	</sql>
+	
+	<sql id="whereDefaultJoins">
+		
+	</sql>
+    
+	<select id="selectByCondition" resultType="OfficeUser">
+		SELECT 
+			<include refid="officeUserColumns"/>
+		FROM u_office_user a
+			<include refid="officeUserJoins"/>
+		<where>
+			<if test="officeId != null">
+				a.office_id = #{officeId}
+			</if>
+			<if test="userId != null">
+				a.user_id = #{userId}
+			</if>
+		</where>
+	</select>
+	
+</mapper>
