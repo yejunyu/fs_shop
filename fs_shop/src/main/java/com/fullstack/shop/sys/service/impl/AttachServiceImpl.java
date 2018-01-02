@@ -1,4 +1,4 @@
-package com.fullstack.shop.dict.service.impl;
+package com.fullstack.shop.sys.service.impl;
 
 import java.io.File;
 import java.util.List;
@@ -12,9 +12,9 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.fullstack.common.exceptions.BusinessException;
 import com.fullstack.common.service.impl.BaseServiceImpl;
 import com.fullstack.common.utils.PropertiesUtil;
-import com.fullstack.shop.dict.dao.AttachDao;
-import com.fullstack.shop.dict.entity.Attach;
-import com.fullstack.shop.dict.service.AttachService;
+import com.fullstack.shop.sys.dao.AttachDao;
+import com.fullstack.shop.sys.entity.Attach;
+import com.fullstack.shop.sys.service.AttachService;
 
 /**
  * 

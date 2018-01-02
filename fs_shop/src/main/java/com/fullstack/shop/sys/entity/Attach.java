@@ -1,4 +1,4 @@
-package com.fullstack.shop.dict.entity;
+package com.fullstack.shop.sys.entity;
 
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;

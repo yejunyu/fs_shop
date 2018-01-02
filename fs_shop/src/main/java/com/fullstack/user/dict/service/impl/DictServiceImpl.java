@@ -1,4 +1,4 @@
-package com.fullstack.shop.dict.service.impl;
+package com.fullstack.user.dict.service.impl;
 
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -7,9 +7,9 @@ import org.springframework.stereotype.Service;
 import com.fullstack.common.exceptions.BusinessException;
 import com.fullstack.common.service.impl.BaseServiceImpl;
 import com.fullstack.common.utils.CacheUtils;
-import com.fullstack.shop.dict.dao.DictDao;
-import com.fullstack.shop.dict.entity.Dict;
-import com.fullstack.shop.dict.service.DictService;
+import com.fullstack.user.dict.dao.DictDao;
+import com.fullstack.user.dict.entity.Dict;
+import com.fullstack.user.dict.service.DictService;
 
 /**
  * 字典

@@ -1,4 +1,4 @@
-package com.fullstack.shop.dict.web;
+package com.fullstack.shop.sys.web;
 
 import java.io.File;
 import java.io.InputStream;
@@ -22,7 +22,7 @@ import com.fullstack.common.utils.PropertiesUtil;
 import com.fullstack.common.utils.UploadUtils;
 import com.fullstack.common.web.RequestUtils;
 import com.fullstack.common.web.ServiceController;
-import com.fullstack.shop.dict.entity.Attach;
+import com.fullstack.shop.sys.entity.Attach;
 
 @RestController  
 @RequestMapping("/attach")  

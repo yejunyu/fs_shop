@@ -1,10 +1,10 @@
-package com.fullstack.shop.dict.service;
+package com.fullstack.user.dict.service;
 
 import org.springframework.stereotype.Service;
 
 import com.fullstack.common.exceptions.BusinessException;
 import com.fullstack.common.service.BaseService;
-import com.fullstack.shop.dict.entity.Dict;
+import com.fullstack.user.dict.entity.Dict;
 
 /**
  * 字典

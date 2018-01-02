@@ -13,7 +13,7 @@ import com.fullstack.common.persistence.DataEntity;
  * @version 2017-5-9
  */
 @TableName("shop_dict")
-public class Dict extends DataEntity<Dict> {
+public class ShopDict extends DataEntity<ShopDict> {
 	
 	private static final long serialVersionUID = 1L;
 	private String name;		// 名称
@@ -35,11 +35,11 @@ public class Dict extends DataEntity<Dict> {
 		return str.toString();
 	}
 	
-	public Dict() throws BusinessException {
+	public ShopDict() throws BusinessException {
 		super();
 	}
 
-	public Dict(Integer id){
+	public ShopDict(Integer id){
 		super(id);
 	}
 

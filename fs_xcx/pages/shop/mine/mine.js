@@ -17,7 +17,7 @@ Page({
       },
       {
         "pic_url": "/images/icons/mine_03.png",
-        "title": "优惠券",
+        "title": "积分兑换",
         "key": "address",
       },
       {

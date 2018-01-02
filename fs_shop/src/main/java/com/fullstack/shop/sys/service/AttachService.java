@@ -1,8 +1,8 @@
-package com.fullstack.shop.dict.service;
+package com.fullstack.shop.sys.service;
 
 import com.fullstack.common.exceptions.BusinessException;
 import com.fullstack.common.service.BaseService;
-import com.fullstack.shop.dict.entity.Attach;
+import com.fullstack.shop.sys.entity.Attach;
 
 /**
  * 

@@ -3,7 +3,6 @@ package com.fullstack.common.service.impl;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,8 +16,6 @@ import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.fullstack.common.exceptions.BusinessException;
 import com.fullstack.common.persistence.DataEntity;
 import com.fullstack.common.service.BaseService;
-import com.fullstack.shop.dict.entity.Dict;
-import com.fullstack.shop.dict.service.DictService;
 
 /**
  * Service基类
@@ -27,9 +24,6 @@ import com.fullstack.shop.dict.service.DictService;
  * @param <T>
  */
 public abstract class BaseServiceImpl<D extends BaseMapper<T>, T extends DataEntity<T>> extends ServiceImpl<BaseMapper<T>, T> implements BaseService<T> {
-	
-	@Autowired  
-	protected DictService<Dict> dictService;
 	
 	/**
 	 * 查询分页数据

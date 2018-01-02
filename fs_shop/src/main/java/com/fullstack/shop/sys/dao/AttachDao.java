@@ -1,9 +1,9 @@
-package com.fullstack.shop.dict.dao;
+package com.fullstack.shop.sys.dao;
 
 import java.util.List;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
-import com.fullstack.shop.dict.entity.Attach;
+import com.fullstack.shop.sys.entity.Attach;
 
 /**
  * 

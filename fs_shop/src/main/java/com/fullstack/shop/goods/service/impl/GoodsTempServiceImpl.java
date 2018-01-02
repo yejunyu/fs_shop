@@ -9,11 +9,11 @@ import com.fullstack.common.exceptions.BusinessException;
 import com.fullstack.common.service.impl.BaseServiceImpl;
 import com.fullstack.common.utils.ImgUtils;
 import com.fullstack.common.utils.PropertiesUtil;
-import com.fullstack.shop.dict.entity.Attach;
-import com.fullstack.shop.dict.service.AttachService;
 import com.fullstack.shop.goods.dao.GoodsTempDao;
 import com.fullstack.shop.goods.entity.GoodsTemp;
 import com.fullstack.shop.goods.service.GoodsTempService;
+import com.fullstack.shop.sys.entity.Attach;
+import com.fullstack.shop.sys.service.AttachService;
 
 /**
  * 商品类型Service
@@ -28,6 +28,7 @@ public class GoodsTempServiceImpl extends BaseServiceImpl<GoodsTempDao, GoodsTem
 	
 	@Override
 	public Page<GoodsTemp> findPage(Page<GoodsTemp> page, Wrapper<GoodsTemp> wrapper) throws BusinessException {
+		wrapper.orderBy("parent_id");
 		page = super.findPage(page, wrapper);
 		super.fieldsetUtils(page.getRecords());
 		for(GoodsTemp entity : page.getRecords()){

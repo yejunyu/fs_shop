@@ -13,11 +13,11 @@ import com.baomidou.mybatisplus.plugins.Page;
 import com.fullstack.common.exceptions.BusinessException;
 import com.fullstack.common.web.RequestUtils;
 import com.fullstack.common.web.ServiceController;
-import com.fullstack.shop.dict.entity.Dict;
+import com.fullstack.shop.dict.entity.ShopDict;
 
 @RestController  
-@RequestMapping("/dict")  
-public class DictController extends ServiceController {
+@RequestMapping("/shopDict")  
+public class ShopDictController extends ServiceController {
 	
 	/**
 	 * 列表
@@ -26,74 +26,74 @@ public class DictController extends ServiceController {
 	 * @throws BusinessException
 	 */
 	@RequestMapping("list")
-    public JSONObject list(HttpServletRequest request,Dict dict) throws BusinessException {
-		Page<Dict> page = RequestUtils.getPage(request);
-		EntityWrapper<Dict> e = this.entityInit(dict);
-		page = dictService.findPage(page,e);
+    public JSONObject list(HttpServletRequest request,ShopDict ShopDict) throws BusinessException {
+		Page<ShopDict> page = RequestUtils.getPage(request);
+		EntityWrapper<ShopDict> e = this.entityInit(ShopDict);
+		page = shopDictService.findPage(page,e);
         return this.retResult(page);
     }
 	/**
 	 * 根据类型加载数据
 	 * @param request
-	 * @param dict
+	 * @param ShopDict
 	 * @return
 	 * @throws BusinessException
 	 */
 	@RequestMapping("loadByType")
-    public JSONObject loadByType(HttpServletRequest request,Dict dict) throws BusinessException {
-		EntityWrapper<Dict> e = this.entityInit(dict);
-		List<Dict> list = dictService.selectList(e);
+    public JSONObject loadByType(HttpServletRequest request,ShopDict ShopDict) throws BusinessException {
+		EntityWrapper<ShopDict> e = this.entityInit(ShopDict);
+		List<ShopDict> list = shopDictService.selectList(e);
         return this.retResult(list);
     }
 	/**
 	 * 新增
 	 * @param request
-	 * @param Dict
+	 * @param ShopDict
 	 * @return
 	 * @throws BusinessException
 	 */
 	@RequestMapping("create")
-    public JSONObject createDict(HttpServletRequest request,Dict dict) throws BusinessException {
-		dictService.create(dict);
+    public JSONObject createShopDict(HttpServletRequest request,ShopDict ShopDict) throws BusinessException {
+		shopDictService.create(ShopDict);
         return this.retResult(success_create);
     }
 	/**
 	 * 修改
 	 * @param request
-	 * @param Dict
+	 * @param ShopDict
 	 * @return
 	 * @throws BusinessException
 	 */
 	@RequestMapping("update")
-    public JSONObject updateDict(HttpServletRequest request,Dict dict) throws BusinessException {
-		dictService.editById2(dict);
+    public JSONObject updateShopDict(HttpServletRequest request,ShopDict ShopDict) throws BusinessException {
+		shopDictService.editById2(ShopDict);
         return this.retResult(success_update);
     }
 	/**
 	 * 删除
 	 * @param request
-	 * @param Dict
+	 * @param ShopDict
 	 * @return
 	 * @throws BusinessException
 	 */
 	@RequestMapping("del")
-    public JSONObject delDict(HttpServletRequest request,Dict dict) throws BusinessException {
-		dictService.delById(dict);
+    public JSONObject delShopDict(HttpServletRequest request,ShopDict ShopDict) throws BusinessException {
+		shopDictService.delById(ShopDict);
         return this.retResult(success_del);
     }
 	
 	/**
 	 * 批量删除
 	 * @param request
-	 * @param Dict
+	 * @param ShopDict
 	 * @return
 	 * @throws BusinessException
 	 */
 	@RequestMapping("batchDel")
-    public JSONObject batchDel(HttpServletRequest request,Dict dict) throws BusinessException {
+    public JSONObject batchDel(HttpServletRequest request,ShopDict shopDict) throws BusinessException {
 		String[] ids = RequestUtils.getStrings(request,"ids[]");
 		if(ids!=null && ids.length>0){
-			dictService.batchDel(dict,ids);
+			shopDictService.batchDel(shopDict,ids);
 	        return this.retResult(success_del);
 		}else{
 			return this.retResult("删除数据不存在");

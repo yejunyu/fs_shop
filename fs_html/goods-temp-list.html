@@ -143,7 +143,7 @@ $(function(){
 });
 function sortDataTable(){
 	$('.table-sort').dataTable({
-		"aaSorting": [[ 1, "desc" ]],//默认第几个排序
+		//"aaSorting": [[ 0, "desc" ]],//默认第几个排序
 		"bStateSave": true,//状态保存
 		"aoColumnDefs": [
 		  //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
@@ -163,9 +163,9 @@ function loadData(){
 			html+='<tr class="text-c">\
 				<td><input type="checkbox" value="'+obj.id+'" name="id"></td>\
 				<td>'+obj.name+'</td>\
-				<td><img class="thumb_img60" alt="'+obj.name+'" src="'+obj.extraData.imgPath+'"></td>\
+				<td>'+imgHtml(obj.name,obj.extraData.imgPath)+'</td>\
 				<td class="td-manage">\
-				<a title="编辑" href="javascript:;" onclick="edit(\'编辑\',\'task-temp-add.html\',\'\',\'510\',\''+obj.id+'\',\''+obj.name+'\')" class="ml-5" style="text-decoration:none">\
+				<a title="编辑" href="javascript:;" onclick="edit(\''+obj.id+'\',\''+obj.name+'\')" class="ml-5" style="text-decoration:none">\
 				<i class="Hui-iconfont">&#xe6df;</i></a> <a title="删除" href="javascript:;" onclick="del(\''+obj.id+'\')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>\
 			</tr>';
 			var n = {id:obj.id,pId:obj.parentId,name:obj.name};
@@ -189,11 +189,13 @@ function loadList(parentId){
 		var zNodes = [];
 		for(var i=0;i<list.length;i++){
 			var obj = list[i];
+			debugger;
 			html+='<tr class="text-c">\
 				<td><input type="checkbox" value="'+obj.id+'" name="id"></td>\
 				<td>'+obj.name+'</td>\
+				<td>'+imgHtml(obj.name,obj.extraData.imgPath)+'</td>\
 				<td class="td-manage">\
-				<a title="编辑" href="javascript:;" onclick="edit()" class="ml-5" style="text-decoration:none">\
+				<a title="编辑" href="javascript:;" onclick="edit(\''+obj.id+'\',\''+obj.name+'\')" class="ml-5" style="text-decoration:none">\
 				<i class="Hui-iconfont">&#xe6df;</i></a> <a title="删除" href="javascript:;" onclick="del(\''+obj.id+'\')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>\
 			</tr>';
 		}
@@ -201,6 +203,13 @@ function loadList(parentId){
 		$("#count").html(data.result.total);
 		sortDataTable();
 	});
+}
+function imgHtml(name,imgPath){
+	if(imgPath){
+		return '<img class="thumb_img60" alt="'+name+'" src="'+imgPath+'">';
+	}else{
+		return '';
+	}
 }
 //清除旧数据
 function cleanDataTable(){
@@ -274,10 +283,17 @@ function add(){
 	$("#id").val("");
 	loadDataInfo();
 }
-function edit(){
+function edit(id,name){
 	$("#rMenu").hide();  
-	var id = $("#id").val();
-	var name = $("#tempName").val();
+	//var id = $("#id").val();
+	if(!id){
+		id = $("#id").val();
+	}
+	//var name = $("#tempName").val();
+	if(!name){
+		name = $("#tempName").val();
+	}
+	
 	common.addParams({id:id,name:name,func:"edit"});
 	//layer_show(title,url,w,h);
 	$('#infoDiv').bringins({
@@ -388,7 +404,9 @@ function loadDataInfo(){
 		return;
 	}
 	var url = "/goodsTemp/getInfoById?id="+id;
+	debugger;
 	common.getData(url,function(data){
+	debugger;
 		var result = data.result;
 		var html="";
 		var dictOpt = common.dictOption;
