@@ -24,6 +24,8 @@ public class Member extends DataEntity<Member> {
 	@TableField("contact_way")
 	private String contactWay;			// 联系方式
 	private Integer score;				// 积分
+	@TableField("credit_score")
+	private String creditScore;			// 信用积分
 	@TableField("last_login_time")
 	private Date lastLoginTime;			// 最后登录时间
 	
@@ -94,6 +96,14 @@ public class Member extends DataEntity<Member> {
 
 	public void setLastLoginTime(Date lastLoginTime) {
 		this.lastLoginTime = lastLoginTime;
+	}
+
+	public String getCreditScore() {
+		return creditScore;
+	}
+
+	public void setCreditScore(String creditScore) {
+		this.creditScore = creditScore;
 	}
 	
 	

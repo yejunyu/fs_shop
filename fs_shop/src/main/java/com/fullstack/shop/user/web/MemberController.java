@@ -1,5 +1,7 @@
 package com.fullstack.shop.user.web;
 
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,7 +53,8 @@ public class MemberController extends ServiceController {
 			member.setName("微信用户"+(memberService.getCount(new Member())+1));
 			memberService.createMember(member);
 		}else{
-			member = m;
+			m.setLastLoginTime(new Date());
+			member = memberService.editById(m);
 		}
         return this.retResult(member);
     }

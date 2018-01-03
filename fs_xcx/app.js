@@ -20,7 +20,7 @@ App({
               console.log('openid-->'+res.data.openid) //获取openid  
               wx.setStorageSync('openid', res.data.openid);
               var d = { 'wxId': res.data.openid};
-              var url = 'http://192.168.1.120:8888' + "/member/createMemberByWxId";
+              var url = 'http://localhost:8888' + "/member/createMemberByWxId";
               wx.request({
                 url: url, //
                 data: d,

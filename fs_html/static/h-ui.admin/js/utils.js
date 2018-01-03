@@ -23,12 +23,12 @@ utils.loadDictOption = function(type){
 	return optHtml;
 }
 
-utils.loadDictOption2 = function(callback,type){
+utils.loadShopDictOption = function(type){
 	var optHtml = '<option value="" >请选择</option>';
 	if (!type) {
 		return optHtml;
 	}
-	var url = "/dict/loadByType?type="+type;
+	var url = "/shopDict/loadByType?type="+type;
 	common.getData(url,function(data){
 		var list = data.result;
 		var optHtml = '<option value="" >请选择</option>';
@@ -36,6 +36,8 @@ utils.loadDictOption2 = function(callback,type){
 			var obj = list[i];
 			optHtml+='<option value="'+obj.id+'">'+obj.name+'</option>';
 		}
-		callback(optHtml);
+		common.dictOption=optHtml;
 	});
+	return optHtml;
 }
+

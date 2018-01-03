@@ -166,7 +166,7 @@ public class Order extends DataEntity<Order> {
 		}else if(this.status==Order.STATUS_RETURN){
 			this.statusDis = "退款中";
 		}else if(this.status==Order.STATUS_REBUT){
-			this.statusDis = "退款中";
+			this.statusDis = "已退款";
 		}else if(this.status==Order.STATUS_CANCEL){
 			this.statusDis = "已取消";
 		}

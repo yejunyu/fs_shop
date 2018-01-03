@@ -25,51 +25,62 @@
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 订单管理 <span class="c-gray en">&gt;</span> 订单管理 <a class="btn btn-success radius r btn-refresh" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
 	<div class="mt-20">
-	<table class="table table-border table-bordered table-hover table-bg table-sort">
-		<thead>
+		<table class="table table-border table-bordered table-hover table-bg table-sort">
+			<thead>
+				<tr class="text-c">
+					<!-- <th width="25"><input type="checkbox" name="" value=""></th> -->
+					<th width="10%">订单号</th>
+					<th width="5%">台号</th>
+					<th width="5%">数量</th>
+					<th width="8%">支付方式</th>
+					<th width="12%">下单时间</th>
+					<th width="12%">配送时间</th>
+					<th width="18%">配送地址</th>
+					<th width="5%">状态</th>
+					<th width="5%">总计</th>
+					<th width="10%">备注</th>
+					<th width="5%">操作</th>
+				</tr>
+			</thead>
+			<tbody id="data">
+				
+			</tbody>
+		</table>
+	</div>
+</div>
+<div id="detailDiv" class="bringins-content" style="display:none;">
+	<table class="table table-border table-bordered table-bg table-hover ">
+		<thead style="background-color:white;">
 			<tr class="text-c">
-				<!-- <th width="25"><input type="checkbox" name="" value=""></th> -->
-				<th width="10%">订单号</th>
-				<th width="5%">台号</th>
-				<th width="5%">数量</th>
-				<th width="8%">支付方式</th>
-				<th width="12%">下单时间</th>
-				<th width="12%">配送时间</th>
-				<th width="18%">配送地址</th>
-				<th width="5%">状态</th>
-				<th width="5%">总计</th>
-				<th width="10%">备注</th>
-				<th width="5%">操作</th>
+				<th width="70">订单号</th>
+				<td width="130" class='order_number'></td>
+				<th width="70">下单时间</th>
+				<td width="130" class='order_orderTime'></td>
+				<th width="70">数量</th>
+				<td width="" class='order_persons'></td>
+			</tr>
+			<tr class="text-c">
+				<th width="70">配送时间</th>
+				<td width="130" class='order_deliveryDate'></td>
+				<th width="70">配送地址</th>
+				<td width="130" class='order_deliveryAddress'></td>
+				<th width="70">总计</th>
+				<td width="" class='order_total'></td>
+			</tr>
+			<tr class="text-c">
+				<th width="70">备注</th>
+				<td colspan='5' class='order_remarks'>2018-1-3 17:00:00</td>
+			</tr>
+			<tr class="text-c">
+				<th width="" colspan='2'>商品名称</th>
+				<th width="" colspan='2'>数量</th>
+				<th width="" colspan='2'>金额</th>
 			</tr>
 		</thead>
-		<tbody id="data">
+		<tbody id="orderDetail" style="background-color:white;">
 			
 		</tbody>
 	</table>
-	</div>
-</div>
-<div id="infoDiv" class="bringins-content" style="display:none;">
-	<form action="" method="post" class="form form-horizontal" id="form-member-add">
-		<input type="hidden" id="id" name="id" value="">
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>名称：</label>
-			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text text_width" value="" placeholder="" id="name" name="name">
-			</div>
-		</div>
-		<br/>
-		<div class="line" ></div>
-		<div id="addBtn" class="row cl">
-			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
-				<a href="javascript:;" onclick="afterAdd()" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe604;</i> 添加字段</a> 
-			</div>
-		</div>
-		<div class="row cl">
-			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
-				<input class="btn btn-primary radius" id="submit" type="button" onclick="save()" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
-			</div>
-		</div>
-	</form>
 </div>
 <!--_footer 作为公共模版分离出去-->
 <script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script> 
@@ -106,6 +117,7 @@ function cleanDataTable(){
 	}
 }
 //加载页面数据
+var orders = {};
 function loadData(){
 	var url = "/order/list?pageNum=-1";
 	common.getData(url,function(data){
@@ -114,6 +126,7 @@ function loadData(){
 		var html="";
 		for(var i=0;i<list.length;i++){
 			var obj = list[i];
+			orders[obj.id] = obj;
 			html+='<tr class="text-c" attrId="'+obj.id+'">\
 				<td>'+obj.number+'</td>\
 				<td>'+obj.tableNo+'</td>\
@@ -121,7 +134,7 @@ function loadData(){
 				<td>'+obj.payMethod+'</td>\
 				<td>'+obj.orderTime+'</td>\
 				<td>'+obj.deliveryDate+'</td>\
-				<td>'+obj.extraData.orderDelivery.deliveryAddress+'</td>\
+				<td>'+obj.orderDelivery.deliveryAddress+'</td>\
 				<td>'+obj.statusDis+'</td>\
 				<td>'+obj.total+'</td>\
 				<td>'+obj.remarks+'</td>\
@@ -144,49 +157,12 @@ function statusUtils(obj){
 		s = '<a title="配送" href="javascript:;" onclick="editStatus(\''+obj.id+'\',\'2\')" class="ml-5" style="text-decoration:none">配送</a>';
 	}else if(obj.status==2){
 		s = '<a title="完成" href="javascript:;" onclick="editStatus(\''+obj.id+'\',\'3\')" class="ml-5" style="text-decoration:none">完成</a>';
+	}else if(obj.status==4){
+		s = '<a title="退款" href="javascript:;" onclick="editStatus(\''+obj.id+'\',\'5\')" class="ml-5" style="text-decoration:none;color:red;">退款</a>';
 	}
 	return s;
 }
 
-//加载页面数据
-function loadDataInfo(){
-	var params = common.getParams();
-	var id = params.id?params.id:"";
-	$("#id").val(id);
-	$("#name").val(params.name?params.name:"");
-	$("#submit").attr("attr1",params.func);
-	$(".fieldsetDiv").remove();
-
-	if(!id){
-		return;
-	}
-	var url = "/goodsTemp/getInfoById?id="+id;
-	common.getData(url,function(data){
-		var result = data.result;
-		var html="";
-		var dictOpt = common.dictOption;
-		for(var i=0;i<result.listFieldset.length;i++){
-			var obj = $.parseJSON(result.listFieldset[i]);
-			html+='<div name="fieldsets" class="row cl fieldsetDiv">\
-				<label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>字段名称：</label>\
-				&nbsp;&nbsp;&nbsp;\
-				<input type="text" class="input-text text_width20" value="'+obj.name+'" placeholder="" name="name" >\
-				&nbsp;&nbsp;&nbsp;&nbsp;字段类型：\
-				<span class="select-box text_width20">\
-				  <select class="select " size="1" name="type" id="sel'+obj.name+'">'+dictOpt+'\
-				  </select>\
-				</span>\
-				<a href="javascript:;" class="btn btn-danger radius removeDiv"><i class="Hui-iconfont">&#xe60b;</i></a>\
-			</div>';
-		}
-		$("#addBtn").before(html);
-		//加载初始的值
-		for(var i=0;i<result.listFieldset.length;i++){
-			var obj = $.parseJSON(result.listFieldset[i]);
-			$("#sel"+obj.name).find("option[value=\""+obj.type+"\"]").attr("selected",true);
-		}
-	});
-}
 //修改订单状态
 function editStatus(id,status){
 	var url = "/order/editStatusById";
@@ -195,6 +171,35 @@ function editStatus(id,status){
 		common.msg(data.msg);
 		loadData();
 	});
+}
+
+function info(id){
+	var obj = orders[id];
+	var detailDiv = $('#detailDiv');
+	detailDiv.bringins({
+		"position":"right",
+		"color":"#e5e5e5",
+		"width":"60%",
+		"closeButton":"white"
+	});
+	detailDiv.find('.order_number').html(obj.number);
+	detailDiv.find('.order_orderTime').html(obj.orderTime);
+	detailDiv.find('.order_persons').html(obj.persons);
+	detailDiv.find('.order_total').html(obj.total);
+	detailDiv.find('.order_deliveryDate').html(obj.deliveryDate);
+	detailDiv.find('.order_deliveryAddress').html(obj.orderDelivery.deliveryAddress);
+	detailDiv.find('.order_remarks').html(obj.remarks);
+	var html="";
+	debugger;
+	for(var i=0;i<obj.listOrderDetail.length;i++){
+		var detail = obj.listOrderDetail[i];
+		html+='<tr class="text-c" attrId="'+detail.id+'">\
+			<td colspan="2">'+detail.goods.name+'</td>\
+			<td colspan="2">'+detail.count+'</td>\
+			<td colspan="2">'+detail.price+'</td>\
+		</tr>';
+	}
+	$("#orderDetail").html(html);
 }
 
 </script> 

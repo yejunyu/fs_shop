@@ -42,7 +42,8 @@
 				<th width="25"><input type="checkbox" name="" value=""></th>
 				<th width="15%">名称</th>
 				<th width="20%">联系方式</th>
-				<th width="15%">积分</th>
+				<th width="10%">积分</th>
+				<th width="10%">信用积分</th>
 				<th width="15%">最近一次登录时间</th>
 				<th width="">操作</th>
 			</tr>
@@ -71,11 +72,11 @@ $(function(){
 });
 function sortDataTable(){
 	$('.table-sort').dataTable({
-		"aaSorting": [[ 3, "desc" ]],//默认第几个排序
+		"aaSorting": [[ 5, "desc" ]],//默认第几个排序
 		"bStateSave": true,//状态保存
 		"aoColumnDefs": [
 		  //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
-		  {"orderable":false,"aTargets":[0,5]}// 制定列不参与排序
+		  {"orderable":false,"aTargets":[0,6]}// 制定列不参与排序
 		]
 	});
 }
@@ -92,6 +93,7 @@ function loadData(){
 				<td>'+obj.name+'</td>\
 				<td>'+obj.contactWay+'</td>\
 				<td>'+obj.score+'</td>\
+				<td>'+obj.creditScore+'</td>\
 				<td>'+common.formatDate(obj.lastLoginTime)+'</td>\
 				<td class="td-manage"></td>\
 			</tr>';
