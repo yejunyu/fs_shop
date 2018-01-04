@@ -15,8 +15,10 @@ import com.fullstack.shop.goods.service.GoodsTempService;
 import com.fullstack.shop.order.entity.Order;
 import com.fullstack.shop.order.entity.OrderDelivery;
 import com.fullstack.shop.order.entity.OrderDetail;
+import com.fullstack.shop.order.entity.OrderEvaluate;
 import com.fullstack.shop.order.service.OrderDeliveryService;
 import com.fullstack.shop.order.service.OrderDetailService;
+import com.fullstack.shop.order.service.OrderEvaluateService;
 import com.fullstack.shop.order.service.OrderService;
 import com.fullstack.shop.report.entity.Report;
 import com.fullstack.shop.report.service.ReportService;
@@ -92,6 +94,8 @@ public abstract class ServiceController extends BaseController {
 	protected OrderDetailService<OrderDetail> orderDetailService;
 	@Autowired  
 	protected OrderDeliveryService<OrderDelivery> orderDeliveryService;
+	@Autowired  
+	protected OrderEvaluateService<OrderEvaluate> orderEvaluateService;
 	
 	@Autowired  
 	protected ReportService<Report> reportService;
