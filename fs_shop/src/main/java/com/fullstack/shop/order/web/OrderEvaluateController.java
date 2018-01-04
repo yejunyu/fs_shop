@@ -14,7 +14,7 @@ import com.fullstack.common.web.ServiceController;
 import com.fullstack.shop.order.entity.OrderEvaluate;
 
 @RestController  
-@RequestMapping("/orderEvaluateEvaluate")  
+@RequestMapping("/orderEvaluate")  
 public class OrderEvaluateController extends ServiceController {
 	
 	/**

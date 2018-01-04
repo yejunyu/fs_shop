@@ -5,6 +5,7 @@ import java.util.Date;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.fullstack.common.persistence.DataEntity;
+import com.fullstack.shop.goods.entity.Goods;
 
 /**
  * 订单
@@ -29,6 +30,11 @@ public class OrderEvaluate extends DataEntity<OrderEvaluate> {
 	private Integer createBy;	// 创建者
 	@TableField("create_date")
 	private Date createDate;	// 创建日期
+	
+	@TableField(exist=false)
+	private Order order;
+	@TableField(exist=false)
+	private Goods goods;
 	
 	@Override
 	public String toString(){
@@ -85,6 +91,22 @@ public class OrderEvaluate extends DataEntity<OrderEvaluate> {
 
 	public void setGoodsScore(Integer goodsScore) {
 		this.goodsScore = goodsScore;
+	}
+
+	public Order getOrder() {
+		return order;
+	}
+
+	public void setOrder(Order order) {
+		this.order = order;
+	}
+
+	public Goods getGoods() {
+		return goods;
+	}
+
+	public void setGoods(Goods goods) {
+		this.goods = goods;
 	}
 
 	

@@ -65,6 +65,20 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderDao, Order> implement
 		}
 		return page;
 	}
+	
+	@Override
+	public Order getInfoById(int id) throws BusinessException {
+		Order order = super.getInfoById(id);
+		if(order != null){
+			order.setOrderDelivery(orderDeliveryService.getInfoByOrderId(order.getId()));
+			List<OrderDetail> list = orderDetailService.getListByOrderId(order.getId());
+			order.setListOrderDetail(list);
+			if(list.size()>0){
+				order.getExtraData().put("details", this.getDetails(list));
+			}
+		}
+		return order;
+	}
 
 	@Override
 	public String getOrderNumber() throws BusinessException {
