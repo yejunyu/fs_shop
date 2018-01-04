@@ -17,10 +17,10 @@ public class AgencyTest extends AppTest{
     private AgencyService<Agency> service;  
       
     @Test  
-    public void testInsert() throws BusinessException{  
+    public void insert() throws BusinessException{  
 		Agency entity = new Agency();  
-		entity.setContent("fsadsfsdd");
-		entity.setAddress("fsdafddfasdfsddf");
+		entity.setContent("daiban002");
+		entity.setAddress("地址002");
     	
     	entity.preInsert();
         service.insert(entity);  

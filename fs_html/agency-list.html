@@ -22,19 +22,21 @@
 <title></title>
 </head>
 <body>
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 评价管理 <span class="c-gray en">&gt;</span>评价管理 <a class="btn btn-success radius r btn-refresh" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 跑腿代办 <span class="c-gray en">&gt;</span> 代办列表 <a class="btn btn-success radius r btn-refresh" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
 	<div class="mt-20">
 		<table class="table table-border table-bordered table-hover table-bg table-sort">
 			<thead>
 				<tr class="text-c">
 					<!-- <th width="25"><input type="checkbox" name="" value=""></th> -->
-					<th width="15%">订单号</th>
-					<th width="10%">商品</th>
 					<th width="">内容</th>
-					<th width="10%">商品满意度</th>
-					<th width="10%">服务评分</th>
-					<th width="80">操作</th>
+					<th width="20%">地址</th>
+					<th width="20%">其他要求</th>
+					<th width="80">基础费用</th>
+					<th width="80">服务费用</th>
+					<th width="120">创建时间</th>
+					<th width="60">状态</th>
+					<th width="100">操作</th>
 				</tr>
 			</thead>
 			<tbody id="data">
@@ -96,7 +98,7 @@ $(function(){
 });
 function sortDataTable(){
 	$('.table-sort').dataTable({
-		"aaSorting": [[ 3, "asc" ]],//默认第几个排序
+		"aaSorting": [[ 5, "desc" ]],//默认第几个排序
 		"bStateSave": true,//状态保存
 		"aoColumnDefs": [
 		  //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
@@ -112,24 +114,23 @@ function cleanDataTable(){
 	}
 }
 //加载页面数据
-var orders = {};
 function loadData(){
-	var url = "/orderEvaluate/list?pageNum=-1";
+	var url = "/agency/list?pageNum=-1";
 	common.getData(url,function(data){
 		cleanDataTable();
 		var list = data.result.records;
 		var html="";
 		for(var i=0;i<list.length;i++){
 			var obj = list[i];
-			orders[obj.order.id] = obj.order;
 			html+='<tr class="text-c" attrId="'+obj.id+'">\
-				<td>'+obj.order.number+'</td>\
-				<td>'+obj.goods.name+'</td>\
 				<td>'+obj.content+'</td>\
-				<td>'+obj.goodsScore+'</td>\
-				<td>'+obj.serviceAttitude+'</td>\
-				<td class="td-manage">\
-				<a title="详情" href="javascript:;" onclick="info(\''+obj.order.id+'\')" class="ml-5" style="text-decoration:none">详情</a></td>\
+				<td>'+obj.address+'</td>\
+				<td>'+obj.demand+'</td>\
+				<td>'+obj.basicCost+'</td>\
+				<td>'+obj.serviceCost+'</td>\
+				<td>'+obj.extraData.createDateStr+'</td>\
+				<td>'+obj.statusDis+'</td>\
+				<td class="td-manage">'+statusUtils(obj)+'</td>\
 			</tr>';
 		}
 		$("#data").html(html);
@@ -137,33 +138,27 @@ function loadData(){
 		sortDataTable();
 	});
 }
-
-function info(id){
-	var obj = orders[id];
-	var detailDiv = $('#detailDiv');
-	detailDiv.bringins({
-		"position":"right",
-		"color":"#e5e5e5",
-		"width":"60%",
-		"closeButton":"white"
-	});
-	detailDiv.find('.order_number').html(obj.number);
-	detailDiv.find('.order_orderTime').html(obj.orderTime);
-	detailDiv.find('.order_persons').html(obj.persons);
-	detailDiv.find('.order_total').html(obj.total);
-	detailDiv.find('.order_deliveryDate').html(obj.deliveryDate);
-	detailDiv.find('.order_deliveryAddress').html(obj.orderDelivery.deliveryAddress);
-	detailDiv.find('.order_remarks').html(obj.remarks);
-	var html="";
-	for(var i=0;i<obj.listOrderDetail.length;i++){
-		var detail = obj.listOrderDetail[i];
-		html+='<tr class="text-c" attrId="'+detail.id+'">\
-			<td colspan="2">'+detail.goods.name+'</td>\
-			<td colspan="2">'+detail.count+'</td>\
-			<td colspan="2">'+detail.price+'</td>\
-		</tr>';
+//状态处理转换
+function statusUtils(obj){
+	var s = ""; 
+	if(obj.status==0){
+		s = '<a title="通过" href="javascript:;" onclick="editStatus(\''+obj.id+'\',\'1\')" class="ml-5" style="text-decoration:none">通过</a> / '
+			+'<a title="不通过" href="javascript:;" onclick="editStatus(\''+obj.id+'\',\'5\')" class="ml-5" style="text-decoration:none">不通过</a>';
+	}else if(obj.status==1){
+		s = '<a title="配送" href="javascript:;" onclick="editStatus(\''+obj.id+'\',\'2\')" class="ml-5" style="text-decoration:none">处理完成</a>';
+	}else if(obj.status==2){
+		s = '<a title="退款" href="javascript:;" onclick="editStatus(\''+obj.id+'\',\'3\')" class="ml-5" style="text-decoration:none;color:red;">验收完成</a>';
 	}
-	$("#orderDetail").html(html);
+	return s;
+}
+//修改状态
+function editStatus(id,status){
+	var url = "/agency/update";
+	var data={id:id,status:status};
+	common.postData(url,data,function(data){
+		common.msg(data.msg);
+		loadData();
+	});
 }
 
 </script> 

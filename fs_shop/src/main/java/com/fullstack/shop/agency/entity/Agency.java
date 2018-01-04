@@ -24,12 +24,20 @@ public class Agency extends DataEntity<Agency> {
 	private String basicCost;	// 基础费用
 	@TableField("service_cost")
 	private String serviceCost;	// 成本（服务费）
+	private Integer status;		// 状态
+	private String cause;		// 代办驳回原因
 	
 	
 	@TableField("create_by")
 	protected Integer createBy;	// 创建者
 	@TableField("create_date")
 	protected Date createDate;	// 创建日期
+	
+
+
+	
+	@TableField(exist=false)
+	private String statusDis;
 	
 	@Override
 	public String toString(){
@@ -94,5 +102,48 @@ public class Agency extends DataEntity<Agency> {
 		this.serviceCost = serviceCost;
 	}
 
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
+	public String getCause() {
+		return cause;
+	}
+
+	public void setCause(String cause) {
+		this.cause = cause;
+	}
+
+	public String getStatusDis() {
+		if(this.status==Agency.STATUS_DEFAULT){
+			this.statusDis = "待处理";
+		}else if(this.status==Agency.STATUS_WAIT){
+			this.statusDis = "处理中";
+		}else if(this.status==Agency.STATUS_SEND){
+			this.statusDis = "待验收";
+		}else if(this.status==Agency.STATUS_END){
+			this.statusDis = "验收完成";
+		}else if(this.status==Agency.STATUS_REBUT){
+			this.statusDis = "审核不通过";
+		}else if(this.status==Agency.STATUS_CANCEL){
+			this.statusDis = "已取消";
+		}
+		return statusDis;
+	}
+
+	
+	
+	
+	public static int STATUS_DEFAULT = 0;	// 待处理
+	public static int STATUS_WAIT = 1;		// 处理中
+	public static int STATUS_SEND = 2;		// 待验收
+	public static int STATUS_END = 3;		// 验收完成
+	public static int STATUS_REBUT = 5;		// 审核不通过
+	public static int STATUS_CANCEL = 6;	// 已取消
+	
 	
 }
