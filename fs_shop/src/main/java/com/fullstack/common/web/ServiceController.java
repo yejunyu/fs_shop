@@ -16,10 +16,12 @@ import com.fullstack.shop.order.entity.Order;
 import com.fullstack.shop.order.entity.OrderDelivery;
 import com.fullstack.shop.order.entity.OrderDetail;
 import com.fullstack.shop.order.entity.OrderEvaluate;
+import com.fullstack.shop.order.entity.ScoreOrder;
 import com.fullstack.shop.order.service.OrderDeliveryService;
 import com.fullstack.shop.order.service.OrderDetailService;
 import com.fullstack.shop.order.service.OrderEvaluateService;
 import com.fullstack.shop.order.service.OrderService;
+import com.fullstack.shop.order.service.ScoreOrderService;
 import com.fullstack.shop.report.entity.Report;
 import com.fullstack.shop.report.service.ReportService;
 import com.fullstack.shop.sys.entity.Attach;
@@ -96,6 +98,8 @@ public abstract class ServiceController extends BaseController {
 	protected OrderDeliveryService<OrderDelivery> orderDeliveryService;
 	@Autowired  
 	protected OrderEvaluateService<OrderEvaluate> orderEvaluateService;
+	@Autowired  
+	protected ScoreOrderService<ScoreOrder> scoreOrderService;
 	
 	@Autowired  
 	protected ReportService<Report> reportService;

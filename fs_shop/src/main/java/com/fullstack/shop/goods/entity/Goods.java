@@ -114,4 +114,9 @@ public class Goods extends DataEntity<Goods> {
 		this.tempId = tempId;
 	}
 	
+	
+	public static int TYPE_DEFAULT = 0;		// 普通商品
+	public static int TYPE_SCORE = 1;		// 积分兑换
+	
+	
 }

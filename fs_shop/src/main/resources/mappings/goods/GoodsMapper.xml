@@ -36,6 +36,9 @@
 						a.temp_id in 
 					(select id from shop_goods_temp where parent_id=#{tempId}))
 			</if>
+			<if test="type != null">
+				and a.type=#{type}
+			</if>
 		</where>
     </select>  
     

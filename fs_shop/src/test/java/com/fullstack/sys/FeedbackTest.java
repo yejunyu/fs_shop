@@ -18,6 +18,7 @@ public class FeedbackTest extends AppTest{
     public void insert() throws BusinessException{  
     	Feedback entity = new Feedback();
     	entity.setContent("junit-test");
+    	entity.setReply("reply...");
     	service.create(entity);
     }  
     

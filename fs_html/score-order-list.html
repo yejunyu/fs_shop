@@ -1,0 +1,230 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<!--[if lt IE 9]>
+<script type="text/javascript" src="lib/html5shiv.js"></script>
+<script type="text/javascript" src="lib/respond.min.js"></script>
+<![endif]-->
+<link rel="stylesheet" type="text/css" href="static/h-ui/css/H-ui.min.css" />
+<link rel="stylesheet" type="text/css" href="static/h-ui.admin/css/H-ui.admin.css" />
+<link rel="stylesheet" type="text/css" href="lib/Hui-iconfont/1.0.8/iconfont.css" />
+<link rel="stylesheet" type="text/css" href="static/h-ui.admin/skin/default/skin.css" id="skin" />
+<link rel="stylesheet" type="text/css" href="static/h-ui.admin/css/style.css" />
+<!--[if IE 6]>
+<script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script>DD_belatedPNG.fix('*');</script>
+<![endif]-->
+<title></title>
+</head>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 积分管理 <span class="c-gray en">&gt;</span> 兑换列表 <a class="btn btn-success radius r btn-refresh" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="page-container">
+	<div class="mt-20">
+		<table class="table table-border table-bordered table-hover table-bg table-sort">
+			<thead>
+				<tr class="text-c">
+					<!-- <th width="25"><input type="checkbox" name="" value=""></th> -->
+					<th width="30%">订单号</th>
+					<th width="20%">商品名称</th>
+					<th width="10%">用户</th>
+					<th width="10%">数量</th>
+					<th width="10%">状态</th>
+					<th width="10%">操作</th>
+				</tr>
+			</thead>
+			<tbody id="data">
+				
+			</tbody>
+		</table>
+	</div>
+</div>
+<div id="infoDiv" class="bringins-content" style="display:none;">
+	<form action="" method="post" class="form form-horizontal" id="form-category-add" novalidate="novalidate">
+		<div id="tab-category" class="HuiTab">
+			<div class="tabBar cl">
+				<span class="current">基本信息</span>
+			</div>
+			<div class="tabCon" style="display: block;">
+				<input class="goods" type="hidden" id="id" name="id" value="">
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>名称：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<input type="text" class="input-text goods" value="" placeholder="" id="name" name="name">
+					</div>
+				</div>
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>描述：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<input type="text" class="textarea goods" value="" placeholder="" id="description" name="description">
+					</div>
+				</div>
+				<!-- <div class="row cl">
+					<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>类型：</label>
+					<div class="formControls col-xs-8 col-sm-9" id="">
+						<span class="select-box text_width30">
+						  <select class="select goods" size="1" name="tempId" id="tempId">
+						  </select>
+						</span>
+					</div>
+				</div> -->
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>价格：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<input type="text" class="input-text goods" value="" placeholder="" id="price" name="price">
+					</div>
+				</div>
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>积分：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<input type="text" class="input-text goods" value="" placeholder="" id="score" name="score">
+					</div>
+				</div>
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>图片：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<input type="hidden" class="input-text goods" value="" id="fileId" name="fileId">
+						<span class="btn-upload">
+							<a href="javascript:void();" class="btn btn-primary radius">选择文件
+								<span class="red" style="font-size:11px;">(默认不修改)</span></a>
+							<input type="file" id="file" name="file" multiple name="file_0" class="input-file">
+						</span>
+						<br>
+						<img id="fileShow" style="display:none;padding-top:5px;" class="thumb_img100 goods " alt="" src="">
+					</div>
+				</div>
+				<div class="row cl">
+					<span class="">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+					<span class="">类型补充属性</span>
+					<div class="line" style="border-top: solid 2px #fff;"></div>
+				</div>
+			</div>
+		</div>
+		<div class="row cl">
+			<div class="col-9 col-offset-3">
+				<input class="btn btn-primary radius" id="submit" type="button" onclick="save()" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+			</div>
+		</div>
+	</form>
+</div>
+<!--_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script> 
+<script type="text/javascript" src="lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="static/h-ui/js/H-ui.min.js"></script> 
+<script type="text/javascript" src="static/h-ui.admin/js/H-ui.admin.js"></script> <!--/_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="static/h-ui.admin/js/common.js"></script>
+<script type="text/javascript" src="static/h-ui.admin/js/utils.js"></script>
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="lib/My97DatePicker/4.8/WdatePicker.js"></script> 
+<script type="text/javascript" src="lib/datatables/1.10.0/jquery.dataTables.min.js"></script> 
+<script type="text/javascript" src="lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript" src="lib/bringins/js/bringins.js"></script>
+<script type="text/javascript">
+$(function(){
+	loadData();
+});
+function sortDataTable(){
+	$('.table-sort').dataTable({
+		"aaSorting": [[ 0, "desc" ]],//默认第几个排序
+		"bStateSave": true,//状态保存
+		"aoColumnDefs": [
+		  //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
+		  {"orderable":false,"aTargets":[5]}// 制定列不参与排序
+		]
+	});
+}
+function cleanDataTable(){
+	if ($('.table-sort').hasClass('dataTable')) {
+		var dttable = $('.table-sort').dataTable();
+		dttable.fnClearTable(); //清空一下table
+		dttable.fnDestroy(); //还原初始化了的datatable
+	}
+}
+//加载页面数据
+var orders = {};
+function loadData(){
+	var url = "/scoreOrder/list?pageNum=-1";
+	common.getData(url,function(data){
+		cleanDataTable();
+		var list = data.result.records;
+		var html="";
+		for(var i=0;i<list.length;i++){
+			var obj = list[i];
+			orders[obj.id] = obj;
+			html+='<tr class="text-c" attrId="'+obj.id+'">\
+				<td>'+obj.order.number+'</td>\
+				<td>'+obj.goods.name+'</td>\
+				<td>'+obj.extraData.createBy.name+'</td>\
+				<td>'+obj.count+'</td>\
+				<td>'+obj.statusDis+'</td>\
+				<td class="td-manage">\
+				<a title="详情" href="javascript:;" onclick="info(\''+obj.id+'\')" class="ml-5" style="text-decoration:none">详情</a>\
+				'+statusUtils(obj)+'</td>\
+			</tr>';
+		}
+		$("#data").html(html);
+		$("#count").html(data.result.total);
+		sortDataTable();
+	});
+}
+//状态处理转换
+function statusUtils(obj){
+	var s = ""; 
+	if(obj.status==0){
+		s = '<a title="处理" href="javascript:;" onclick="editStatus(\''+obj.id+'\',\'1\')" class="ml-5" style="text-decoration:none">处理</a>';
+	}else if(obj.status==1){
+		s = '<a title="配送" href="javascript:;" onclick="editStatus(\''+obj.id+'\',\'2\')" class="ml-5" style="text-decoration:none">配送</a>';
+	}else if(obj.status==2){
+		s = '<a title="完成" href="javascript:;" onclick="editStatus(\''+obj.id+'\',\'3\')" class="ml-5" style="text-decoration:none">完成</a>';
+	}else if(obj.status==4){
+		s = '<a title="退款" href="javascript:;" onclick="editStatus(\''+obj.id+'\',\'5\')" class="ml-5" style="text-decoration:none;color:red;">退款</a>';
+	}
+	return s;
+}
+
+//修改订单状态
+function editStatus(id,status){
+	var url = "/order/editStatusById";
+	var data={id:id,status:status};
+	common.postData(url,data,function(data){
+		common.msg(data.msg);
+		loadData();
+	});
+}
+
+function info(id){
+	var obj = orders[id];
+	var detailDiv = $('#detailDiv');
+	detailDiv.bringins({
+		"position":"right",
+		"color":"#e5e5e5",
+		"width":"60%",
+		"closeButton":"white"
+	});
+	detailDiv.find('.order_number').html(obj.number);
+	detailDiv.find('.order_orderTime').html(obj.orderTime);
+	detailDiv.find('.order_persons').html(obj.persons);
+	detailDiv.find('.order_total').html(obj.total);
+	detailDiv.find('.order_deliveryDate').html(obj.deliveryDate);
+	detailDiv.find('.order_deliveryAddress').html(obj.orderDelivery.deliveryAddress);
+	detailDiv.find('.order_remarks').html(obj.remarks);
+	var html="";
+	for(var i=0;i<obj.listOrderDetail.length;i++){
+		var detail = obj.listOrderDetail[i];
+		html+='<tr class="text-c" attrId="'+detail.id+'">\
+			<td colspan="2">'+detail.goods.name+'</td>\
+			<td colspan="2">'+detail.count+'</td>\
+			<td colspan="2">'+detail.price+'</td>\
+		</tr>';
+	}
+	$("#orderDetail").html(html);
+}
+
+</script> 
+</body>
+</html>

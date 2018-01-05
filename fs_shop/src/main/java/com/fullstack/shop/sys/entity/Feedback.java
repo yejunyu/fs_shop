@@ -17,7 +17,7 @@ public class Feedback extends DataEntity<Feedback> {
 	
 	private static final long serialVersionUID = 1L;
 	private String content;		// 内容
-	
+	private String reply;		// 回复
 	
 	@TableField("create_by")
 	protected Integer createBy;	
@@ -45,6 +45,14 @@ public class Feedback extends DataEntity<Feedback> {
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+
+	public String getReply() {
+		return reply;
+	}
+
+	public void setReply(String reply) {
+		this.reply = reply;
 	}
 
 	
