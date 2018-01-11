@@ -82,16 +82,16 @@
 
 <view class='foot'>
   <view class='foot_0'>
-    <image class='foot_0_img' src='http://192.168.1.120:8080/business_images/wx_xcx/banner/foot_01.jpg'></image>
+    <image class='foot_0_img' src='http://localhost:8080/business_images/wx_xcx/banner/foot_01.jpg'></image>
   </view>
   <view class='foot_0'>
-    <image class='foot_0_img' src='http://192.168.1.120:8080/business_images/wx_xcx/banner/foot_02.jpg'></image>
+    <image class='foot_0_img' src='http://localhost:8080/business_images/wx_xcx/banner/foot_02.jpg'></image>
   </view>
   <view class='foot_0'>
-    <image class='foot_0_img' src='http://192.168.1.120:8080/business_images/wx_xcx/banner/foot_03.jpg'></image>
+    <image class='foot_0_img' src='http://localhost:8080/business_images/wx_xcx/banner/foot_03.jpg'></image>
   </view>
   <view class='foot_0'>
-    <image class='foot_0_img' src='http://192.168.1.120:8080/business_images/wx_xcx/banner/foot_04.jpg'></image>
+    <image class='foot_0_img' src='http://localhost:8080/business_images/wx_xcx/banner/foot_04.jpg'></image>
   </view>
 </view>
 

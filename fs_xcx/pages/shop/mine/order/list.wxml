@@ -1,14 +1,20 @@
-
 <view class="">
   <view class="content">
+    <view class='title'>
+      <view class='tit detail'>订单详情</view>
+      <view class='tit amount'>金额(元)</view>
+      <view class='tit status'>状态</view>
+      <view class='tit opera'>操作</view>
+    </view>
     <view class="list">
       <view wx:for="{{list}}" wx:for-index="i" wx:for-item="item" wx:key="unique">
         <view class="order" data-order="{{item}}" catchtap="orderdetail">
-          <view> <image class="img_l" src="../../../../images/icons/order_01.png"></image> </view>
-          <view class="v_r"> > </view>
-          <text class="titles">{{item.extraData.details}}</text>
-          <text class="times">下单时间：{{item.orderTime}}</text>
-          <text class="totals" decode="{{true}}">&nbsp;&nbsp;&nbsp;数量：{{item.persons}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;总额：￥{{item.total}}</text>
+          <!-- <view> <image class="img_l" src="../../../../images/icons/order_01.png"></image> </view> -->
+          <!-- <view class="v_r"> > </view> -->
+          <view class="li detail details">{{item.extraData.details}}</view>
+          <view class="li amount" >{{item.total}}</view>
+          <view class="li status statusDis" >{{item.statusDis}}</view>
+          <view class="li opera" data-order="{{item}}" catchtap="opera">{{item.extraData.opera}}</view>
         </view>
       </view>
     </view>

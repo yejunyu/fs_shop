@@ -12,7 +12,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function () {
     var url = app.common.basePath + "/order/list?pageNum=-1";
     var d = { 'pageNum': '-1', 'createBy': wx.getStorageSync('userid')};
     var that = this;
@@ -22,8 +22,15 @@ Page({
       success: function (res) {
         var list = res.data.result.records;
         list.forEach(function (obj, i) {
-          if (obj.extraData.details.length > 15) {
-            obj.extraData.details = obj.extraData.details.substring(0,13)+'...';
+          if (obj.extraData.details.length > 20) {
+            obj.extraData.details = obj.extraData.details.substring(0,20)+'...';
+          }
+          if (obj.status == 0) {
+            obj.extraData.opera="取消";
+          } else if (obj.status == 2) {
+            obj.extraData.opera = "收货";
+          } else if (obj.status == 3) {
+            obj.extraData.opera = "评价";
           }
         });
         that.setData({
@@ -90,5 +97,27 @@ Page({
     wx.navigateTo({
       url: 'detail/detail'
     });
+  },
+  opera: function(e){
+    var order = e.currentTarget.dataset.order;
+    var status = 0;
+    if (order.status==0){
+      status = 6;
+    }
+    var url = app.common.basePath + "/order/editStatusById";
+    var d = { 'status': status, 'id': order.id };
+    var that = this;
+    wx.request({
+      url: url, //
+      data: d,
+      success: function (res) {
+        wx.showToast({
+          title: res.data.msg,
+          duration: 1500
+        });
+        that.onLoad();
+      }
+    });
+
   }
 })
