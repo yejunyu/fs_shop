@@ -126,11 +126,13 @@ public class Agency extends DataEntity<Agency> {
 		}else if(this.status==Agency.STATUS_SEND){
 			this.statusDis = "待验收";
 		}else if(this.status==Agency.STATUS_END){
-			this.statusDis = "验收完成";
+			this.statusDis = "已完成";
 		}else if(this.status==Agency.STATUS_REBUT){
-			this.statusDis = "审核不通过";
+			this.statusDis = "不通过";
 		}else if(this.status==Agency.STATUS_CANCEL){
 			this.statusDis = "已取消";
+		}else if(this.status==Agency.STATUS_EVALUATE){
+			this.statusDis = "已评价";
 		}
 		return statusDis;
 	}
@@ -144,6 +146,7 @@ public class Agency extends DataEntity<Agency> {
 	public static int STATUS_END = 3;		// 验收完成
 	public static int STATUS_REBUT = 5;		// 审核不通过
 	public static int STATUS_CANCEL = 6;	// 已取消
+	public static int STATUS_EVALUATE = 7;	// 已评价
 	
 	
 }

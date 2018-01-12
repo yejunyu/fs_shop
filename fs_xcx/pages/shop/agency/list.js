@@ -22,6 +22,21 @@ Page({
       data: d,
       success: function (res) {
         var list = res.data.result.records;
+        list.forEach(function (obj, i) {
+          if (obj.content.length > 20) {
+            obj.contentDis = obj.content.substring(0, 19) + '...';
+          }else{
+            obj.contentDis = obj.content;
+          }
+          if (obj.status == 0) {
+            obj.extraData.opera = "取消";
+          } else if (obj.status == 2) {
+            obj.extraData.opera = "完成";
+          } 
+          // else if (obj.status == 3) {
+          //   obj.extraData.opera = "评价";
+          // }
+        });
         that.setData({
           list: list
         });
@@ -86,5 +101,31 @@ Page({
     wx.navigateTo({
       url: '../agency/add/add'
     });
+  },
+  opera: function (e) {
+    var agency = e.currentTarget.dataset.agency;
+    var status = 0;
+    if (agency.status == 0) {
+      status = 6;
+    } else if (agency.status == 2) {
+      status = 3;
+    } else {
+      return;
+    }
+    var url = app.common.basePath + "/agency/update";
+    var d = { 'status': status, 'id': agency.id };
+    var that = this;
+    wx.request({
+      url: url, //
+      data: d,
+      success: function (res) {
+        wx.showToast({
+          title: res.data.msg,
+          duration: 1500
+        });
+        that.onLoad();
+      }
+    });
+
   }
 })

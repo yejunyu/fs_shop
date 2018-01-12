@@ -1,13 +1,19 @@
-<!--pages/shop/agency/list.wxml-->
-
 <view class="">
   <view class="content">
+    <view class='title'>
+      <view class='tit detail'>概要</view>
+      <view class='tit amount'>基础/服务(元)</view>
+      <view class='tit status'>状态</view>
+      <view class='tit opera'>操作</view>
+    </view>
     <view class="list">
       <view wx:for="{{list}}" wx:for-index="i" wx:for-item="item" wx:key="unique">
         <view class="agency" data-agency="{{item}}" catchtap="detail">
-          <view class="v_r"> > </view>
-          <text class="titles">{{item.content}}</text>
-          <text class="times">创建时间：{{item.extraData.createDateStr}}</text>
+          <view class="top">创建时间：2018-1-12 15:09:52</view>
+          <view class="li detail details">{{item.contentDis}}</view>
+          <view class="li amount" >{{item.basicCost}}/{{item.serviceCost}}</view>
+          <view class="li status statusDis" >{{item.statusDis}}</view>
+          <view class="li opera" data-agency="{{item}}" catchtap="opera">{{item.extraData.opera}}</view>
         </view>
       </view>
     </view>
