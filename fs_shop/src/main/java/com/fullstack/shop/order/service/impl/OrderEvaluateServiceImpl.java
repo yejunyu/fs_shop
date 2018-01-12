@@ -1,7 +1,11 @@
 package com.fullstack.shop.order.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.plugins.Page;
@@ -37,6 +41,21 @@ public class OrderEvaluateServiceImpl extends BaseServiceImpl<OrderEvaluateDao, 
 			entity.setGoods(goodsService.getInfoById(entity.getGoodsId()));
 		}
 		return page;
+	}
+
+
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED,rollbackFor={BusinessException.class})
+	public void batchCreate(List<OrderEvaluate> list) throws BusinessException {
+		
+		for(OrderEvaluate entity:list){
+			super.create(entity);
+		}
+		//评价完成修改订单状态
+		if(list.size()>0){
+			Integer orderId = list.get(0).getOrderId();
+			orderService.editStatusById(orderId, Order.STATUS_EVALUATE);
+		}
 	}
 
 	

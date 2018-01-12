@@ -169,6 +169,8 @@ public class Order extends DataEntity<Order> {
 			this.statusDis = "已退款";
 		}else if(this.status==Order.STATUS_CANCEL){
 			this.statusDis = "已取消";
+		}else if(this.status==Order.STATUS_EVALUATE){
+			this.statusDis = "已评价";
 		}
 		return statusDis;
 	}
@@ -201,5 +203,6 @@ public class Order extends DataEntity<Order> {
 	public static int STATUS_RETURN = 4;	// 退款中
 	public static int STATUS_REBUT = 5;		// 已退款
 	public static int STATUS_CANCEL = 6;	// 已取消
+	public static int STATUS_EVALUATE = 7;	// 已评价
 	
 }

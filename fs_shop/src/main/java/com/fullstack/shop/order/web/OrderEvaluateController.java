@@ -1,10 +1,14 @@
 package com.fullstack.shop.order.web;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
@@ -40,8 +44,11 @@ public class OrderEvaluateController extends ServiceController {
 	 */
 	@RequestMapping("create")
     public JSONObject createOrderEvaluate(HttpServletRequest request,OrderEvaluate orderEvaluate) throws BusinessException {
-		orderEvaluateService.create(orderEvaluate);
-        return this.retResult(success_create);
+		JSONArray jsonArray = RequestUtils.getJSONArray(request, "list");
+		List<OrderEvaluate> list = this.orderEvaluateJSONArrayToList(jsonArray);
+//		orderEvaluateService.create(orderEvaluate);
+		orderEvaluateService.batchCreate(list);
+        return this.retResult("评价成功");
     }
 	/**
 	 * 修改
@@ -98,4 +105,20 @@ public class OrderEvaluateController extends ServiceController {
         return this.retResult(orderEvaluate);
     }
 	
+	
+	public List<OrderEvaluate> orderEvaluateJSONArrayToList(JSONArray jsonArray){
+		List<OrderEvaluate> list = new ArrayList<OrderEvaluate>();
+		OrderEvaluate orderEvaluate = null;
+		for(Object obj : jsonArray){
+			JSONObject jsonObj = (JSONObject) obj;
+			orderEvaluate = new OrderEvaluate();
+			orderEvaluate.setOrderId(jsonObj.getInteger("orderId"));
+			orderEvaluate.setGoodsId(jsonObj.getInteger("goodsId"));
+			orderEvaluate.setContent(jsonObj.getString("content"));
+			orderEvaluate.setGoodsScore(jsonObj.getInteger("goodsScore"));
+			
+			list.add(orderEvaluate);
+		}
+		return list;
+	}
 }

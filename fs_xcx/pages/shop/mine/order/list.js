@@ -51,7 +51,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    this.onLoad();
   },
 
   /**
@@ -91,7 +91,7 @@ Page({
   orderdetail(e){
     var d = e.currentTarget.dataset.order;
     wx.setStorage({
-      key: "key_mine_order_detail",
+      key: app.storageKey.orderCurrent,
       data: d
     });
     wx.navigateTo({
@@ -103,6 +103,19 @@ Page({
     var status = 0;
     if (order.status==0){
       status = 6;
+    }else if(order.status==2){
+      status = 3;
+    } else if (order.status == 3) {
+      wx.setStorage({
+        key: app.storageKey.orderCurrent,
+        data: order
+      });
+      wx.navigateTo({
+        url: 'evaluate/add/add'
+      });
+      return;
+    }else{
+      return;
     }
     var url = app.common.basePath + "/order/editStatusById";
     var d = { 'status': status, 'id': order.id };

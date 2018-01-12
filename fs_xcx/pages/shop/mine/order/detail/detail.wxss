@@ -1,5 +1,4 @@
-/* pages/shop/mine/order/detail/detail.wxss */
-/* pages/shop/list/settlement/settlement.wxss */
+
 .content{
   height: 100%;
   width: 100%;

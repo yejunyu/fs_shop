@@ -75,6 +75,13 @@ public class GoodsServiceImpl extends BaseServiceImpl<GoodsDao, Goods> implement
 			GoodsTemp goodsTemp = goodsTempService.getInfoById(goods.getTempId());
 			super.fieldsetUtils(goodsTemp.getFieldset(), goods);
 		}
+		if(goods!=null){
+			GoodsImg goodsImg = goodsImgService.getLastGoodsImgByGoodsId(id);
+			if(goodsImg!=null){
+				goods.getExtraData().put(ImgUtils.IMG_KEY, 
+						ImgUtils.commonPathUtils(PropertiesUtil.getGoodsImgLoadPath(),goodsImg.getPath(),goodsImg.getName()));
+			}
+		}
 		return goods;
 	}
 

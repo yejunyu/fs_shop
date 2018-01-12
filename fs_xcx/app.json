@@ -7,6 +7,7 @@
     "pages/shop/mine/mine",
     "pages/shop/mine/order/list",
     "pages/shop/mine/order/detail/detail",
+    "pages/shop/mine/order/evaluate/add/add",
     "pages/shop/mine/address/address",
     "pages/shop/agency/list",
     "pages/shop/agency/add/add",

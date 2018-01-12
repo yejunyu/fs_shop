@@ -1,0 +1,67 @@
+
+.content{
+  height: 100%;
+  width: 100%;
+  padding-top:10px;
+}
+
+.details .list .detail{
+  width: 100%;
+  height: 250rpx;
+  background-color: white;
+  border-bottom: 1rpx solid gainsboro;
+}
+
+.details .list .detail .con{
+  float: left;
+  width: 30%;
+  text-align: center;
+  font-size: 0.8em;
+}
+.details .list .detail .con .img{
+  margin-left: 15rpx;
+  width: 180rpx;
+  height: 180rpx;
+  border: 1rpx red solid;
+}
+
+.details .list .detail .evaluate{
+  float: right;
+  width: 68%;
+  height: 100%;
+}
+.details .list .detail .evaluate .score{
+  width: 100%;
+}
+.details .list .detail .evaluate .score .s_img{
+  width: 45rpx;
+  height: 45rpx;
+  margin-left: 8rpx;
+}
+.details .list .detail .evaluate .etxt{
+  width: 95%;
+  height: 120rpx;
+  border: 1rpx solid gainsboro;
+}
+
+
+.save{
+  height: 100rpx;
+	display: block;
+	position: fixed;
+  z-index: 999;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	color: #fff;
+  background-color: white;
+}
+.save .btn {
+	width:100%;
+  height: 100%;
+	line-height: 100rpx;
+	float: left;
+	text-align: center;
+	background: rgba(0,0,0,0.6);
+  font-size: 1.2em;
+}

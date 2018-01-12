@@ -1,0 +1,31 @@
+
+<view class="">
+  <view class="content">
+    <view class="details">
+      <view class="list">
+        <view wx:for="{{list}}" wx:for-index="i" wx:for-item="obj" wx:key="unique">
+          <view class="detail">
+            <view class="con">
+              <image class="img" src="{{obj.goods.extraData.imgPath}}"></image>
+              <text>{{obj.goods.name}}</text>
+            </view>
+            <view class="evaluate">
+              <view class='score'>商品评分：
+                <block wx:for="{{scoreImgs}}" wx:for-index="i" wx:for-item="img" wx:key="unique">
+                  <image catchtap="scoreclick" data-goodsid="{{obj.goods.id}}" data-val="{{i}}" class='s_img' src='{{img}}'></image>
+                </block>
+              </view>
+              <view>评价内容：</view>
+              <textarea class='etxt' data-goodsid="{{obj.goods.id}}" bindinput="etxtVal"></textarea>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="save" catchtap="save">
+	<text class="btn">提交</text>
+</view>
+
