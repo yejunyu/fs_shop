@@ -33,16 +33,17 @@
 .list .agency{
   width: 100%;
   height: 150rpx;
-  border-bottom: 1px solid gainsboro;
-  padding: 0rpx 0rpx 0rpx 0rpx;
+  border-bottom: 1px solid #999;
   color: #333;
 }
 .list .agency .top{
   width: 100%;
-  height: 50rpx;
+  height: 40rpx;
   font-size: 0.8em;
-  margin-left: 50rpx;
+  padding-left: 50rpx;
+  margin-bottom: 10rpx;
   color: cadetblue;
+  border-bottom: 1px solid gainsboro;
 }
 .list .agency .li{
   float: left;
