@@ -15,11 +15,13 @@ Page({
   },
   onLoad: function (options) {
     var tempId = wx.getStorageSync(app.storageKey.goodsTempId);
+    var goodsType = wx.getStorageSync(app.storageKey.goodsType);
     this.loadGoodsList(tempId);
     this.loadGoodsTemp(tempId);
     this.setData({
       parentTempId: tempId,
-      current: tempId
+      current: tempId,
+      goodsType: goodsType
     });
   },
   onReady: function () {
@@ -189,8 +191,10 @@ Page({
   },
   tempChoose(event) {  //商品类型选择
     var tempId = event.target.dataset.id;
+    var goodsType = event.target.dataset.type;
     this.setData({
-      current: tempId
+      current: tempId,
+      goodsType: goodsType
     });
     this.storageCart();
     this.loadGoodsList(tempId);

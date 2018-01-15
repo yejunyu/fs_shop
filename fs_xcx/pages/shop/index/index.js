@@ -80,6 +80,10 @@ Page({
       key: app.storageKey.goodsTempId,
       data: tempId
     });
+    wx.setStorage({
+      key: app.storageKey.goodsType,
+      data: 0
+    });
     wx.navigateTo({
       url: '../goods/list'
     });
@@ -100,6 +104,19 @@ Page({
     });
     wx.navigateTo({
       url: '../sys/feedback/add/add'
+    });
+  },
+  score: function(){
+    wx.setStorage({
+      key: app.storageKey.goodsTempId,
+      data: 27
+    });
+    wx.setStorage({
+      key: app.storageKey.goodsType,
+      data:1
+    });
+    wx.navigateTo({
+      url: '../goods/list'
     });
   }
 

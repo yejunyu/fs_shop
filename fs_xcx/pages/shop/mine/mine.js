@@ -17,11 +17,6 @@ Page({
       },
       {
         "pic_url": "/images/icons/mine_03.png",
-        "title": "积分兑换",
-        "key": "address",
-      },
-      {
-        "pic_url": "/images/icons/mine_04.png",
         "title": "代办列表",
         "key": "agency",
       },
@@ -31,9 +26,14 @@ Page({
         "key": "feedback",
       },
       {
-        "pic_url": "/images/icons/mine_04.png",
-        "title": "代办列表",
-        "key": "agency",
+        "pic_url": "",
+        "title": "",
+        "key": "",
+      },
+      {
+        "pic_url": "",
+        "title": "",
+        "key": "",
       }
     ]
   },

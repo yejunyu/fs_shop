@@ -5,7 +5,7 @@
       <view wx:for="{{list}}" wx:for-index="i" wx:for-item="item" wx:key="unique">
         <view class="feedback" data-feedback="{{item}}" catchtap="detail">
           <view class="v_r"> > </view>
-          <text class="titles">{{item.content}}</text>
+          <text class="titles">意见建议：{{item.content}}</text>
           <text class="times">创建时间：{{item.extraData.createDateStr}}</text>
         </view>
       </view>
