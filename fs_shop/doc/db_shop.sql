@@ -19,6 +19,7 @@ CREATE TABLE `shop_member` (
   `login_name` varchar(64) DEFAULT NULL COMMENT '登录名',
   `password` varchar(32) DEFAULT NULL COMMENT '密码',
 	`score` int(11) DEFAULT 0 COMMENT '积分',
+	`credit_score` int(11) DEFAULT 100 COMMENT '信用积分',
   `contact_way` varchar(30) DEFAULT NULL COMMENT '联系方式',
   `status` tinyint(2) DEFAULT '0' COMMENT '状态',
   `last_login_time` datetime DEFAULT NULL COMMENT '最后登录时间',
@@ -45,7 +46,7 @@ DROP TABLE IF EXISTS `shop_goods`;
 CREATE TABLE `shop_goods` (
   `id` int(11) NOT NULL auto_increment COMMENT 'id',
   `name` varchar(50) NOT NULL COMMENT '名称',
-	`type` int(11) DEFAULT NULL COMMENT '类型',
+	`type` tinyint(2) DEFAULT 0 COMMENT '类型',
 	`temp_id` int(11) DEFAULT NULL COMMENT '模板id',
   `price` varchar(20) NULL DEFAULT '0' COMMENT '价格',
 	`score` int(11) DEFAULT -1 COMMENT '积分',
@@ -154,8 +155,10 @@ CREATE TABLE `shop_agency` (
   `address` varchar(255) DEFAULT NULL COMMENT '地址',
   `demand` varchar(255) DEFAULT NULL COMMENT '其它要求',
 	`type` int(11) DEFAULT NULL COMMENT '类型',
+	`status` tinyint(2) DEFAULT '0' COMMENT '状态',
 	`basic_cost` varchar(30) DEFAULT NULL COMMENT '基础费用',
 	`service_cost` varchar(30) DEFAULT NULL COMMENT '服务费',
+	`cause` varchar(100) DEFAULT NULL COMMENT '驳回理由',
 	`create_by` int(11) NOT NULL COMMENT '创建者',
   `create_date` datetime NOT NULL COMMENT '创建时间',
   `remarks` varchar(255) DEFAULT NULL COMMENT '备注信息',
@@ -179,9 +182,41 @@ DROP TABLE IF EXISTS `shop_feedback`;
 CREATE TABLE `shop_feedback` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
   `content` varchar(255) DEFAULT NULL COMMENT '内容',
+  `reply` varchar(255) DEFAULT NULL COMMENT '回复',
 	`create_by` int(11) NOT NULL COMMENT '创建者',
   `create_date` datetime NOT NULL COMMENT '创建时间',
   `remarks` varchar(255) DEFAULT NULL COMMENT '备注信息',
   `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT '删除标记',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='反馈表';
+
+DROP TABLE IF EXISTS `shop_order_evaluate`;
+CREATE TABLE `shop_order_evaluate` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `content` varchar(255) DEFAULT NULL COMMENT '内容',
+  `order_id` int(11) DEFAULT NULL COMMENT '订单id',
+  `goods_id` int(11) DEFAULT NULL COMMENT '商品id',
+  `service_attitude` int(11) DEFAULT 0 COMMENT '服务态度',
+  `goods_score` int(11) DEFAULT 0 COMMENT '商品评分（满意度）',
+	`create_by` int(11) NOT NULL COMMENT '创建者',
+  `create_date` datetime NOT NULL COMMENT '创建时间',
+  `remarks` varchar(255) DEFAULT NULL COMMENT '备注信息',
+  `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT '删除标记',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='订单评价表';
+
+DROP TABLE IF EXISTS `shop_score_order`;
+CREATE TABLE `shop_score_order` (
+  `id` int(11) NOT NULL auto_increment COMMENT 'id',
+	`order_id` int(11) NOT NULL COMMENT '订单id',
+	`goods_id` int(11) NOT NULL COMMENT '商品id',
+	`count` int(11) DEFAULT 1 COMMENT '数量',
+	`status` tinyint(2) DEFAULT '0' COMMENT '状态',
+	`create_by` int(11) NOT NULL COMMENT '创建者',
+  `create_date` datetime NOT NULL COMMENT '创建时间',
+  `update_by` int(11) NOT NULL COMMENT '更新者',
+  `update_date` datetime NOT NULL COMMENT '更新时间',
+  `remarks` varchar(255) DEFAULT NULL COMMENT '备注信息',
+  `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT '删除标记',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='积分兑换订单表';
