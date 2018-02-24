@@ -20,7 +20,7 @@ App({
               console.log('openid-->'+res.data.openid) //获取openid  
               wx.setStorageSync('openid', res.data.openid);
               var d = { 'wxId': res.data.openid};
-              var url = 'http://localhost:8888' + "/member/createMemberByWxId";
+              var url = 'http://127.0.0.1:8888' + "/member/createMemberByWxId";
               wx.request({
                 url: url, //
                 data: d,
@@ -79,7 +79,7 @@ App({
     openid:''
   },
   common:{
-    basePath:"http://localhost:8888"
+    basePath:"http://127.0.0.1:8888"
   },
   storageKey: {
     cart: "cart_list",                              // 购物车列表

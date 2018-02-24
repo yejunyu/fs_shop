@@ -10,13 +10,13 @@ Page({
     menus:[],
     banners: [
       {
-        "pic_url": "http://localhost:8080/business_images/wx_xcx/banner/1.png",
+        "pic_url": "http://127.0.0.1:8080/business_images/wx_xcx/banner/1.png",
       },
       {
-        "pic_url": "http://localhost:8080/business_images/wx_xcx/banner/2.png",
+        "pic_url": "http://127.0.0.1:8080/business_images/wx_xcx/banner/2.png",
       },
       {
-        "pic_url": "http://localhost:8080/business_images/wx_xcx/banner/3.png",
+        "pic_url": "http://127.0.0.1:8080/business_images/wx_xcx/banner/3.png",
       }
     ]
   },
