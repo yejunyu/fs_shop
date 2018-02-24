@@ -22,7 +22,7 @@ FastDFS 安装使用：https://my.oschina.net/xwzj/blog/760862
 ### 图文简介
  **小程序端** 
 
-![首页](https://gitee.com/uploads/images/2018/0224/152215_8d9a1d17_629055.png "首页.png")
+![首页](https://gitee.com/uploads/images/2018/0224/153425_ccd5a456_629055.png "首页01.png")
 ![商品列表](https://gitee.com/uploads/images/2018/0224/133136_0ee1ab31_629055.png "商品列表.png")
 ![购物车](https://gitee.com/uploads/images/2018/0224/133157_b33a90ea_629055.png "购物车.png")
 ![订单详情](https://gitee.com/uploads/images/2018/0224/133214_12f2ddcc_629055.png "订单详情.png")
