@@ -161,7 +161,7 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderDao, Order> implement
 		super.updateById(order);
 		//TODO 订单执行完成 ，自动生成报表（后续正式上线考虑调整为每天凌晨生成前一天，现在为了方便调试暂时放在这里触发）
 		if(status == Order.STATUS_END){
-			reportService.generateReportByDate(order.getDeliveryDate());
+			reportService.generateReportByDate(order.getOrderTime());
 		}
 		return true;
 	}
