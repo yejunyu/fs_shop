@@ -1,90 +1,90 @@
 DROP TABLE IF EXISTS `u_dict`;
 CREATE TABLE `u_dict` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
-  `name` varchar(50) NOT NULL COMMENT 'Ãû³Æ',
-  `type` varchar(50) NOT NULL COMMENT 'ÀàĞÍ',
-  `sort` int(11) DEFAULT NULL COMMENT 'ÅÅĞò',
-  `update_by` int(11) NOT NULL COMMENT '¸üĞÂÕß',
-  `update_date` datetime NOT NULL COMMENT '¸üĞÂÊ±¼ä',
-  `remarks` varchar(255) DEFAULT NULL COMMENT '±¸×¢ĞÅÏ¢',
-  `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT 'É¾³ı±ê¼Ç',
+  `name` varchar(50) NOT NULL COMMENT 'åç§°',
+  `type` varchar(50) NOT NULL COMMENT 'ç±»å‹',
+  `sort` int(11) DEFAULT NULL COMMENT 'æ’åº',
+  `update_by` int(11) NOT NULL COMMENT 'æ›´æ–°è€…',
+  `update_date` datetime NOT NULL COMMENT 'æ›´æ–°æ—¶é—´',
+  `remarks` varchar(255) DEFAULT NULL COMMENT 'å¤‡æ³¨ä¿¡æ¯',
+  `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT 'åˆ é™¤æ ‡è®°',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8 COMMENT='×Öµä±í';
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8 COMMENT='å­—å…¸è¡¨';
 
 DROP TABLE IF EXISTS `u_auth`;
 CREATE TABLE `u_auth` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
-  `name` varchar(50) NOT NULL COMMENT 'Ãû³Æ',
-  `update_by` int(11) NOT NULL COMMENT '¸üĞÂÕß',
-  `update_date` datetime NOT NULL COMMENT '¸üĞÂÊ±¼ä',
-  `remarks` varchar(255) DEFAULT NULL COMMENT '±¸×¢ĞÅÏ¢',
-  `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT 'É¾³ı±ê¼Ç',
+  `name` varchar(50) NOT NULL COMMENT 'åç§°',
+  `update_by` int(11) NOT NULL COMMENT 'æ›´æ–°è€…',
+  `update_date` datetime NOT NULL COMMENT 'æ›´æ–°æ—¶é—´',
+  `remarks` varchar(255) DEFAULT NULL COMMENT 'å¤‡æ³¨ä¿¡æ¯',
+  `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT 'åˆ é™¤æ ‡è®°',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='È¨ÏŞ±í';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='æƒé™è¡¨';
 
 DROP TABLE IF EXISTS `u_office`;
 CREATE TABLE `u_office` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
-  `parent_id` int(11) NOT NULL COMMENT '¸¸¼¶id',
-  `name` varchar(30) NOT NULL COMMENT 'Ãû³Æ',
-  `master_id` int(11) DEFAULT NULL COMMENT '¸ºÔğÈËid',
-  `update_by` int(11) NOT NULL COMMENT '¸üĞÂÕß',
-  `update_date` datetime NOT NULL COMMENT '¸üĞÂÊ±¼ä',
-  `remarks` varchar(255) DEFAULT NULL COMMENT '±¸×¢ĞÅÏ¢',
-  `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT 'É¾³ı±ê¼Ç',
+  `parent_id` int(11) NOT NULL COMMENT 'çˆ¶çº§id',
+  `name` varchar(30) NOT NULL COMMENT 'åç§°',
+  `master_id` int(11) DEFAULT NULL COMMENT 'è´Ÿè´£äººid',
+  `update_by` int(11) NOT NULL COMMENT 'æ›´æ–°è€…',
+  `update_date` datetime NOT NULL COMMENT 'æ›´æ–°æ—¶é—´',
+  `remarks` varchar(255) DEFAULT NULL COMMENT 'å¤‡æ³¨ä¿¡æ¯',
+  `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT 'åˆ é™¤æ ‡è®°',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='»ú¹¹±í';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='æœºæ„è¡¨';
 
 DROP TABLE IF EXISTS `u_office_user`;
 CREATE TABLE `u_office_user` (
-  `office_id` int(11) NOT NULL COMMENT '»ú¹¹id',
-  `user_id` int(11) NOT NULL COMMENT 'ÓÃ»§id',
+  `office_id` int(11) NOT NULL COMMENT 'æœºæ„id',
+  `user_id` int(11) NOT NULL COMMENT 'ç”¨æˆ·id',
   PRIMARY KEY (`office_id`,`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='»ú¹¹-ÓÃ»§±í';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='æœºæ„-ç”¨æˆ·è¡¨';
 
 DROP TABLE IF EXISTS `u_role`;
 CREATE TABLE `u_role` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
-  `name` varchar(50) NOT NULL COMMENT 'Ãû³Æ',
-  `ename` varchar(50) NOT NULL COMMENT 'Ó¢ÎÄÃû³Æ',
-  `update_by` int(11) NOT NULL COMMENT '¸üĞÂÕß',
-  `update_date` datetime NOT NULL COMMENT '¸üĞÂÊ±¼ä',
-  `remarks` varchar(255) DEFAULT NULL COMMENT '±¸×¢ĞÅÏ¢',
-  `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT 'É¾³ı±ê¼Ç',
+  `name` varchar(50) NOT NULL COMMENT 'åç§°',
+  `ename` varchar(50) NOT NULL COMMENT 'è‹±æ–‡åç§°',
+  `update_by` int(11) NOT NULL COMMENT 'æ›´æ–°è€…',
+  `update_date` datetime NOT NULL COMMENT 'æ›´æ–°æ—¶é—´',
+  `remarks` varchar(255) DEFAULT NULL COMMENT 'å¤‡æ³¨ä¿¡æ¯',
+  `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT 'åˆ é™¤æ ‡è®°',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='½ÇÉ«±í';
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='è§’è‰²è¡¨';
 
 DROP TABLE IF EXISTS `u_role_auth`;
 CREATE TABLE `u_role_auth` (
-  `role_id` int(11) NOT NULL COMMENT '½ÇÉ«id',
-  `auth_id` int(11) NOT NULL COMMENT 'È¨ÏŞid',
+  `role_id` int(11) NOT NULL COMMENT 'è§’è‰²id',
+  `auth_id` int(11) NOT NULL COMMENT 'æƒé™id',
   PRIMARY KEY (`role_id`,`auth_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='½ÇÉ«-È¨ÏŞ±í';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='è§’è‰²-æƒé™è¡¨';
 
 DROP TABLE IF EXISTS `u_user`;
 CREATE TABLE `u_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
-  `name` varchar(50) DEFAULT NULL COMMENT 'Ãû³Æ',
-  `code` varchar(100) DEFAULT NULL COMMENT '±àÂë£¨¹¤ºÅ£©',
-  `login_name` varchar(64) NOT NULL COMMENT 'µÇÂ¼Ãû',
-  `password` varchar(32) NOT NULL COMMENT 'ÃÜÂë',
-  `contact_way` varchar(30) DEFAULT NULL COMMENT 'ÁªÏµ·½Ê½',
-  `email` varchar(30) DEFAULT NULL COMMENT 'ÓÊÏä',
-  `status` tinyint(2) DEFAULT '0' COMMENT '×´Ì¬',
-  `last_login_time` datetime DEFAULT NULL COMMENT '×îºóµÇÂ¼Ê±¼ä',
-  `update_by` int(11) NOT NULL COMMENT '¸üĞÂÕß',
-  `update_date` datetime NOT NULL COMMENT '¸üĞÂÊ±¼ä',
-  `remarks` varchar(255) DEFAULT NULL COMMENT '±¸×¢ĞÅÏ¢',
-  `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT 'É¾³ı±ê¼Ç',
+  `name` varchar(50) DEFAULT NULL COMMENT 'åç§°',
+  `code` varchar(100) DEFAULT NULL COMMENT 'ç¼–ç ï¼ˆå·¥å·ï¼‰',
+  `login_name` varchar(64) NOT NULL COMMENT 'ç™»å½•å',
+  `password` varchar(32) NOT NULL COMMENT 'å¯†ç ',
+  `contact_way` varchar(30) DEFAULT NULL COMMENT 'è”ç³»æ–¹å¼',
+  `email` varchar(30) DEFAULT NULL COMMENT 'é‚®ç®±',
+  `status` tinyint(2) DEFAULT '0' COMMENT 'çŠ¶æ€',
+  `last_login_time` datetime DEFAULT NULL COMMENT 'æœ€åç™»å½•æ—¶é—´',
+  `update_by` int(11) NOT NULL COMMENT 'æ›´æ–°è€…',
+  `update_date` datetime NOT NULL COMMENT 'æ›´æ–°æ—¶é—´',
+  `remarks` varchar(255) DEFAULT NULL COMMENT 'å¤‡æ³¨ä¿¡æ¯',
+  `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT 'åˆ é™¤æ ‡è®°',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COMMENT='ÓÃ»§»ù´¡ĞÅÏ¢±í';
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COMMENT='ç”¨æˆ·åŸºç¡€ä¿¡æ¯è¡¨';
 
 DROP TABLE IF EXISTS `u_user_role`;
 CREATE TABLE `u_user_role` (
-  `user_id` int(11) NOT NULL COMMENT 'ÓÃ»§id',
-  `role_id` int(11) NOT NULL COMMENT '½ÇÉ«id',
+  `user_id` int(11) NOT NULL COMMENT 'ç”¨æˆ·id',
+  `role_id` int(11) NOT NULL COMMENT 'è§’è‰²id',
   PRIMARY KEY (`user_id`,`role_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='ÓÃ»§-½ÇÉ«±í';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='ç”¨æˆ·-è§’è‰²è¡¨';
 
 
 

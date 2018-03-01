@@ -1,222 +1,222 @@
 DROP TABLE IF EXISTS `shop_dict`;
 CREATE TABLE `shop_dict` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
-  `name` varchar(50) NOT NULL COMMENT 'Ãû³Æ',
-  `type` varchar(50) NOT NULL COMMENT 'ÀàĞÍ',
-  `sort` int(11) DEFAULT NULL COMMENT 'ÅÅĞò',
-  `update_by` int(11) NOT NULL COMMENT '¸üĞÂÕß',
-  `update_date` datetime NOT NULL COMMENT '¸üĞÂÊ±¼ä',
-  `remarks` varchar(255) DEFAULT NULL COMMENT '±¸×¢ĞÅÏ¢',
-  `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT 'É¾³ı±ê¼Ç',
+  `name` varchar(50) NOT NULL COMMENT 'åç§°',
+  `type` varchar(50) NOT NULL COMMENT 'ç±»å‹',
+  `sort` int(11) DEFAULT NULL COMMENT 'æ’åº',
+  `update_by` int(11) NOT NULL COMMENT 'æ›´æ–°è€…',
+  `update_date` datetime NOT NULL COMMENT 'æ›´æ–°æ—¶é—´',
+  `remarks` varchar(255) DEFAULT NULL COMMENT 'å¤‡æ³¨ä¿¡æ¯',
+  `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT 'åˆ é™¤æ ‡è®°',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='×Öµä±í';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='å­—å…¸è¡¨';
 
 DROP TABLE IF EXISTS `shop_member`;
 CREATE TABLE `shop_member` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
-  `name` varchar(50) DEFAULT NULL COMMENT 'Ãû³Æ',
-  `wx_id` varchar(100) DEFAULT NULL COMMENT 'Î¢ĞÅid',
-  `login_name` varchar(64) DEFAULT NULL COMMENT 'µÇÂ¼Ãû',
-  `password` varchar(32) DEFAULT NULL COMMENT 'ÃÜÂë',
-	`score` int(11) DEFAULT 0 COMMENT '»ı·Ö',
-	`credit_score` int(11) DEFAULT 100 COMMENT 'ĞÅÓÃ»ı·Ö',
-  `contact_way` varchar(30) DEFAULT NULL COMMENT 'ÁªÏµ·½Ê½',
-  `status` tinyint(2) DEFAULT '0' COMMENT '×´Ì¬',
-  `last_login_time` datetime DEFAULT NULL COMMENT '×îºóµÇÂ¼Ê±¼ä',
-  `remarks` varchar(255) DEFAULT NULL COMMENT '±¸×¢ĞÅÏ¢',
-  `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT 'É¾³ı±ê¼Ç',
+  `name` varchar(50) DEFAULT NULL COMMENT 'åç§°',
+  `wx_id` varchar(100) DEFAULT NULL COMMENT 'å¾®ä¿¡id',
+  `login_name` varchar(64) DEFAULT NULL COMMENT 'ç™»å½•å',
+  `password` varchar(32) DEFAULT NULL COMMENT 'å¯†ç ',
+	`score` int(11) DEFAULT 0 COMMENT 'ç§¯åˆ†',
+	`credit_score` int(11) DEFAULT 100 COMMENT 'ä¿¡ç”¨ç§¯åˆ†',
+  `contact_way` varchar(30) DEFAULT NULL COMMENT 'è”ç³»æ–¹å¼',
+  `status` tinyint(2) DEFAULT '0' COMMENT 'çŠ¶æ€',
+  `last_login_time` datetime DEFAULT NULL COMMENT 'æœ€åç™»å½•æ—¶é—´',
+  `remarks` varchar(255) DEFAULT NULL COMMENT 'å¤‡æ³¨ä¿¡æ¯',
+  `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT 'åˆ é™¤æ ‡è®°',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='¹Ë¿Í»ù´¡ĞÅÏ¢±í';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='é¡¾å®¢åŸºç¡€ä¿¡æ¯è¡¨';
 
 DROP TABLE IF EXISTS `shop_goods_temp`;
 CREATE TABLE `shop_goods_temp` (
   `id` int(11) NOT NULL auto_increment COMMENT 'id',
-	`parent_id` int(11) DEFAULT '-1' COMMENT 'ÉÏ¼¶ÀàĞÍ',
-  `name` varchar(50) NOT NULL COMMENT 'Ãû³Æ',
-  `img` varchar(50) default NULL COMMENT 'Í¼Æ¬',
-  `fieldset` varchar(255) DEFAULT NULL COMMENT '×Ô¶¨Òå×Ö¶Î',
-	`update_by` int(11) NOT NULL COMMENT '¸üĞÂÕß',
-  `update_date` datetime NOT NULL COMMENT '¸üĞÂÊ±¼ä',
-  `remarks` varchar(255) DEFAULT NULL COMMENT '±¸×¢ĞÅÏ¢',
-  `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT 'É¾³ı±ê¼Ç',
+	`parent_id` int(11) DEFAULT '-1' COMMENT 'ä¸Šçº§ç±»å‹',
+  `name` varchar(50) NOT NULL COMMENT 'åç§°',
+  `img` varchar(50) default NULL COMMENT 'å›¾ç‰‡',
+  `fieldset` varchar(255) DEFAULT NULL COMMENT 'è‡ªå®šä¹‰å­—æ®µ',
+	`update_by` int(11) NOT NULL COMMENT 'æ›´æ–°è€…',
+  `update_date` datetime NOT NULL COMMENT 'æ›´æ–°æ—¶é—´',
+  `remarks` varchar(255) DEFAULT NULL COMMENT 'å¤‡æ³¨ä¿¡æ¯',
+  `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT 'åˆ é™¤æ ‡è®°',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='ÉÌÆ·ÀàĞÍ±í';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='å•†å“ç±»å‹è¡¨';
 
 DROP TABLE IF EXISTS `shop_goods`;
 CREATE TABLE `shop_goods` (
   `id` int(11) NOT NULL auto_increment COMMENT 'id',
-  `name` varchar(50) NOT NULL COMMENT 'Ãû³Æ',
-	`type` tinyint(2) DEFAULT 0 COMMENT 'ÀàĞÍ',
-	`temp_id` int(11) DEFAULT NULL COMMENT 'Ä£°åid',
-  `price` varchar(20) NULL DEFAULT '0' COMMENT '¼Û¸ñ',
-	`score` int(11) DEFAULT -1 COMMENT '»ı·Ö',
-  `description` varchar(255) DEFAULT NULL COMMENT 'ÃèÊö',
-  `min` int(11) NULL DEFAULT '-1' COMMENT '×îĞ¡Öµ',
-	`max` int(11) NULL DEFAULT '0' COMMENT '×î´óÖµ',
-	`update_by` int(11) NOT NULL COMMENT '¸üĞÂÕß',
-  `update_date` datetime NOT NULL COMMENT '¸üĞÂÊ±¼ä',
-  `fieldset` TEXT DEFAULT NULL COMMENT '×Ô¶¨Òå×Ö¶Î',
-  `remarks` varchar(255) DEFAULT NULL COMMENT '±¸×¢ĞÅÏ¢',
-  `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT 'É¾³ı±ê¼Ç',
+  `name` varchar(50) NOT NULL COMMENT 'åç§°',
+	`type` tinyint(2) DEFAULT 0 COMMENT 'ç±»å‹',
+	`temp_id` int(11) DEFAULT NULL COMMENT 'æ¨¡æ¿id',
+  `price` varchar(20) NULL DEFAULT '0' COMMENT 'ä»·æ ¼',
+	`score` int(11) DEFAULT -1 COMMENT 'ç§¯åˆ†',
+  `description` varchar(255) DEFAULT NULL COMMENT 'æè¿°',
+  `min` int(11) NULL DEFAULT '-1' COMMENT 'æœ€å°å€¼',
+	`max` int(11) NULL DEFAULT '0' COMMENT 'æœ€å¤§å€¼',
+	`update_by` int(11) NOT NULL COMMENT 'æ›´æ–°è€…',
+  `update_date` datetime NOT NULL COMMENT 'æ›´æ–°æ—¶é—´',
+  `fieldset` TEXT DEFAULT NULL COMMENT 'è‡ªå®šä¹‰å­—æ®µ',
+  `remarks` varchar(255) DEFAULT NULL COMMENT 'å¤‡æ³¨ä¿¡æ¯',
+  `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT 'åˆ é™¤æ ‡è®°',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='ÉÌÆ·±í';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='å•†å“è¡¨';
 
 DROP TABLE IF EXISTS `shop_goods_img`;
 CREATE TABLE `shop_goods_img` (
   `id` int(11) NOT NULL auto_increment COMMENT 'id',
-  `goods_id` int(11) DEFAULT NULL COMMENT 'ÉÌÆ·id',
-  `name` varchar(100) DEFAULT NULL COMMENT 'Ãû³Æ',
-	`path` varchar(100) DEFAULT NULL COMMENT 'Â·¾¶',
-  `bytes` MEDIUMBLOB DEFAULT NULL COMMENT 'ÎÄ¼ş¶ş½øÖÆ´æ´¢',
-	`first_show` char(1) NOT NULL DEFAULT '0' COMMENT 'ÓÅÏÈÕ¹Ê¾',
-  `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT 'É¾³ı±ê¼Ç',
+  `goods_id` int(11) DEFAULT NULL COMMENT 'å•†å“id',
+  `name` varchar(100) DEFAULT NULL COMMENT 'åç§°',
+	`path` varchar(100) DEFAULT NULL COMMENT 'è·¯å¾„',
+  `bytes` MEDIUMBLOB DEFAULT NULL COMMENT 'æ–‡ä»¶äºŒè¿›åˆ¶å­˜å‚¨',
+	`first_show` char(1) NOT NULL DEFAULT '0' COMMENT 'ä¼˜å…ˆå±•ç¤º',
+  `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT 'åˆ é™¤æ ‡è®°',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='ÉÌÆ·Í¼Æ¬±í';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='å•†å“å›¾ç‰‡è¡¨';
 
 DROP TABLE IF EXISTS `shop_order`;
 CREATE TABLE `shop_order` (
   `id` int(11) NOT NULL auto_increment COMMENT 'id',
-	`number` varchar(100) NOT NULL COMMENT '¶©µ¥ºÅ',
-	`table_no` varchar(30) DEFAULT NULL COMMENT 'Ì¨ºÅ',
-	`persons` int(11) DEFAULT NULL COMMENT 'ÈËÊı',
-	`pay_method` varchar(30) DEFAULT NULL COMMENT 'Ö§¸¶·½Ê½',
-  `order_time` varchar(20) NOT NULL COMMENT 'ÏÂµ¥Ê±¼ä',
-  `delivery_date` varchar(20) DEFAULT NULL COMMENT 'ÅäËÍÈÕÆÚ',
-  `delivery_type` varchar(30) DEFAULT NULL COMMENT 'ÅäËÍ·½Ê½',
-	`status` tinyint(2) DEFAULT '0' COMMENT '×´Ì¬',
-  `total` varchar(20) DEFAULT '0' COMMENT '×Ü¼Æ',
-	`create_by` int(11) NOT NULL COMMENT '´´½¨Õß',
-  `create_date` datetime NOT NULL COMMENT '´´½¨Ê±¼ä',
-  `update_by` int(11) NOT NULL COMMENT '¸üĞÂÕß',
-  `update_date` datetime NOT NULL COMMENT '¸üĞÂÊ±¼ä',
-  `remarks` varchar(255) DEFAULT NULL COMMENT '±¸×¢ĞÅÏ¢',
-  `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT 'É¾³ı±ê¼Ç',
+	`number` varchar(100) NOT NULL COMMENT 'è®¢å•å·',
+	`table_no` varchar(30) DEFAULT NULL COMMENT 'å°å·',
+	`persons` int(11) DEFAULT NULL COMMENT 'äººæ•°',
+	`pay_method` varchar(30) DEFAULT NULL COMMENT 'æ”¯ä»˜æ–¹å¼',
+  `order_time` varchar(20) NOT NULL COMMENT 'ä¸‹å•æ—¶é—´',
+  `delivery_date` varchar(20) DEFAULT NULL COMMENT 'é…é€æ—¥æœŸ',
+  `delivery_type` varchar(30) DEFAULT NULL COMMENT 'é…é€æ–¹å¼',
+	`status` tinyint(2) DEFAULT '0' COMMENT 'çŠ¶æ€',
+  `total` varchar(20) DEFAULT '0' COMMENT 'æ€»è®¡',
+	`create_by` int(11) NOT NULL COMMENT 'åˆ›å»ºè€…',
+  `create_date` datetime NOT NULL COMMENT 'åˆ›å»ºæ—¶é—´',
+  `update_by` int(11) NOT NULL COMMENT 'æ›´æ–°è€…',
+  `update_date` datetime NOT NULL COMMENT 'æ›´æ–°æ—¶é—´',
+  `remarks` varchar(255) DEFAULT NULL COMMENT 'å¤‡æ³¨ä¿¡æ¯',
+  `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT 'åˆ é™¤æ ‡è®°',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='¶©µ¥±í';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='è®¢å•è¡¨';
 
 DROP TABLE IF EXISTS `shop_order_delivery`;
 CREATE TABLE `shop_order_delivery` (
   `id` int(11) NOT NULL auto_increment COMMENT 'id',
-	`order_id` int(11) NOT NULL COMMENT '¶©µ¥id',
-  `delivery_time` varchar(30) DEFAULT NULL COMMENT 'ÅäËÍÊ±¼ä',
-	`delivery_address` varchar(255) DEFAULT NULL COMMENT 'ÅäËÍµØÖ·',
-	`customer` varchar(100) DEFAULT NULL COMMENT 'ÊÕ»õÈË',
-	`contact_way` varchar(255) DEFAULT NULL COMMENT 'ÁªÏµ·½Ê½',
-  `remarks` varchar(255) DEFAULT NULL COMMENT '±¸×¢ĞÅÏ¢',
-  `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT 'É¾³ı±ê¼Ç',
+	`order_id` int(11) NOT NULL COMMENT 'è®¢å•id',
+  `delivery_time` varchar(30) DEFAULT NULL COMMENT 'é…é€æ—¶é—´',
+	`delivery_address` varchar(255) DEFAULT NULL COMMENT 'é…é€åœ°å€',
+	`customer` varchar(100) DEFAULT NULL COMMENT 'æ”¶è´§äºº',
+	`contact_way` varchar(255) DEFAULT NULL COMMENT 'è”ç³»æ–¹å¼',
+  `remarks` varchar(255) DEFAULT NULL COMMENT 'å¤‡æ³¨ä¿¡æ¯',
+  `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT 'åˆ é™¤æ ‡è®°',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='¶©µ¥-ÅäËÍ±í';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='è®¢å•-é…é€è¡¨';
 
 DROP TABLE IF EXISTS `shop_order_detail`;
 CREATE TABLE `shop_order_detail` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
-  `order_id` int(11) NOT NULL COMMENT '¶©µ¥id',
-  `goods_id` int(11) NOT NULL COMMENT 'ÉÌÆ·id',
-  `count` int(11) NOT NULL COMMENT 'ÊıÁ¿',
-  `price` varchar(20) DEFAULT '0' COMMENT '¼Û¸ñ',
-  `remarks` varchar(255) DEFAULT NULL COMMENT '±¸×¢ĞÅÏ¢',
-  `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT 'É¾³ı±ê¼Ç',
+  `order_id` int(11) NOT NULL COMMENT 'è®¢å•id',
+  `goods_id` int(11) NOT NULL COMMENT 'å•†å“id',
+  `count` int(11) NOT NULL COMMENT 'æ•°é‡',
+  `price` varchar(20) DEFAULT '0' COMMENT 'ä»·æ ¼',
+  `remarks` varchar(255) DEFAULT NULL COMMENT 'å¤‡æ³¨ä¿¡æ¯',
+  `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT 'åˆ é™¤æ ‡è®°',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='¶©µ¥-ÏêÇé±í';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='è®¢å•-è¯¦æƒ…è¡¨';
 
 DROP TABLE IF EXISTS `shop_report`;
 CREATE TABLE `shop_report` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
-  `count_date` varchar(30) NOT NULL COMMENT 'Í³¼ÆÈÕÆÚ',
-  `goods_id` int(11) DEFAULT NULL COMMENT 'ÉÌÆ·id',
-  `type` tinyint(2) NOT NULL COMMENT 'ÀàĞÍ',
-  `total` varchar(20) DEFAULT '0' COMMENT '×Ü¼Æ',
-  `remarks` varchar(255) DEFAULT NULL COMMENT '±¸×¢ĞÅÏ¢',
-  `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT 'É¾³ı±ê¼Ç',
+  `count_date` varchar(30) NOT NULL COMMENT 'ç»Ÿè®¡æ—¥æœŸ',
+  `goods_id` int(11) DEFAULT NULL COMMENT 'å•†å“id',
+  `type` tinyint(2) NOT NULL COMMENT 'ç±»å‹',
+  `total` varchar(20) DEFAULT '0' COMMENT 'æ€»è®¡',
+  `remarks` varchar(255) DEFAULT NULL COMMENT 'å¤‡æ³¨ä¿¡æ¯',
+  `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT 'åˆ é™¤æ ‡è®°',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='±¨±í±í';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='æŠ¥è¡¨è¡¨';
 
 DROP TABLE IF EXISTS `shop_member_address`;
 CREATE TABLE `shop_member_address` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
-  `name` varchar(50) DEFAULT NULL COMMENT 'Ãû³Æ',
-  `sex` varchar(2) DEFAULT NULL COMMENT 'ĞÔ±ğ',
-  `phone` varchar(20) DEFAULT NULL COMMENT 'ÊÖ»úºÅÂë',
-  `address` varchar(50) DEFAULT NULL COMMENT 'µØÖ·',
-	`detail_address` varchar(50) DEFAULT NULL COMMENT 'ÏêÏ¸µØÖ·',
-  `default_flag` tinyint(2) NOT NULL DEFAULT '0' COMMENT 'ÊÇ·ñÄ¬ÈÏÊ¹ÓÃ',
-	`create_by` int(11) NOT NULL COMMENT '´´½¨Õß',
-  `create_date` datetime NOT NULL COMMENT '´´½¨Ê±¼ä',
-  `update_date` datetime NOT NULL COMMENT '¸üĞÂÊ±¼ä',
-  `remarks` varchar(255) DEFAULT NULL COMMENT '±¸×¢ĞÅÏ¢',
-  `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT 'É¾³ı±ê¼Ç',
+  `name` varchar(50) DEFAULT NULL COMMENT 'åç§°',
+  `sex` varchar(2) DEFAULT NULL COMMENT 'æ€§åˆ«',
+  `phone` varchar(20) DEFAULT NULL COMMENT 'æ‰‹æœºå·ç ',
+  `address` varchar(50) DEFAULT NULL COMMENT 'åœ°å€',
+	`detail_address` varchar(50) DEFAULT NULL COMMENT 'è¯¦ç»†åœ°å€',
+  `default_flag` tinyint(2) NOT NULL DEFAULT '0' COMMENT 'æ˜¯å¦é»˜è®¤ä½¿ç”¨',
+	`create_by` int(11) NOT NULL COMMENT 'åˆ›å»ºè€…',
+  `create_date` datetime NOT NULL COMMENT 'åˆ›å»ºæ—¶é—´',
+  `update_date` datetime NOT NULL COMMENT 'æ›´æ–°æ—¶é—´',
+  `remarks` varchar(255) DEFAULT NULL COMMENT 'å¤‡æ³¨ä¿¡æ¯',
+  `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT 'åˆ é™¤æ ‡è®°',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='¹Ë¿ÍÊÕ²ÍµØÖ·ĞÅÏ¢±í';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='é¡¾å®¢æ”¶é¤åœ°å€ä¿¡æ¯è¡¨';
 
 DROP TABLE IF EXISTS `shop_agency`;
 CREATE TABLE `shop_agency` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
-  `content` varchar(255) DEFAULT NULL COMMENT 'ÄÚÈİ',
-  `address` varchar(255) DEFAULT NULL COMMENT 'µØÖ·',
-  `demand` varchar(255) DEFAULT NULL COMMENT 'ÆäËüÒªÇó',
-	`type` int(11) DEFAULT NULL COMMENT 'ÀàĞÍ',
-	`status` tinyint(2) DEFAULT '0' COMMENT '×´Ì¬',
-	`basic_cost` varchar(30) DEFAULT NULL COMMENT '»ù´¡·ÑÓÃ',
-	`service_cost` varchar(30) DEFAULT NULL COMMENT '·şÎñ·Ñ',
-	`cause` varchar(100) DEFAULT NULL COMMENT '²µ»ØÀíÓÉ',
-	`create_by` int(11) NOT NULL COMMENT '´´½¨Õß',
-  `create_date` datetime NOT NULL COMMENT '´´½¨Ê±¼ä',
-  `remarks` varchar(255) DEFAULT NULL COMMENT '±¸×¢ĞÅÏ¢',
-  `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT 'É¾³ı±ê¼Ç',
+  `content` varchar(255) DEFAULT NULL COMMENT 'å†…å®¹',
+  `address` varchar(255) DEFAULT NULL COMMENT 'åœ°å€',
+  `demand` varchar(255) DEFAULT NULL COMMENT 'å…¶å®ƒè¦æ±‚',
+	`type` int(11) DEFAULT NULL COMMENT 'ç±»å‹',
+	`status` tinyint(2) DEFAULT '0' COMMENT 'çŠ¶æ€',
+	`basic_cost` varchar(30) DEFAULT NULL COMMENT 'åŸºç¡€è´¹ç”¨',
+	`service_cost` varchar(30) DEFAULT NULL COMMENT 'æœåŠ¡è´¹',
+	`cause` varchar(100) DEFAULT NULL COMMENT 'é©³å›ç†ç”±',
+	`create_by` int(11) NOT NULL COMMENT 'åˆ›å»ºè€…',
+  `create_date` datetime NOT NULL COMMENT 'åˆ›å»ºæ—¶é—´',
+  `remarks` varchar(255) DEFAULT NULL COMMENT 'å¤‡æ³¨ä¿¡æ¯',
+  `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT 'åˆ é™¤æ ‡è®°',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='´ú°ì±í';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='ä»£åŠè¡¨';
 
 DROP TABLE IF EXISTS `shop_attach`;
 CREATE TABLE `shop_attach` (
   `id` int(11) NOT NULL auto_increment COMMENT 'id',
-  `parent_id` int(11) DEFAULT NULL COMMENT 'À´Ô´id',
-  `name` varchar(100) DEFAULT NULL COMMENT 'Ãû³Æ',
-	`path` varchar(100) DEFAULT NULL COMMENT 'Â·¾¶',
-  `bytes` MEDIUMBLOB DEFAULT NULL COMMENT 'ÎÄ¼ş¶ş½øÖÆ´æ´¢',
-	`first_show` char(1) NOT NULL DEFAULT '0' COMMENT 'ÓÅÏÈÕ¹Ê¾',
-  `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT 'É¾³ı±ê¼Ç',
+  `parent_id` int(11) DEFAULT NULL COMMENT 'æ¥æºid',
+  `name` varchar(100) DEFAULT NULL COMMENT 'åç§°',
+	`path` varchar(100) DEFAULT NULL COMMENT 'è·¯å¾„',
+  `bytes` MEDIUMBLOB DEFAULT NULL COMMENT 'æ–‡ä»¶äºŒè¿›åˆ¶å­˜å‚¨',
+	`first_show` char(1) NOT NULL DEFAULT '0' COMMENT 'ä¼˜å…ˆå±•ç¤º',
+  `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT 'åˆ é™¤æ ‡è®°',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='ÏµÍ³¸½¼ş±í£¨µ±Êı¾İÁ¿²»´ó²»ÏëÖØĞÂ´´½¨Ò»ÕÅ±í¾ÍÓÃÕâÕÅ£©';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='ç³»ç»Ÿé™„ä»¶è¡¨ï¼ˆå½“æ•°æ®é‡ä¸å¤§ä¸æƒ³é‡æ–°åˆ›å»ºä¸€å¼ è¡¨å°±ç”¨è¿™å¼ ï¼‰';
 
 DROP TABLE IF EXISTS `shop_feedback`;
 CREATE TABLE `shop_feedback` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
-  `content` varchar(255) DEFAULT NULL COMMENT 'ÄÚÈİ',
-  `reply` varchar(255) DEFAULT NULL COMMENT '»Ø¸´',
-	`create_by` int(11) NOT NULL COMMENT '´´½¨Õß',
-  `create_date` datetime NOT NULL COMMENT '´´½¨Ê±¼ä',
-  `remarks` varchar(255) DEFAULT NULL COMMENT '±¸×¢ĞÅÏ¢',
-  `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT 'É¾³ı±ê¼Ç',
+  `content` varchar(255) DEFAULT NULL COMMENT 'å†…å®¹',
+  `reply` varchar(255) DEFAULT NULL COMMENT 'å›å¤',
+	`create_by` int(11) NOT NULL COMMENT 'åˆ›å»ºè€…',
+  `create_date` datetime NOT NULL COMMENT 'åˆ›å»ºæ—¶é—´',
+  `remarks` varchar(255) DEFAULT NULL COMMENT 'å¤‡æ³¨ä¿¡æ¯',
+  `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT 'åˆ é™¤æ ‡è®°',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='·´À¡±í';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='åé¦ˆè¡¨';
 
 DROP TABLE IF EXISTS `shop_order_evaluate`;
 CREATE TABLE `shop_order_evaluate` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
-  `content` varchar(255) DEFAULT NULL COMMENT 'ÄÚÈİ',
-  `order_id` int(11) DEFAULT NULL COMMENT '¶©µ¥id',
-  `goods_id` int(11) DEFAULT NULL COMMENT 'ÉÌÆ·id',
-  `service_attitude` int(11) DEFAULT 0 COMMENT '·şÎñÌ¬¶È',
-  `goods_score` int(11) DEFAULT 0 COMMENT 'ÉÌÆ·ÆÀ·Ö£¨ÂúÒâ¶È£©',
-	`create_by` int(11) NOT NULL COMMENT '´´½¨Õß',
-  `create_date` datetime NOT NULL COMMENT '´´½¨Ê±¼ä',
-  `remarks` varchar(255) DEFAULT NULL COMMENT '±¸×¢ĞÅÏ¢',
-  `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT 'É¾³ı±ê¼Ç',
+  `content` varchar(255) DEFAULT NULL COMMENT 'å†…å®¹',
+  `order_id` int(11) DEFAULT NULL COMMENT 'è®¢å•id',
+  `goods_id` int(11) DEFAULT NULL COMMENT 'å•†å“id',
+  `service_attitude` int(11) DEFAULT 0 COMMENT 'æœåŠ¡æ€åº¦',
+  `goods_score` int(11) DEFAULT 0 COMMENT 'å•†å“è¯„åˆ†ï¼ˆæ»¡æ„åº¦ï¼‰',
+	`create_by` int(11) NOT NULL COMMENT 'åˆ›å»ºè€…',
+  `create_date` datetime NOT NULL COMMENT 'åˆ›å»ºæ—¶é—´',
+  `remarks` varchar(255) DEFAULT NULL COMMENT 'å¤‡æ³¨ä¿¡æ¯',
+  `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT 'åˆ é™¤æ ‡è®°',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='¶©µ¥ÆÀ¼Û±í';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='è®¢å•è¯„ä»·è¡¨';
 
 DROP TABLE IF EXISTS `shop_score_order`;
 CREATE TABLE `shop_score_order` (
   `id` int(11) NOT NULL auto_increment COMMENT 'id',
-	`order_id` int(11) NOT NULL COMMENT '¶©µ¥id',
-	`goods_id` int(11) NOT NULL COMMENT 'ÉÌÆ·id',
-	`count` int(11) DEFAULT 1 COMMENT 'ÊıÁ¿',
-	`status` tinyint(2) DEFAULT '0' COMMENT '×´Ì¬',
-	`create_by` int(11) NOT NULL COMMENT '´´½¨Õß',
-  `create_date` datetime NOT NULL COMMENT '´´½¨Ê±¼ä',
-  `update_by` int(11) NOT NULL COMMENT '¸üĞÂÕß',
-  `update_date` datetime NOT NULL COMMENT '¸üĞÂÊ±¼ä',
-  `remarks` varchar(255) DEFAULT NULL COMMENT '±¸×¢ĞÅÏ¢',
-  `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT 'É¾³ı±ê¼Ç',
+	`order_id` int(11) NOT NULL COMMENT 'è®¢å•id',
+	`goods_id` int(11) NOT NULL COMMENT 'å•†å“id',
+	`count` int(11) DEFAULT 1 COMMENT 'æ•°é‡',
+	`status` tinyint(2) DEFAULT '0' COMMENT 'çŠ¶æ€',
+	`create_by` int(11) NOT NULL COMMENT 'åˆ›å»ºè€…',
+  `create_date` datetime NOT NULL COMMENT 'åˆ›å»ºæ—¶é—´',
+  `update_by` int(11) NOT NULL COMMENT 'æ›´æ–°è€…',
+  `update_date` datetime NOT NULL COMMENT 'æ›´æ–°æ—¶é—´',
+  `remarks` varchar(255) DEFAULT NULL COMMENT 'å¤‡æ³¨ä¿¡æ¯',
+  `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT 'åˆ é™¤æ ‡è®°',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='»ı·Ö¶Ò»»¶©µ¥±í';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='ç§¯åˆ†å…‘æ¢è®¢å•è¡¨';
